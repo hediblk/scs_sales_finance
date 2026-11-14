@@ -8,13 +8,14 @@ import { Forecaster } from "./Forecaster.jsx";
 // What if = a forecast. The forecaster on top, then one compact row per rule:
 // on/off, its policy slider(s) and a one-line live summary. Assumptions stay at their defaults.
 const RULES = [
-  ["damage_policy", "damage"],
   ["pricing_policy", "pricing"],
+  ["damage_policy", "damage"],
   ["credit_policy", "credit"],
 ];
-// Opening settings. The sweep's best values (cap 0%, allowance 1 day) are boundary results of
-// optimistic assumptions, so the page opens on settings a judge would accept; damage keeps its defaults.
-const START = { pricing: { cap: 25 }, credit: { allowance: 60 } };
+// Opening settings. The page opens on the one rule we act on: the discount cap at 25% (the sweep's 0% is a
+// boundary result of assuming every customer keeps buying). Damage and credit open off, as detection only:
+// damage needs an operations fix (packaging, carrier), credit stays a human decision (condition C3).
+const START = { pricing: { cap: 25 }, damage: { enabled: false, trigger: 15 }, credit: { allowance: 60, enabled: false } };
 
 const signed = (v) => `${v > 0 ? "+" : v < 0 ? "-" : ""}${money(Math.abs(v ?? 0))}`;
 const optionLabel = (o) => ({ prepayment: "Prepayment", full_ban: "Full ban" }[o] ?? humanize(o));
@@ -63,6 +64,16 @@ function Choice({ c, value, onChange, disabled }) {
 
 // One line, rebuilt from each response.
 function summary(apiName, env, p) {
+  if (!p.enabled && apiName === "damage") {
+    // Detection only: name the groups the data flags, no estimate (the packaging effect would be an assumption).
+    const hit = (env.details?.groups ?? []).filter((g) => g.eligible && g.damage_rate_pct > p.trigger)
+      .sort((a, b) => b.damage_rate_pct - a.damage_rate_pct);
+    return hit.length
+      ? `Detected: ${hit.map((g) => `${g.product} in ${g.region} (${num(g.damage_rate_pct)}% damaged)`).join(", ")}. `
+        + "Detection only: the fix is packaging or carrier, an operations decision. Turn on to estimate it."
+      : "Detection only: no product-region group above this damage rate.";
+  }
+  if (!p.enabled && apiName === "credit") return "Off: unpaid invoices stay detection only (Action queue, second rule). Turn on to estimate a stricter credit policy.";
   if (!p.enabled) return "Rule off: today's policy.";
   const s = env.selected ?? {};
   const d = env.delta ?? {};
