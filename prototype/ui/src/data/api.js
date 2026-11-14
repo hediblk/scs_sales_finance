@@ -44,6 +44,8 @@ export const api = {
     request("GET", `/api/${source}/${table}/rows?${q(p)}${p.col ? `&val=${encodeURIComponent(val ?? "")}` : ""}`),
   dsCharts: (source) => request("GET", `/api/${source}/charts`),
   setAside: () => request("GET", "/api/clean/set-aside"),
+  // Data cleaning page: every cleaning step with its assumption and its effect on revenue and gross profit.
+  dataPrep: () => request("GET", "/api/data-prep"),
 
   // Every chart in the app is a preset of this endpoint (docs/ui-contract.md, "Dynamic charts").
   explore: (params) => request("GET", `/api/explore?${q(params)}`),
