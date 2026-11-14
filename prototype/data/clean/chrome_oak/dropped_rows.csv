@@ -1,0 +1,34 @@
+file,raw_line,order_id,step,outcome
+orders.csv,400,SO-000399,dedupe,removed
+orders.csv,1109,SO-001122,dedupe,removed
+orders.csv,1165,SO-001180,dedupe,removed
+orders.csv,1195,SO-001209,dedupe,removed
+orders.csv,2024,SO-002083,dedupe,removed
+orders.csv,2383,SO-002464,dedupe,removed
+orders.csv,2525,SO-002620,dedupe,removed
+orders.csv,2891,SO-003011,dedupe,removed
+orders.csv,2954,SO-003082,dedupe,removed
+orders.csv,2970,SO-003097,dedupe,removed
+orders.csv,3004,SO-003134,dedupe,removed
+orders.csv,3042,SO-003175,dedupe,removed
+orders.csv,3447,SO-003622,dedupe,removed
+orders.csv,3567,SO-003757,dedupe,removed
+orders.csv,3635,SO-003832,dedupe,removed
+orders.csv,4444,SO-004750,dedupe,removed
+orders.csv,4450,SO-004756,dedupe,removed
+orders.csv,4452,SO-004757,dedupe,removed
+orders.csv,4524,SO-004839,dedupe,removed
+orders.csv,4617,SO-004944,dedupe,removed
+orders.csv,4675,SO-005007,dedupe,removed
+orders.csv,4907,SO-005278,dedupe,removed
+orders.csv,5049,SO-005440,dedupe,removed
+orders.csv,5415,SO-005859,dedupe,removed
+orders.csv,5503,SO-005962,dedupe,removed
+orders.csv,238,SO-000237,neg_qty,set aside for review
+orders.csv,1363,SO-001387,neg_qty,set aside for review
+orders.csv,2738,SO-002848,neg_qty,set aside for review
+orders.csv,3006,SO-003136,neg_qty,set aside for review
+orders.csv,3043,SO-003176,neg_qty,set aside for review
+orders.csv,3784,SO-004004,neg_qty,set aside for review
+orders.csv,5023,SO-005414,neg_qty,set aside for review
+orders.csv,5572,SO-006039,neg_qty,set aside for review

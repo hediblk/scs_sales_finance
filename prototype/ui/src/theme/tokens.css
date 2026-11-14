@@ -1,0 +1,142 @@
+/* Brand tokens. The only file to touch when adjusting a theme.
+   Theme is picked by meta.company from /api/meta and applied as
+   <html data-company="chrome-oak | millennium">.
+   Both companies are fictional and have no brand guide: these are our own choices.
+   Chart series colors were checked with a colorblind-safety validator (light surface). */
+
+/* ---------- Chrome & Oak Office Supply ----------
+   Graphite and brushed steel neutrals, warm oak accent. Squarer corners, industrial type. */
+:root,
+:root[data-company="chrome-oak"] {
+  --font-body: "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Archivo", "IBM Plex Sans", "Segoe UI", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+
+  --radius-lg: 8px;
+  --radius: 6px;
+  --radius-sm: 4px;
+
+  --canvas: #eceef0;
+  --surface: #ffffff;
+  --surface-2: #f6f7f7;
+  --surface-3: #eaedef;
+  --border: #d9dde0;
+  --border-strong: #bfc5ca;
+
+  --text: #1a1e21;
+  --text-2: #4b545b;
+  --text-3: #737d85;
+
+  --accent: #9c5a17;
+  --accent-hover: #7f4710;
+  --accent-contrast: #ffffff;
+  --accent-soft: #f5ebdf;
+  --accent-ink: #6b3c0b;
+  --focus: #d89a4e;
+
+  --brand-1: #cfd6db;          /* wordmark: steel */
+  --brand-2: #d89a4e;          /* wordmark: oak */
+
+  --side-bg: #1a1d20;
+  --side-bg-2: #262b2f;
+  --side-text: #c5ccd1;
+  --side-muted: #87929a;
+  --side-line: rgba(255, 255, 255, 0.08);
+  --side-hover: rgba(255, 255, 255, 0.05);
+  --side-active-bg: rgba(216, 154, 78, 0.14);
+  --side-active-bar: #d89a4e;
+  --side-active-text: #ffffff;
+
+  --good: #2e7d32;
+  --good-soft: #e6f2e6;
+  --warn: #7d6400;
+  --warn-soft: #f7efcc;
+  --bad: #b3261e;
+  --bad-soft: #fbe7e5;
+  --neutral: #5b656c;
+  --neutral-soft: #eceff1;
+
+  --series-1: #b8691c;  /* oak */
+  --series-2: #2f6fae;  /* steel blue */
+  --series-3: #6b8f23;  /* olive */
+  --series-4: #a8467a;  /* plum */
+  --series-5: #5a5fc8;  /* indigo */
+
+  /* bridge (waterfall) chart on The gap */
+  --bridge-total: #2f6fae;   /* start and end bars: steel blue */
+  --bridge-down: #b4532a;    /* money lost between the two: rust */
+  --bridge-up: #6b8f23;
+
+  --shadow-sm: 0 1px 2px rgba(26, 30, 33, 0.07);
+  --shadow: 0 1px 2px rgba(26, 30, 33, 0.06), 0 10px 28px rgba(26, 30, 33, 0.08);
+  --display-tracking: -0.01em;
+  --label-tracking: 0.08em;
+}
+
+/* ---------- Millennium Mutual ----------
+   Home and auto insurer founded in 2000. Deep navy, harbour blue accent, muted gold mark,
+   warm paper canvas, serif headings, softer corners. */
+:root[data-company="millennium"] {
+  --font-body: "Source Sans 3", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Source Serif 4", Georgia, "Times New Roman", serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, "Cascadia Mono", monospace;
+
+  --radius-lg: 12px;
+  --radius: 8px;
+  --radius-sm: 6px;
+
+  --canvas: #f2f3ef;
+  --surface: #ffffff;
+  --surface-2: #f7f8f5;
+  --surface-3: #ecefea;
+  --border: #dde1db;
+  --border-strong: #c4cac2;
+
+  --text: #16202c;
+  --text-2: #4a5664;
+  --text-3: #727e8b;
+
+  --accent: #24589e;
+  --accent-hover: #1b4579;
+  --accent-contrast: #ffffff;
+  --accent-soft: #e8eef7;
+  --accent-ink: #1a4378;
+  --focus: #d4b161;
+
+  --brand-1: #ffffff;
+  --brand-2: #d4b161;          /* muted gold */
+
+  --side-bg: #0f1e33;
+  --side-bg-2: #1a3050;
+  --side-text: #c9d3df;
+  --side-muted: #8a9bb0;
+  --side-line: rgba(255, 255, 255, 0.09);
+  --side-hover: rgba(255, 255, 255, 0.05);
+  --side-active-bg: rgba(212, 177, 97, 0.13);
+  --side-active-bar: #d4b161;
+  --side-active-text: #ffffff;
+
+  --good: #2f7a4f;
+  --good-soft: #e5f1ea;
+  --warn: #8a6200;
+  --warn-soft: #faf0d7;
+  --bad: #a8322a;
+  --bad-soft: #f8e6e4;
+  --neutral: #56626f;
+  --neutral-soft: #edf0f2;
+
+  --series-1: #24589e;  /* harbour blue */
+  --series-2: #b07d0a;  /* gold */
+  --series-3: #3a9a6e;  /* green */
+  --series-4: #8e5fb9;  /* violet */
+  --series-5: #c0563c;  /* brick */
+
+  --bridge-total: #24589e;
+  --bridge-down: #c0563c;
+  --bridge-up: #3a9a6e;
+
+  --shadow-sm: 0 1px 2px rgba(22, 32, 44, 0.06);
+  --shadow: 0 1px 2px rgba(22, 32, 44, 0.05), 0 12px 32px rgba(22, 32, 44, 0.08);
+  --display-tracking: -0.005em;
+  --label-tracking: 0.06em;
+}

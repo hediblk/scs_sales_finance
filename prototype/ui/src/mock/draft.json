@@ -1,0 +1,5 @@
+{
+  "to": "{owner}",
+  "subject": "[AI subject line] {entity_name}, {amount}",
+  "body": "Hello {owner},\n\n[AI wording goes here. The numbers below are filled by code, never by the model.]\n\nAccount: {entity_name}\nAmount: {amount}\nWhy it was flagged:\n{reasons}\n\n[Closing line drafted by AI]"
+}

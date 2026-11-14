@@ -1,0 +1,8 @@
+{
+  "answer": "[Mock answer. POST /api/ask is not served yet, so this reply is a placeholder. The real one comes from a read-only SELECT on the clean tables.]",
+  "sql": "SELECT region, SUM(revenue) AS revenue\nFROM orders\nGROUP BY region\nORDER BY revenue DESC\nLIMIT 50",
+  "columns": ["region", "revenue"],
+  "rows": [["Region 1", 400000], ["Region 2", 300000], ["Region 3", 200000]],
+  "chart": { "type": "bar", "x": "region", "unit": "$", "series": [{ "key": "revenue", "label": "Revenue" }] },
+  "error": null
+}

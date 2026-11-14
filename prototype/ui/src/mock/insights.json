@@ -1,0 +1,5 @@
+[
+  { "id": "i1", "title": "[Insight 1 headline]", "what": "[What happened, with the number from pandas]", "why": "[Why it matters, and to which executive]", "action": "[What to do about it]", "chart_id": "chart_bar" },
+  { "id": "i2", "title": "[Insight 2 headline]", "what": "[What happened]", "why": "[Why it matters]", "action": "[What to do about it]", "chart_id": "chart_line" },
+  { "id": "i3", "title": "[Insight 3 headline]", "what": "[What happened]", "why": "[Why it matters]", "action": "[What to do about it]", "chart_id": "chart_stacked" }
+]

@@ -1,0 +1,588 @@
+[
+ {
+  "id": "a1",
+  "condition_id": "qe_discount",
+  "entity_id": "C9001",
+  "entity_name": "Sample account 01",
+  "owner": "R02",
+  "region": "Region 1",
+  "severity": "low",
+  "amount": 7364,
+  "reasons": [
+   "Discount 15% (threshold 25%)",
+   "Ordered 28 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "SMB",
+  "status": "auto_held",
+  "created_at": "2026-10-23",
+  "_metric": 15,
+  "_window": 28
+ },
+ {
+  "id": "a2",
+  "condition_id": "qe_discount",
+  "entity_id": "C9002",
+  "entity_name": "Sample account 02",
+  "owner": "R03",
+  "region": "Region 3",
+  "severity": "low",
+  "amount": 6523,
+  "reasons": [
+   "Discount 31.5% (threshold 25%)",
+   "Ordered 23 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "Enterprise",
+  "status": "auto_held",
+  "created_at": "2026-10-22",
+  "_metric": 31.5,
+  "_window": 23
+ },
+ {
+  "id": "a3",
+  "condition_id": "qe_discount",
+  "entity_id": "C9003",
+  "entity_name": "Sample account 03",
+  "owner": "R04",
+  "region": "Region 1",
+  "severity": "low",
+  "amount": 6955,
+  "reasons": [
+   "Discount 23.2% (threshold 25%)",
+   "Ordered 21 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "SMB",
+  "status": "auto_held",
+  "created_at": "2026-10-30",
+  "_metric": 23.2,
+  "_window": 21
+ },
+ {
+  "id": "a4",
+  "condition_id": "qe_discount",
+  "entity_id": "C9004",
+  "entity_name": "Sample account 04",
+  "owner": "R03",
+  "region": "Region 4",
+  "severity": "medium",
+  "amount": 6997,
+  "reasons": [
+   "Discount 32.8% (threshold 25%)",
+   "Ordered 4 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "SMB",
+  "status": "auto_held",
+  "created_at": "2026-10-26",
+  "_metric": 32.8,
+  "_window": 4
+ },
+ {
+  "id": "a5",
+  "condition_id": "qe_discount",
+  "entity_id": "C9005",
+  "entity_name": "Sample account 05",
+  "owner": "R02",
+  "region": "Region 2",
+  "severity": "medium",
+  "amount": 8335,
+  "reasons": [
+   "Discount 35.1% (threshold 25%)",
+   "Ordered 27 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "Reseller",
+  "status": "auto_held",
+  "created_at": "2026-10-21",
+  "_metric": 35.1,
+  "_window": 27
+ },
+ {
+  "id": "a6",
+  "condition_id": "qe_discount",
+  "entity_id": "C9006",
+  "entity_name": "Sample account 06",
+  "owner": "R02",
+  "region": "Region 4",
+  "severity": "low",
+  "amount": 5816,
+  "reasons": [
+   "Discount 21.5% (threshold 25%)",
+   "Ordered 13 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "Enterprise",
+  "status": "auto_held",
+  "created_at": "2026-10-29",
+  "_metric": 21.5,
+  "_window": 13
+ },
+ {
+  "id": "a7",
+  "condition_id": "qe_discount",
+  "entity_id": "C9007",
+  "entity_name": "Sample account 07",
+  "owner": "R03",
+  "region": "Region 3",
+  "severity": "low",
+  "amount": 4593,
+  "reasons": [
+   "Discount 16.3% (threshold 25%)",
+   "Ordered 8 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "Reseller",
+  "status": "auto_held",
+  "created_at": "2026-10-29",
+  "_metric": 16.3,
+  "_window": 8
+ },
+ {
+  "id": "a8",
+  "condition_id": "qe_discount",
+  "entity_id": "C9008",
+  "entity_name": "Sample account 08",
+  "owner": "R02",
+  "region": "Region 3",
+  "severity": "low",
+  "amount": 9119,
+  "reasons": [
+   "Discount 16.2% (threshold 25%)",
+   "Ordered 11 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "SMB",
+  "status": "auto_held",
+  "created_at": "2026-10-21",
+  "_metric": 16.2,
+  "_window": 11
+ },
+ {
+  "id": "a9",
+  "condition_id": "qe_discount",
+  "entity_id": "C9009",
+  "entity_name": "Sample account 09",
+  "owner": "R02",
+  "region": "Region 2",
+  "severity": "low",
+  "amount": 3793,
+  "reasons": [
+   "Discount 23.9% (threshold 25%)",
+   "Ordered 9 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "SMB",
+  "status": "auto_held",
+  "created_at": "2026-10-26",
+  "_metric": 23.9,
+  "_window": 9
+ },
+ {
+  "id": "a10",
+  "condition_id": "qe_discount",
+  "entity_id": "C9010",
+  "entity_name": "Sample account 10",
+  "owner": "R03",
+  "region": "Region 4",
+  "severity": "low",
+  "amount": 6516,
+  "reasons": [
+   "Discount 20.1% (threshold 25%)",
+   "Ordered 27 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "SMB",
+  "status": "auto_held",
+  "created_at": "2026-10-25",
+  "_metric": 20.1,
+  "_window": 27
+ },
+ {
+  "id": "a11",
+  "condition_id": "qe_discount",
+  "entity_id": "C9011",
+  "entity_name": "Sample account 11",
+  "owner": "R05",
+  "region": "Region 2",
+  "severity": "low",
+  "amount": 7174,
+  "reasons": [
+   "Discount 26.1% (threshold 25%)",
+   "Ordered 21 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "Reseller",
+  "status": "auto_held",
+  "created_at": "2026-10-26",
+  "_metric": 26.1,
+  "_window": 21
+ },
+ {
+  "id": "a12",
+  "condition_id": "qe_discount",
+  "entity_id": "C9012",
+  "entity_name": "Sample account 12",
+  "owner": "R02",
+  "region": "Region 4",
+  "severity": "low",
+  "amount": 8698,
+  "reasons": [
+   "Discount 22.7% (threshold 25%)",
+   "Ordered 10 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "Reseller",
+  "status": "auto_held",
+  "created_at": "2026-10-29",
+  "_metric": 22.7,
+  "_window": 10
+ },
+ {
+  "id": "a13",
+  "condition_id": "qe_discount",
+  "entity_id": "C9013",
+  "entity_name": "Sample account 13",
+  "owner": "R01",
+  "region": "Region 1",
+  "severity": "low",
+  "amount": 9766,
+  "reasons": [
+   "Discount 16.7% (threshold 25%)",
+   "Ordered 12 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "Reseller",
+  "status": "auto_held",
+  "created_at": "2026-10-26",
+  "_metric": 16.7,
+  "_window": 12
+ },
+ {
+  "id": "a14",
+  "condition_id": "qe_discount",
+  "entity_id": "C9014",
+  "entity_name": "Sample account 14",
+  "owner": "R03",
+  "region": "Region 1",
+  "severity": "low",
+  "amount": 9097,
+  "reasons": [
+   "Discount 18.2% (threshold 25%)",
+   "Ordered 14 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "Enterprise",
+  "status": "auto_held",
+  "created_at": "2026-10-29",
+  "_metric": 18.2,
+  "_window": 14
+ },
+ {
+  "id": "a15",
+  "condition_id": "qe_discount",
+  "entity_id": "C9015",
+  "entity_name": "Sample account 15",
+  "owner": "R04",
+  "region": "Region 2",
+  "severity": "medium",
+  "amount": 894,
+  "reasons": [
+   "Discount 34.5% (threshold 25%)",
+   "Ordered 27 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "Reseller",
+  "status": "auto_held",
+  "created_at": "2026-10-20",
+  "_metric": 34.5,
+  "_window": 27
+ },
+ {
+  "id": "a16",
+  "condition_id": "qe_discount",
+  "entity_id": "C9016",
+  "entity_name": "Sample account 16",
+  "owner": "R02",
+  "region": "Region 3",
+  "severity": "low",
+  "amount": 5204,
+  "reasons": [
+   "Discount 15% (threshold 25%)",
+   "Ordered 19 days before quarter end",
+   "Placeholder reason from the rule"
+  ],
+  "segment": "Enterprise",
+  "status": "auto_held",
+  "created_at": "2026-10-22",
+  "_metric": 15,
+  "_window": 19
+ },
+ {
+  "id": "a17",
+  "condition_id": "quiet_after_bad_return",
+  "entity_id": "C9017",
+  "entity_name": "Sample account 17",
+  "owner": "R02",
+  "region": "Region 2",
+  "severity": "high",
+  "amount": 38800,
+  "reasons": [
+   "Placeholder: damaged return",
+   "No reorder after 2.7x the usual gap"
+  ],
+  "segment": "Reseller",
+  "status": "notified",
+  "created_at": "2026-10-25",
+  "_metric": 2.7,
+  "_window": null
+ },
+ {
+  "id": "a18",
+  "condition_id": "quiet_after_bad_return",
+  "entity_id": "C9018",
+  "entity_name": "Sample account 18",
+  "owner": "R05",
+  "region": "Region 3",
+  "severity": "low",
+  "amount": 39900,
+  "reasons": [
+   "Placeholder: damaged return",
+   "No reorder after 0.5x the usual gap"
+  ],
+  "segment": "Reseller",
+  "status": "notified",
+  "created_at": "2026-10-29",
+  "_metric": 0.5,
+  "_window": null
+ },
+ {
+  "id": "a19",
+  "condition_id": "quiet_after_bad_return",
+  "entity_id": "C9019",
+  "entity_name": "Sample account 19",
+  "owner": "R05",
+  "region": "Region 3",
+  "severity": "low",
+  "amount": 30200,
+  "reasons": [
+   "Placeholder: damaged return",
+   "No reorder after 1.0x the usual gap"
+  ],
+  "segment": "Reseller",
+  "status": "overridden",
+  "created_at": "2026-10-22",
+  "_metric": 1,
+  "_window": null
+ },
+ {
+  "id": "a20",
+  "condition_id": "quiet_after_bad_return",
+  "entity_id": "C9020",
+  "entity_name": "Sample account 20",
+  "owner": "R03",
+  "region": "Region 1",
+  "severity": "low",
+  "amount": 33800,
+  "reasons": [
+   "Placeholder: damaged return",
+   "No reorder after 1.0x the usual gap"
+  ],
+  "segment": "Enterprise",
+  "status": "notified",
+  "created_at": "2026-10-27",
+  "_metric": 1,
+  "_window": null
+ },
+ {
+  "id": "a21",
+  "condition_id": "quiet_after_bad_return",
+  "entity_id": "C9021",
+  "entity_name": "Sample account 21",
+  "owner": "R01",
+  "region": "Region 1",
+  "severity": "medium",
+  "amount": 39800,
+  "reasons": [
+   "Placeholder: damaged return",
+   "No reorder after 1.7x the usual gap"
+  ],
+  "segment": "Reseller",
+  "status": "notified",
+  "created_at": "2026-10-27",
+  "_metric": 1.7,
+  "_window": null
+ },
+ {
+  "id": "a22",
+  "condition_id": "quiet_after_bad_return",
+  "entity_id": "C9022",
+  "entity_name": "Sample account 22",
+  "owner": "R01",
+  "region": "Region 4",
+  "severity": "high",
+  "amount": 37500,
+  "reasons": [
+   "Placeholder: damaged return",
+   "No reorder after 2.7x the usual gap"
+  ],
+  "segment": "Enterprise",
+  "status": "resolved",
+  "created_at": "2026-10-30",
+  "_metric": 2.7,
+  "_window": null
+ },
+ {
+  "id": "a23",
+  "condition_id": "quiet_after_bad_return",
+  "entity_id": "C9023",
+  "entity_name": "Sample account 23",
+  "owner": "R03",
+  "region": "Region 1",
+  "severity": "high",
+  "amount": 32100,
+  "reasons": [
+   "Placeholder: damaged return",
+   "No reorder after 2.4x the usual gap"
+  ],
+  "segment": "Enterprise",
+  "status": "notified",
+  "created_at": "2026-10-24",
+  "_metric": 2.4,
+  "_window": null
+ },
+ {
+  "id": "a24",
+  "condition_id": "quiet_after_bad_return",
+  "entity_id": "C9024",
+  "entity_name": "Sample account 24",
+  "owner": "R03",
+  "region": "Region 4",
+  "severity": "low",
+  "amount": 25400,
+  "reasons": [
+   "Placeholder: damaged return",
+   "No reorder after 1.1x the usual gap"
+  ],
+  "segment": "SMB",
+  "status": "notified",
+  "created_at": "2026-10-26",
+  "_metric": 1.1,
+  "_window": null
+ },
+ {
+  "id": "a25",
+  "condition_id": "quiet_after_bad_return",
+  "entity_id": "C9025",
+  "entity_name": "Sample account 25",
+  "owner": "R02",
+  "region": "Region 3",
+  "severity": "high",
+  "amount": 19900,
+  "reasons": [
+   "Placeholder: damaged return",
+   "No reorder after 2.3x the usual gap"
+  ],
+  "segment": "Reseller",
+  "status": "notified",
+  "created_at": "2026-10-23",
+  "_metric": 2.3,
+  "_window": null
+ },
+ {
+  "id": "a26",
+  "condition_id": "overdue_or_over_limit",
+  "entity_id": "C9026",
+  "entity_name": "Sample account 26",
+  "owner": "R05",
+  "region": "Region 3",
+  "severity": "high",
+  "amount": 31150,
+  "reasons": [
+   "Oldest unpaid invoice 217 days past due",
+   "Placeholder balance vs credit limit"
+  ],
+  "segment": "Enterprise",
+  "status": "open",
+  "created_at": "2026-10-22",
+  "_metric": 217,
+  "_window": null
+ },
+ {
+  "id": "a27",
+  "condition_id": "overdue_or_over_limit",
+  "entity_id": "C9027",
+  "entity_name": "Sample account 27",
+  "owner": "R01",
+  "region": "Region 2",
+  "severity": "high",
+  "amount": 21700,
+  "reasons": [
+   "Oldest unpaid invoice 149 days past due",
+   "Placeholder balance vs credit limit"
+  ],
+  "segment": "Enterprise",
+  "status": "open",
+  "created_at": "2026-10-30",
+  "_metric": 149,
+  "_window": null
+ },
+ {
+  "id": "a28",
+  "condition_id": "overdue_or_over_limit",
+  "entity_id": "C9028",
+  "entity_name": "Sample account 28",
+  "owner": "R01",
+  "region": "Region 2",
+  "severity": "high",
+  "amount": 10000,
+  "reasons": [
+   "Oldest unpaid invoice 116 days past due",
+   "Placeholder balance vs credit limit"
+  ],
+  "segment": "SMB",
+  "status": "open",
+  "created_at": "2026-10-25",
+  "_metric": 116,
+  "_window": null
+ },
+ {
+  "id": "a29",
+  "condition_id": "overdue_or_over_limit",
+  "entity_id": "C9029",
+  "entity_name": "Sample account 29",
+  "owner": "R03",
+  "region": "Region 4",
+  "severity": "high",
+  "amount": 15850,
+  "reasons": [
+   "Oldest unpaid invoice 132 days past due",
+   "Placeholder balance vs credit limit"
+  ],
+  "segment": "Enterprise",
+  "status": "open",
+  "created_at": "2026-10-20",
+  "_metric": 132,
+  "_window": null
+ },
+ {
+  "id": "a30",
+  "condition_id": "overdue_or_over_limit",
+  "entity_id": "C9030",
+  "entity_name": "Sample account 30",
+  "owner": "R03",
+  "region": "Region 1",
+  "severity": "medium",
+  "amount": 26700,
+  "reasons": [
+   "Oldest unpaid invoice 80 days past due",
+   "Placeholder balance vs credit limit"
+  ],
+  "segment": "Reseller",
+  "status": "open",
+  "created_at": "2026-10-22",
+  "_metric": 80,
+  "_window": null
+ }
+]

@@ -1,0 +1,163 @@
+{
+  "files": [
+    {
+      "name": "customers.csv",
+      "rows": 1210,
+      "cols": 7,
+      "row_means": "one customer: segment, region, account rep, payment terms, credit limit",
+      "rows_clean": 1210
+    },
+    {
+      "name": "orders.csv",
+      "rows": 6169,
+      "cols": 13,
+      "row_means": "one order line: one product, quantity, list price, discount, unit cost, rep, payment date",
+      "rows_clean": 6136
+    },
+    {
+      "name": "returns.csv",
+      "rows": 275,
+      "cols": 6,
+      "row_means": "one return: at most one per order, quantity returned, reason, refund",
+      "rows_clean": 275
+    }
+  ],
+  "steps": [
+    {
+      "id": "dedupe",
+      "kind": "drop",
+      "title": "Removed duplicate order rows",
+      "why": "Same order_id with every column identical: the order was counted twice.",
+      "column": null,
+      "rows_affected": 25,
+      "effect": "Removes $44,018 of double-counted revenue",
+      "revenue_before": 2569404.39,
+      "revenue_after": 2525386.24,
+      "gross_profit_before": -3151789.61,
+      "gross_profit_after": -3162408.45
+    },
+    {
+      "id": "discount_pct",
+      "kind": "fix",
+      "title": "Converted percent discounts to fractions",
+      "why": "Most discounts are fractions (0.12). These rows hold 12 for 12%, which made their revenue negative. They sit inside the discount analysis the main finding rests on.",
+      "column": "discount",
+      "rows_affected": 181,
+      "effect": "These rows go from -$5,121,624 to $314,759 of revenue",
+      "revenue_before": 2525386.24,
+      "revenue_after": 7961769.78,
+      "gross_profit_before": -3162408.45,
+      "gross_profit_after": 2226353.31
+    },
+    {
+      "id": "neg_qty",
+      "kind": "set_aside",
+      "title": "Set aside negative quantities for review",
+      "why": "Each has a payment date and no matching return, so it is neither a clean sale nor a return. Kept in a review list instead of guessing the sign.",
+      "column": "quantity",
+      "rows_affected": 8,
+      "effect": "Out of the sales view: -$11,522. Jan-Sep revenue growth 33.00% -> 33.03%",
+      "revenue_before": 7961769.78,
+      "revenue_after": 7973291.55,
+      "gross_profit_before": 2226353.31,
+      "gross_profit_after": 2229755.07
+    },
+    {
+      "id": "region",
+      "kind": "fix",
+      "title": "Unified region spellings",
+      "why": "15 spellings (ON, ontario, QC, Qu\u00e9bec, B.C., ATL...) for 5 regions.",
+      "column": "region",
+      "rows_affected": 245,
+      "effect": "Total unchanged. Regional totals gain Ontario $93,155, Quebec $75,624, Atlantic $66,814, BC $23,356, Prairies $20,785",
+      "revenue_before": 7973291.55,
+      "revenue_after": 7973291.55,
+      "gross_profit_before": 2229755.07,
+      "gross_profit_after": 2229755.07
+    },
+    {
+      "id": "product",
+      "kind": "fix",
+      "title": "Unified product names",
+      "why": "22 names (Mech Keyboard, 24in Monitor, ERGOLIFT STANDING DESK...) for 10 products.",
+      "column": "product",
+      "rows_affected": 160,
+      "effect": "Total unchanged. $276,774 now lands on the right product",
+      "revenue_before": 7973291.55,
+      "revenue_after": 7973291.55,
+      "gross_profit_before": 2229755.07,
+      "gross_profit_after": 2229755.07
+    },
+    {
+      "id": "date_format",
+      "kind": "fix",
+      "title": "Converted MM/DD/YYYY order dates to ISO",
+      "why": "The rest are YYYY-MM-DD. Read day first, these would put orders in Oct to Dec 2026, after the data ends. So month first.",
+      "column": "order_date",
+      "rows_affected": 122,
+      "effect": "Total unchanged. $166,793 now falls in the right month and quarter",
+      "revenue_before": 7973291.55,
+      "revenue_after": 7973291.55,
+      "gross_profit_before": 2229755.07,
+      "gross_profit_after": 2229755.07
+    },
+    {
+      "id": "cost_blank",
+      "kind": "kept",
+      "title": "Left blank unit costs blank",
+      "why": "No invented values. Margins use only rows with a known cost.",
+      "column": "unit_cost",
+      "rows_affected": 92,
+      "effect": "Margins computed on 98.5% of order lines",
+      "revenue_before": 7973291.55,
+      "revenue_after": 7973291.55,
+      "gross_profit_before": 2229755.07,
+      "gross_profit_after": 2229755.07
+    },
+    {
+      "id": "unpaid_kept",
+      "kind": "kept",
+      "title": "Kept blank payment dates",
+      "why": "All on business orders (Net 30 / Net 60): invoices still unpaid when the data was extracted on 2026-10-31.",
+      "column": "payment_date",
+      "rows_affected": 92,
+      "effect": "$250,004 unpaid at extraction",
+      "revenue_before": 7973291.55,
+      "revenue_after": 7973291.55,
+      "gross_profit_before": 2229755.07,
+      "gross_profit_after": 2229755.07
+    },
+    {
+      "id": "join_check",
+      "kind": "check",
+      "title": "Checked the joins between the three files",
+      "why": "orders.customer_id to customers, returns.order_id to orders, order region vs customer region.",
+      "column": null,
+      "rows_affected": 0,
+      "effect": "0 orders without a customer, 0 returns without an order, 0 region mismatches",
+      "revenue_before": 7973291.55,
+      "revenue_after": 7973291.55,
+      "gross_profit_before": 2229755.07,
+      "gross_profit_after": 2229755.07
+    }
+  ],
+  "summary": {
+    "raw": {
+      "orders": 6169,
+      "revenue": 2569404.39,
+      "gross_profit": -3151789.61,
+      "margin_pct": -126.34
+    },
+    "clean": {
+      "orders": 6136,
+      "revenue": 7973291.55,
+      "gross_profit": 2229755.07,
+      "margin_pct": 28.4
+    },
+    "cells_changed": 708,
+    "rows_removed": 25,
+    "rows_set_aside": 8,
+    "rows_fixed": 676,
+    "cost_coverage_pct": 98.5
+  }
+}

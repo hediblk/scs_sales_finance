@@ -53,3 +53,24 @@ PYTHONDONTWRITEBYTECODE=1 uv run jupyter nbconvert --to html output/jupyter-note
 ```
 
 The notebook keeps summaries and review tables in memory; optional CSV exports are commented out in the final cell.
+
+## Prototype
+
+`prototype/` is the app: a FastAPI + pandas back end (`prototype/api`) and a React + Vite UI (`prototype/ui`), self-contained with its own copy of the raw and clean data. The plan, demo script and API contract are in `prototype/docs` (`PLAN.md`, `DEMO.md`, `ui-contract.md`).
+
+```bash
+cd prototype
+python -m venv .venv
+.venv/Scripts/python -m pip install -r api/requirements.txt
+.venv/Scripts/python -m uvicorn api.main:app --port 8000
+```
+
+In a second terminal:
+
+```bash
+cd prototype/ui
+npm install
+npm run dev
+```
+
+Open http://localhost:5173. AI wording (email drafts, Ask) needs `ANTHROPIC_API_KEY=...` in `prototype/.env`, which is gitignored; without it the app uses template text. Every flag and number comes from the rules in `prototype/api`, never from the model.

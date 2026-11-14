@@ -1,0 +1,5 @@
+pandas>=3.0
+fastapi
+uvicorn[standard]
+anthropic>=2.8
+duckdb>=1.1

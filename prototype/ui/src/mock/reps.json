@@ -1,0 +1,14 @@
+[
+  { "id": "R00", "region": "[Sample region]", "_mock": "Placeholder until GET /api/reps exists",
+    "quarters": [
+      { "quarter": "2026Q1", "revenue": 300000, "net_of_returns": 280000, "quota_countable": 260000, "avg_discount": 12, "team_avg_discount": 11, "quarter_end_share": 15, "target": null },
+      { "quarter": "2026Q2", "revenue": 320000, "net_of_returns": 300000, "quota_countable": 290000, "avg_discount": 11, "team_avg_discount": 11, "quarter_end_share": 14, "target": null },
+      { "quarter": "2026Q3", "revenue": 340000, "net_of_returns": 320000, "quota_countable": 300000, "avg_discount": 12, "team_avg_discount": 11, "quarter_end_share": 16, "target": null }
+    ] },
+  { "id": "R99", "region": "[Sample region]",
+    "quarters": [
+      { "quarter": "2026Q1", "revenue": 400000, "net_of_returns": 330000, "quota_countable": 210000, "avg_discount": 27, "team_avg_discount": 11, "quarter_end_share": 45, "target": null },
+      { "quarter": "2026Q2", "revenue": 420000, "net_of_returns": 350000, "quota_countable": 220000, "avg_discount": 28, "team_avg_discount": 11, "quarter_end_share": 48, "target": null },
+      { "quarter": "2026Q3", "revenue": 450000, "net_of_returns": 360000, "quota_countable": 230000, "avg_discount": 28, "team_avg_discount": 11, "quarter_end_share": 50, "target": null }
+    ] }
+]

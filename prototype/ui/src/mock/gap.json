@@ -1,0 +1,44 @@
+{
+  "_mock": "Stand-in until GET /api/gap exists. Bridge values derived from the live /api/overview chart growth_vs_profit (discounts and cost of goods combined, the split is not computed yet). Driver text from docs/PLAN.md.",
+  "period": "Jan-Sep 2026 vs Jan-Sep 2025",
+  "headline": { "revenue_growth": 967909, "revenue_growth_pct": 33.0, "profit_after_refunds_growth_pct": 10.0 },
+  "bridge": [
+    { "id": "revenue", "label": "Revenue growth", "value": 967909, "kind": "start" },
+    { "id": "discounts_cogs", "label": "Extra discounts and cost of goods", "value": 781423, "kind": "minus", "driver_id": "qe_push" },
+    { "id": "refunds", "label": "Extra refunds", "value": 118067, "kind": "minus", "driver_id": "transit_damage" },
+    { "id": "result", "label": "Profit after refunds growth", "value": 68419, "kind": "end" }
+  ],
+  "drivers": [
+    { "id": "qe_push", "rank": 1, "title": "Quarter-end discount push (R07, Atlantic resellers)",
+      "what": "R07 books 48% of revenue in the last 14 days of each quarter at a 27% average discount (other reps 9 to 12%). 207 orders cross the rule: $892,567 of revenue, $170,676 refunded later.",
+      "why": "The quarterly target and bonus pay on gross revenue. Deep discounts land in the last 14 days, and resellers send the overstock back about a month later.",
+      "todo": "Pay quota on revenue net of returns after 45 days, and require approval for quarter-end discounts of 25% or more.",
+      "handled_by": ["qe_discount", "reps"], "impact": 170676, "impact_label": "refunded from flagged orders",
+      "changed_in_2026": true, "controllable": true, "rule_catchable": true, "chart_id": "discount_band_returns" },
+    { "id": "transit_damage", "rank": 2, "title": "Furniture damaged in transit (BC, Prairies)",
+      "what": "Damaged-in-transit refunds are 16.9% of furniture revenue in BC and 15.4% in the Prairies, vs 3.8% in Ontario. BC is also the fastest-growing region (+50%).",
+      "why": "Big items ship long-haul from Montreal, and the fastest-growing region is the farthest one.",
+      "todo": "Change packaging or carrier for long-haul furniture.",
+      "handled_by": ["quiet_after_bad_return"], "impact": null, "impact_label": "[refund $ to compute]",
+      "changed_in_2026": null, "controllable": true, "rule_catchable": true, "chart_id": "furniture_damage_region" },
+    { "id": "quiet_customers", "rank": 3, "title": "Business customers going quiet after a bad return",
+      "what": "70 business customers went quiet ($618,246 of 2025 spend). 59% of them had a damaged, defective or wrong-item return, vs 27% of active customers.",
+      "why": "Nobody calls after a bad return, so nobody learns why the customer left.",
+      "todo": "Contact every business customer right after a bad return.",
+      "handled_by": ["quiet_after_bad_return"], "impact": 618246, "impact_label": "2025 spend that went quiet",
+      "changed_in_2026": null, "controllable": true, "rule_catchable": true, "chart_id": "quiet_vs_bad_return" },
+    { "id": "late_payments", "rank": 4, "title": "Late payments",
+      "what": "$135,367 overdue at extraction, 3 customers past 60 days. The late-payment rate is flat since 2025.",
+      "why": "Steady since 2025, so it is not what changed.",
+      "todo": "Monitor, and put a credit hold only on clear cases.",
+      "handled_by": ["overdue_or_over_limit", "accounts"], "impact": 135367, "impact_label": "overdue at extraction",
+      "changed_in_2026": false, "controllable": true, "rule_catchable": true, "chart_id": null }
+  ],
+  "who_is_right": [
+    { "exec": "CEO", "claim": "Revenue up about a third, the Atlantic team punches above its weight", "verdict": "partly", "evidence": "Top line true (+33%). Atlantic's growth is discounting plus returns; its SMB and Enterprise revenue fell 25%." },
+    { "exec": "CFO", "claim": "Cash is tight, profit is not keeping up, we chase unpaid invoices", "verdict": "partly", "evidence": "Profit lag true (refunds +67%). Unpaid invoices are real but small: $135k overdue, flat since 2025." },
+    { "exec": "Operations", "claim": "Returns eat warehouse time, especially big items", "verdict": "right", "evidence": "Furniture damaged in transit to BC (16.9% of furniture revenue) and the Prairies (15.4%)." },
+    { "exec": "Customer Success", "claim": "Long-time business customers went quiet", "verdict": "right", "evidence": "70 business customers ($619k in 2025). 59% had a bad return vs 27% of active ones." }
+  ],
+  "why_first": "Ranked on four plain criteria: size in dollars, whether it changed in 2026, whether the company controls it, whether a rule catches it early.\n#1 Quarter-end discount push: the largest controllable piece, new in 2026 (R07's discount went from 18-19% in 2025 to 28% in 2026), one cause, and a rule catches it with almost no false alarms. This is what the tool automates first.\n#2 Transit damage, then quiet customers: big ($619k of 2025 spend went quiet), but the root fix is operational. The tool handles the customer side (C2).\n#3 Late payments: real but flat and smaller ($135k overdue). Monitor only."
+}
