@@ -58,7 +58,7 @@ The notebook keeps summaries and review tables in memory; optional CSV exports a
 
 `prototype/` is the app: a FastAPI + pandas back end (`prototype/api`) and a React + Vite UI (`prototype/ui`), self-contained with its own copy of the raw and clean data. The plan, demo script and API contract are in `prototype/docs` (`PLAN.md`, `DEMO.md`, `ui-contract.md`).
 
-Needs Python 3.12+ and Node 18+. One command starts everything (the first run installs the dependencies):
+Needs Python 3.12+, Node 18+ and the team's Anthropic API key. One command starts everything; the first run installs the dependencies and asks for the key, which it saves to `prototype/.env` (gitignored, never committed):
 
 ```bash
 cd prototype && ./run-demo.sh
@@ -83,6 +83,6 @@ npm install
 npm run dev
 ```
 
-AI wording (email drafts, advisory notes, Ask) is optional: copy `prototype/.env.example` to `prototype/.env` and paste an Anthropic API key (`.env` is gitignored). Without a key the app runs fully and the text uses templates. Every flag, number and chart comes from the rules in `prototype/api`, never from the model.
+Claude (Anthropic API) writes the email drafts, the advisory notes and Ask's queries and answers. When starting by hand, create the key file first: copy `prototype/.env.example` to `prototype/.env` and paste the key (`.env` is gitignored: never commit it). Every flag, number and chart comes from the rules in `prototype/api`, never from the model.
 
 Pages: Dataset, The gap, Action queue, What if (policy simulator: damage, pricing, credit), Accounts & Limits, Ask, Activity log. `POST /api/admin/reset` clears the user actions before a demo run. `python -m api.check` (from `prototype/`) recomputes the headline numbers.
