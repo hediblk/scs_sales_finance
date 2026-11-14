@@ -392,3 +392,54 @@ def reset():
     actions.reset_user_rows()
     tasks_mod.reset()
     return {"ok": True}
+
+
+# ---------------------------------------------------------------- production (Render): one service, one URL
+# The built UI (ui/dist, produced by `npm run build`) is served from the same origin as the API, and an
+# optional shared password (env DEMO_PASSWORD) keeps a public URL from spending the Anthropic key.
+import base64  # noqa: E402
+import os  # noqa: E402
+import secrets  # noqa: E402
+from pathlib import Path  # noqa: E402
+
+from fastapi import Request  # noqa: E402
+from fastapi.responses import FileResponse, JSONResponse, Response  # noqa: E402
+from fastapi.staticfiles import StaticFiles  # noqa: E402
+
+_DIST = Path(__file__).resolve().parents[1] / "ui" / "dist"
+_PASSWORD = os.environ.get("DEMO_PASSWORD", "")
+
+
+@app.middleware("http")
+async def _password_gate(request: Request, call_next):
+    if _PASSWORD and request.url.path != "/healthz":
+        auth = request.headers.get("authorization", "")
+        ok = False
+        if auth.startswith("Basic "):
+            try:
+                _, _, given = base64.b64decode(auth[6:]).decode("utf-8").partition(":")
+                ok = secrets.compare_digest(given, _PASSWORD)
+            except Exception:
+                ok = False
+        if not ok:
+            return Response("Password required", status_code=401,
+                            headers={"WWW-Authenticate": 'Basic realm="Chrome & Oak"'})
+    return await call_next(request)
+
+
+@app.get("/healthz", include_in_schema=False)
+def healthz():
+    return {"ok": True}
+
+
+if _DIST.exists():
+    app.mount("/assets", StaticFiles(directory=_DIST / "assets"), name="assets")
+
+    @app.get("/{path:path}", include_in_schema=False)
+    def _ui(path: str):
+        if path.startswith("api/"):
+            return JSONResponse({"detail": "Not Found"}, status_code=404)
+        f = (_DIST / path).resolve()
+        if path and f.is_file() and _DIST.resolve() in f.parents:
+            return FileResponse(f)
+        return FileResponse(_DIST / "index.html")

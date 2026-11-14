@@ -1,0 +1,16 @@
+# Render Blueprint for the Chrome & Oak prototype.
+# In Render: New > Blueprint > pick this repository. Render then asks for the two secret values below.
+services:
+  - type: web
+    name: chrome-oak-prototype
+    runtime: docker
+    dockerfilePath: ./prototype/Dockerfile
+    dockerContext: ./prototype
+    plan: free
+    region: virginia
+    healthCheckPath: /healthz
+    envVars:
+      - key: ANTHROPIC_API_KEY   # the team's key; never committed
+        sync: false
+      - key: DEMO_PASSWORD       # shared password for the public URL (any username)
+        sync: false

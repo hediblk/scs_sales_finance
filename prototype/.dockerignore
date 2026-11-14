@@ -1,0 +1,12 @@
+**/node_modules
+**/__pycache__
+.venv
+.git
+.env
+ui/dist
+data/state
+notebooks
+docs
+explore
+*.pkl
+*.zip

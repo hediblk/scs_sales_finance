@@ -85,4 +85,8 @@ npm run dev
 
 Claude (Anthropic API) writes the email drafts, the advisory notes and Ask's queries and answers. When starting by hand, create the key file first: copy `prototype/.env.example` to `prototype/.env` and paste the key (`.env` is gitignored: never commit it). Every flag, number and chart comes from the rules in `prototype/api`, never from the model.
 
+### Deploy on Render
+
+`render.yaml` (repo root) deploys one web service from `prototype/Dockerfile`: the UI is built and served by the API on a single URL. In Render: **New > Blueprint**, pick this repository, then fill `ANTHROPIC_API_KEY` and `DEMO_PASSWORD` (the browser asks for it; any username). The free plan sleeps after 15 minutes idle: open the URL a minute before a demo. Local `docker build -t chrome-oak prototype && docker run -p 8000:8000 -e ANTHROPIC_API_KEY=... chrome-oak` runs the same image.
+
 Pages: Dataset, The gap, Action queue, What if (policy simulator: damage, pricing, credit), Accounts & Limits, Ask, Activity log. `POST /api/admin/reset` clears the user actions before a demo run. `python -m api.check` (from `prototype/`) recomputes the headline numbers.
