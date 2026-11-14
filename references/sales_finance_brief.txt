@@ -1,0 +1,331 @@
+Selected-domain excerpt of the supplied Business Track participant brief.
+Includes Option B and the shared challenge requirements.
+
+Option B — Sales & Finance · Chrome & Oak Office
+Supply
+Who they are
+
+Chrome & Oak Office Supply is a Montreal-based company, founded in 2000, that sells office
+and home-office equipment (desks, chairs, monitors and accessories) across Canada. It sells
+to individual consumers through its website, to small businesses and large companies through
+account reps, and to resellers who sell Chrome & Oak products to their own clients.
+
+How the business works
+       •    Every product has a list price. Account reps can give discounts to win or keep a
+            deal. Each rep has a quarterly revenue target, and hitting it earns a bonus.
+       •    Consumers pay at checkout. Business customers pay later, on terms: “Net 30”
+            means the invoice is due 30 days after the order, “Net 60” means 60 days.
+       •    Each business customer has a credit limit: the maximum amount it’s supposed to
+            owe Chrome & Oak at any time.
+       •    Customers can return products. Chrome & Oak refunds them, and damaged items
+            usually can’t be resold.
+
+What’s happening
+
+On paper, Chrome & Oak has never looked better. But the leadership team is uneasy:
+    CEO: “Revenue is up about a third compared to last year. Our Atlantic team punches
+    way above its weight. Let’s keep doing what we’re doing.”
+    CFO: “Then why is cash so tight? Revenue is growing but profit isn’t keeping up, and
+    I’m chasing unpaid invoices every week.”
+    Operations Manager: “Returns are eating my warehouse team’s time, especially the
+    big items.”
+    Head of Customer Success: “Some of our long-time business customers have gone
+    quiet. Nobody told me why.”
+
+Your role
+
+You’ve been brought in as a small analytics and tools team. Find out what’s really driving the
+gap between how good things look and how they actually are, decide which problem is
+worth solving first, and build a tool Chrome & Oak’s team could use to act on it.
+
+Your data: customers.csv, orders.csv and returns.csv, covering orders from January 2025 to
+September 2026, extracted on October 31, 2026.
+
+
+
+The Dataset
+The selected domain comes with:
+       •    the short business scenario above
+       •    the data files exported from the company’s systems
+
+There is no data dictionary. Figuring out what each file and column represents, and how the
+files connect to each other, is part of the challenge.
+
+The data came straight from internal systems. Don’t assume it’s clean.
+
+The purpose of the dataset is not to test business knowledge. It is to test your ability to reason
+about data, communicate your findings, and learn while getting hands-on experience.
+
+
+
+How to Approach It
+Work through these stages in order. In practice you’ll go back and forth between them, and
+that’s normal. At the end of each stage, there’s a short note on what you should be able to
+show.
+
+
+1. Understand the business
+Read the scenario carefully before touching any code. Ask yourselves:
+       •    What does this company do, and how does it make money?
+       •    What are the people in the scenario worried about? Do they agree with each other?
+       •    What would “a problem worth solving” look like for this company?
+
+Don’t assume you already know what the problem is. The people in the scenario each have an
+opinion. Your data will tell you who is right.
+
+Show: You understand how the business works and why the problem you chose matters to it.
+
+
+2. Ask questions and explore the data
+Start by understanding the data itself: what each file contains, what each row represents, and
+how the files relate to each other. Then start asking business questions.
+
+Good questions combine more than one piece of information. For example:
+
+Instead of:
+     “Which product sells the most?”
+
+A stronger question could be:
+     “Are our highest-revenue products actually our most profitable products?”
+
+This requires you to combine multiple pieces of information and draw a more meaningful
+conclusion. The strongest projects come up with their own questions and show independent
+reasoning, rather than stopping at the first obvious chart.
+
+Show: The questions you asked, and why you thought they were worth asking.
+
+
+3. Prepare the data
+Before you can trust any number, you need to make the data usable. This might mean cleaning,
+filtering, fixing types, combining files, grouping, aggregating, or creating new calculated
+columns.
+
+You do not need to explain every line of code. What you do need to explain is the reasoning
+behind your changes. For example, if you group transactions by category, remove duplicates, or
+create a new column, you should be able to explain:
+       •      Why did you make this change?
+       •      What were you trying to understand?
+       •      Did it change any of your conclusions?
+
+Small cleaning decisions can completely change what the data seems to say. Pay attention to
+them.
+
+Show: What you changed in the data, why, and how it affected what you found.
+
+
+4. Find insights and visualize them
+Analyze the prepared data to find what’s really going on. Useful tools include totals, averages,
+percentages, growth rates, comparisons between groups, rankings, trends and correlations.
+
+Insights. Identify at least 2 meaningful insights. Each insight should explain:
+       •      What happened?
+       •      Why does it matter?
+       •      What should the business consider doing?
+
+At least one of your insights must be the reason behind your automation (see stage 6).
+
+Visualizations. Create at least 2 meaningful visualizations that help explain your insights.
+They can live inside your prototype (for example, as part of a dashboard), and that’s
+encouraged.
+
+Examples: bar charts, line charts, scatter plots, histograms, heatmaps, pie/donut charts.
+
+Think carefully about which visualizations you choose and how relevant they are to your
+solution. A good chart helps someone understand a business situation and make a decision. It
+doesn’t just display data.
+
+Show: Your insights, the evidence behind them, and visuals that make them easy to
+understand.
+
+
+5. Build your prototype
+Translate what you found into a working software prototype that addresses the problem you
+identified.
+
+There are no restrictions on the type of solution. It could be:
+       •    a web application
+       •    a software or desktop application
+       •    a dashboard with interactive functionality
+       •    an internal business tool
+       •    an operational management or decision-support system
+       •    another creative software solution
+
+A command-line interface on its own does not count as a prototype for this track.
+
+Your prototype must use the provided dataset, and it should be something the company’s staff
+could actually picture themselves using.
+
+Show: A working prototype that clearly connects to the problem you identified.
+
+
+6. Automate
+Your prototype must:
+       •    Detect at least 2 meaningful business conditions in the data.
+       •    Automatically trigger at least 1 action when one of those conditions occurs.
+       •    Be justified by your analysis: your automation should exist because of something
+            you found in the data, not just to satisfy a requirement.
+
+What is an automation? An automation checks a condition in the data and does something
+useful without a person having to do it manually.
+
+Here’s an example from a different business, so you can see the shape of it:
+     A gym member who used to come 3 times a week hasn’t checked in for 30 days
+     → System flags the member as “at risk” and sends a win-back offer.
+
+How you design your automation is up to you, and it’s one of the most important parts of the
+challenge. As you design yours, ask yourselves:
+       •    Who receives the result?
+       •    What do they do next?
+       •    What happens if your automation is wrong?
+
+Show: What your system detects, what happens when it does, and why that’s useful for the
+business.
+
+
+
+Minimum Requirements
+By the end of the build, your team must have:
+       1.   A clear business problem you identified from the scenario and the data.
+       2.   Prepared data, with reasoning behind your main transformations.
+       3.   At least 2 meaningful insights (What happened? Why does it matter? What should
+            the business consider doing?).
+       4.   At least 2 meaningful visualizations.
+       5.   A working prototype (not just a command-line interface).
+       6.   At least 2 detected business conditions and at least 1 automated action,
+            justified by your insights.
+
+
+
+AI
+AI tools ARE allowed.
+
+Teams may use tools such as ChatGPT, GitHub Copilot, Claude, Gemini, Cursor, or AI APIs, for
+example to:
+       •    assist with coding and debugging
+       •    understand unfamiliar libraries and frameworks
+       •    explore ideas and possible approaches
+       •    classify or summarize information
+       •    generate recommendations or natural-language explanations
+       •    enhance your workflow
+
+However:
+       •    AI cannot be the entire solution. For example, simply sending the dataset to an AI
+            model and displaying its response does not count as a strong automation system.
+       •    At least one of your detections must be logic your team wrote and can
+            explain. AI can summarize, explain or recommend on top of it.
+
+       •    You must understand what you build. AI can help you analyze the data,
+            challenge your assumptions, or suggest alternatives. But you should be the ones
+            deciding what to investigate, whether an insight is actually supported by the data,
+            and how your findings shape your solution.
+
+We strongly encourage you to do the business reasoning yourselves. Understanding the
+business, identifying the problem, choosing your questions, and judging whether an insight is
+meaningful are exactly the skills this track is designed to build. Use AI as a tool, not as a
+replacement for your thinking. The judges will ask you about your reasoning, not about whether
+you used AI.
+
+
+
+Recommended Tools
+Teams may use any programming language or framework.
+
+That said, we recommend Python. It’s one of the most widely used languages for working with
+data, and its libraries for data analysis, visualization and machine learning are among the best
+available.
+
+Hint: this challenge uses structured, table-shaped data. Some Python libraries were built for
+exactly that kind of data, and knowing them will save you a lot of time.
+
+
+
+Optional Advanced Features
+Teams can go beyond the minimum requirements by adding:
+
+
+Simulation
+Allow the user to change a value and see what would happen.
+
+Example: “What happens if we change this threshold?”
+
+
+Multiple-step Automation
+One detection triggers a chain of actions.
+
+Example: Condition detected → identify who is affected → recommend an action → notify the
+right person → log what happened.
+
+
+AI-Assisted Decision Making
+Example: System detects an unusual case → AI summarizes the relevant information → system
+recommends whether a human should review it.
+
+Interactive Exploration
+Let the user explore the data behind an alert, for example by filtering, drilling down, or
+comparing groups, to understand why the automation was triggered.
+
+
+
+Presentation
+Each team will have a 5-minute presentation and demo, followed by 2–3 minutes of
+questions from the judges.
+
+No slides are needed. Use your prototype to tell the story.
+
+Suggested time split:
+
+ Part                                                                                Time
+
+ The business problem and why it matters                                             ~1 min
+
+ What you found in the data (your insights and visualizations)                       ~1.5 min
+
+ Live demo of your prototype, with your automation in action                         ~2 min
+
+ Your recommendation to the business                                                 ~30 sec
+
+You should be ready to explain:
+        •   Which domain you selected and what business problem you identified.
+        •   How you processed the data, and why.
+        •   What you discovered and why you chose your visualizations.
+        •   What your system detects, what happens when it does, and why that action is
+            useful.
+        •   What decision or recommendation you would give the business.
+
+You don’t need to walk through your code line by line. But you should understand what you built
+and be ready to explain the reasoning behind your data transformations, your automation and
+every part of your solution. Expect questions. The Q&A is where we find out how well you
+understand your work.
+
+
+
+Submission
+There is no formal submission at this time. Your presentation and live demo are what will be
+evaluated. If a submission step is added, we will announce it before the event.
+
+Rules
+       •   Teams consist of 2 participants.
+       •   Development time: 4 hours.
+       •   Teams may use any programming language or framework.
+       •   AI tools are permitted (see the AI section).
+       •   Official documentation, tutorials, Stack Overflow and other programming resources
+           are permitted.
+       •   External APIs are permitted, provided they are accessible during the competition.
+       •   All major implementation work must take place during the competition. Starter
+           templates and libraries are fine. Project code written before the event is not.
+       •   Teams must be able to explain their work to the judges.
+
+
+
+Important
+There is no single correct answer.
+
+Two teams may analyze the same dataset and reach completely different conclusions. We are
+interested in how you use the data to support your reasoning.
+
+The goal is not to automate everything. Build a focused solution that solves one business
+problem well. A simple automation that reliably solves a real problem is better than a
+complicated system with many unfinished features.
+
+               Good luck and enjoy your time learning and getting challenged! :D
+

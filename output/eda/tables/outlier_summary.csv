@@ -1,8 +1,0 @@
-,grain,column,nonmissing,iqr_low,iqr_high,iqr_flagged,MAD,modified_z_flagged,zero_MAD_or_IQR
-0,policy,age_for_analysis,4641,5.0,85.0,0,10.0,0,False
-1,policy,annual_premium,4684,359.2774999999999,2386.6975,222,238.365,135,False
-2,policy,deductible,4684,-250.0,1750.0,921,500.0,0,False
-3,claim,claim_amount,839,-5201.2825,15128.4575,33,2443.09,26,False
-4,claim,paid_amount,799,-6394.645000000001,13110.835000000003,25,2485.52,17,False
-5,claim,closure_days,799,-16.0,48.0,55,8.0,34,False
-6,claim,report_lag_days,841,-3.5,8.5,21,1.0,37,False

@@ -2102,7 +2102,7 @@ wheels = [
 ]
 
 [[package]]
-name = "scs-insurance-claims"
+name = "scs-sales-finance"
 version = "0.1.0"
 source = { virtual = "." }
 dependencies = [

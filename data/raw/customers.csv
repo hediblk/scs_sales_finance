@@ -1,0 +1,1211 @@
+customer_id,segment,region,signup_date,account_rep,payment_terms,credit_limit
+C0001,Consumer,Ontario,2023-09-13,,Prepaid,0
+C0002,Consumer,Ontario,2023-08-10,,Prepaid,0
+C0003,Consumer,Prairies,2025-10-07,,Prepaid,0
+C0004,Consumer,Atlantic,2024-10-30,,Prepaid,0
+C0005,Consumer,Prairies,2025-09-02,,Prepaid,0
+C0006,Consumer,Quebec,2024-11-02,,Prepaid,0
+C0007,Consumer,Ontario,2024-03-17,,Prepaid,0
+C0008,Consumer,Quebec,2026-02-22,,Prepaid,0
+C0009,Consumer,Ontario,2024-01-09,,Prepaid,0
+C0010,Consumer,Quebec,2024-04-09,,Prepaid,0
+C0011,Consumer,Ontario,2026-03-20,,Prepaid,0
+C0012,Consumer,Ontario,2025-01-01,,Prepaid,0
+C0013,Consumer,Prairies,2024-03-17,,Prepaid,0
+C0014,Consumer,BC,2024-09-01,,Prepaid,0
+C0015,Consumer,Prairies,2023-03-31,,Prepaid,0
+C0016,Consumer,Prairies,2025-12-15,,Prepaid,0
+C0017,Consumer,Ontario,2024-04-13,,Prepaid,0
+C0018,Consumer,BC,2023-06-26,,Prepaid,0
+C0019,Consumer,Prairies,2025-10-06,,Prepaid,0
+C0020,Consumer,Ontario,2026-04-28,,Prepaid,0
+C0021,Consumer,Ontario,2023-10-20,,Prepaid,0
+C0022,Consumer,Ontario,2023-06-10,,Prepaid,0
+C0023,Consumer,Ontario,2024-12-06,,Prepaid,0
+C0024,Consumer,Ontario,2023-06-10,,Prepaid,0
+C0025,Consumer,Ontario,2026-01-25,,Prepaid,0
+C0026,Consumer,Prairies,2024-06-13,,Prepaid,0
+C0027,Consumer,Ontario,2026-05-03,,Prepaid,0
+C0028,Consumer,BC,2024-02-28,,Prepaid,0
+C0029,Consumer,BC,2023-05-18,,Prepaid,0
+C0030,Consumer,BC,2025-11-12,,Prepaid,0
+C0031,Consumer,BC,2025-01-03,,Prepaid,0
+C0032,Consumer,Atlantic,2025-10-27,,Prepaid,0
+C0033,Consumer,Atlantic,2023-07-09,,Prepaid,0
+C0034,Consumer,Quebec,2023-12-28,,Prepaid,0
+C0035,Consumer,Quebec,2026-01-24,,Prepaid,0
+C0036,Consumer,Ontario,2025-04-10,,Prepaid,0
+C0037,Consumer,Quebec,2026-03-01,,Prepaid,0
+C0038,Consumer,Quebec,2026-02-03,,Prepaid,0
+C0039,Consumer,Quebec,2023-10-15,,Prepaid,0
+C0040,Consumer,Ontario,2025-01-06,,Prepaid,0
+C0041,Consumer,Ontario,2025-12-31,,Prepaid,0
+C0042,Consumer,BC,2026-03-12,,Prepaid,0
+C0043,Consumer,Ontario,2023-11-25,,Prepaid,0
+C0044,Consumer,Quebec,2024-03-08,,Prepaid,0
+C0045,Consumer,Atlantic,2023-11-16,,Prepaid,0
+C0046,Consumer,BC,2025-12-03,,Prepaid,0
+C0047,Consumer,Quebec,2025-10-07,,Prepaid,0
+C0048,Consumer,Prairies,2025-12-09,,Prepaid,0
+C0049,Consumer,Quebec,2025-07-20,,Prepaid,0
+C0050,Consumer,Ontario,2026-04-30,,Prepaid,0
+C0051,Consumer,BC,2023-06-02,,Prepaid,0
+C0052,Consumer,Quebec,2024-01-07,,Prepaid,0
+C0053,Consumer,Ontario,2024-08-06,,Prepaid,0
+C0054,Consumer,Ontario,2026-03-12,,Prepaid,0
+C0055,Consumer,Atlantic,2026-03-03,,Prepaid,0
+C0056,Consumer,Ontario,2025-06-11,,Prepaid,0
+C0057,Consumer,Ontario,2025-11-18,,Prepaid,0
+C0058,Consumer,Quebec,2024-01-18,,Prepaid,0
+C0059,Consumer,Prairies,2023-12-29,,Prepaid,0
+C0060,Consumer,BC,2026-02-03,,Prepaid,0
+C0061,Consumer,Ontario,2024-08-19,,Prepaid,0
+C0062,Consumer,Ontario,2023-11-07,,Prepaid,0
+C0063,Consumer,Quebec,2026-06-04,,Prepaid,0
+C0064,Consumer,Ontario,2023-11-14,,Prepaid,0
+C0065,Consumer,Quebec,2026-02-23,,Prepaid,0
+C0066,Consumer,Prairies,2025-02-21,,Prepaid,0
+C0067,Consumer,Prairies,2023-03-24,,Prepaid,0
+C0068,Consumer,Atlantic,2026-05-01,,Prepaid,0
+C0069,Consumer,Atlantic,2026-01-26,,Prepaid,0
+C0070,Consumer,Ontario,2023-05-26,,Prepaid,0
+C0071,Consumer,Ontario,2024-02-17,,Prepaid,0
+C0072,Consumer,Ontario,2024-05-28,,Prepaid,0
+C0073,Consumer,BC,2024-08-29,,Prepaid,0
+C0074,Consumer,BC,2024-04-02,,Prepaid,0
+C0075,Consumer,Ontario,2023-11-28,,Prepaid,0
+C0076,Consumer,Quebec,2024-03-08,,Prepaid,0
+C0077,Consumer,Quebec,2026-01-05,,Prepaid,0
+C0078,Consumer,Ontario,2025-04-16,,Prepaid,0
+C0079,Consumer,Prairies,2024-06-22,,Prepaid,0
+C0080,Consumer,Ontario,2023-03-23,,Prepaid,0
+C0081,Consumer,Ontario,2023-03-29,,Prepaid,0
+C0082,Consumer,Atlantic,2023-06-28,,Prepaid,0
+C0083,Consumer,Ontario,2024-12-09,,Prepaid,0
+C0084,Consumer,Ontario,2023-10-03,,Prepaid,0
+C0085,Consumer,Quebec,2025-01-17,,Prepaid,0
+C0086,Consumer,Quebec,2026-04-20,,Prepaid,0
+C0087,Consumer,Quebec,2023-12-13,,Prepaid,0
+C0088,Consumer,Quebec,2023-02-05,,Prepaid,0
+C0089,Consumer,Quebec,2025-01-01,,Prepaid,0
+C0090,Consumer,BC,2026-04-21,,Prepaid,0
+C0091,Consumer,Atlantic,2023-03-24,,Prepaid,0
+C0092,Consumer,Prairies,2025-10-06,,Prepaid,0
+C0093,Consumer,Ontario,2023-02-03,,Prepaid,0
+C0094,Consumer,Atlantic,2025-06-03,,Prepaid,0
+C0095,Consumer,Quebec,2024-04-05,,Prepaid,0
+C0096,Consumer,Quebec,2023-10-24,,Prepaid,0
+C0097,Consumer,BC,2024-09-23,,Prepaid,0
+C0098,Consumer,Ontario,2024-10-14,,Prepaid,0
+C0099,Consumer,Quebec,2025-06-01,,Prepaid,0
+C0100,Consumer,Ontario,2023-12-22,,Prepaid,0
+C0101,Consumer,Quebec,2026-02-21,,Prepaid,0
+C0102,Consumer,Ontario,2023-04-06,,Prepaid,0
+C0103,Consumer,Ontario,2023-10-13,,Prepaid,0
+C0104,Consumer,Quebec,2023-12-07,,Prepaid,0
+C0105,Consumer,Ontario,2025-03-22,,Prepaid,0
+C0106,Consumer,Ontario,2026-03-12,,Prepaid,0
+C0107,Consumer,BC,2023-12-12,,Prepaid,0
+C0108,Consumer,BC,2023-08-27,,Prepaid,0
+C0109,Consumer,Quebec,2024-05-27,,Prepaid,0
+C0110,Consumer,Quebec,2025-04-08,,Prepaid,0
+C0111,Consumer,Ontario,2025-07-28,,Prepaid,0
+C0112,Consumer,Prairies,2026-05-16,,Prepaid,0
+C0113,Consumer,Ontario,2023-06-05,,Prepaid,0
+C0114,Consumer,Ontario,2023-10-01,,Prepaid,0
+C0115,Consumer,Prairies,2026-01-10,,Prepaid,0
+C0116,Consumer,Quebec,2025-02-13,,Prepaid,0
+C0117,Consumer,Quebec,2023-11-20,,Prepaid,0
+C0118,Consumer,Quebec,2023-03-19,,Prepaid,0
+C0119,Consumer,Ontario,2024-10-14,,Prepaid,0
+C0120,Consumer,Quebec,2024-04-08,,Prepaid,0
+C0121,Consumer,Ontario,2024-03-11,,Prepaid,0
+C0122,Consumer,Quebec,2023-08-02,,Prepaid,0
+C0123,Consumer,Prairies,2023-08-15,,Prepaid,0
+C0124,Consumer,BC,2026-02-18,,Prepaid,0
+C0125,Consumer,Quebec,2026-03-09,,Prepaid,0
+C0126,Consumer,Ontario,2023-07-22,,Prepaid,0
+C0127,Consumer,Ontario,2024-04-06,,Prepaid,0
+C0128,Consumer,Quebec,2023-11-16,,Prepaid,0
+C0129,Consumer,Atlantic,2023-05-17,,Prepaid,0
+C0130,Consumer,Ontario,2025-09-14,,Prepaid,0
+C0131,Consumer,Prairies,2023-05-21,,Prepaid,0
+C0132,Consumer,Ontario,2025-12-20,,Prepaid,0
+C0133,Consumer,BC,2024-03-08,,Prepaid,0
+C0134,Consumer,Quebec,2024-08-29,,Prepaid,0
+C0135,Consumer,Quebec,2024-08-09,,Prepaid,0
+C0136,Consumer,Ontario,2024-10-30,,Prepaid,0
+C0137,Consumer,BC,2024-06-08,,Prepaid,0
+C0138,Consumer,Quebec,2023-12-03,,Prepaid,0
+C0139,Consumer,Ontario,2025-09-16,,Prepaid,0
+C0140,Consumer,Quebec,2024-04-10,,Prepaid,0
+C0141,Consumer,Ontario,2024-05-03,,Prepaid,0
+C0142,Consumer,Prairies,2023-06-21,,Prepaid,0
+C0143,Consumer,Ontario,2023-11-08,,Prepaid,0
+C0144,Consumer,BC,2025-05-10,,Prepaid,0
+C0145,Consumer,BC,2024-09-07,,Prepaid,0
+C0146,Consumer,Atlantic,2025-07-19,,Prepaid,0
+C0147,Consumer,Quebec,2024-11-05,,Prepaid,0
+C0148,Consumer,Quebec,2023-02-26,,Prepaid,0
+C0149,Consumer,Ontario,2025-10-13,,Prepaid,0
+C0150,Consumer,Ontario,2024-04-29,,Prepaid,0
+C0151,Consumer,Atlantic,2024-03-18,,Prepaid,0
+C0152,Consumer,Prairies,2025-09-25,,Prepaid,0
+C0153,Consumer,BC,2026-02-13,,Prepaid,0
+C0154,Consumer,Quebec,2025-06-18,,Prepaid,0
+C0155,Consumer,Quebec,2026-01-17,,Prepaid,0
+C0156,Consumer,Prairies,2024-05-03,,Prepaid,0
+C0157,Consumer,Prairies,2025-06-23,,Prepaid,0
+C0158,Consumer,Atlantic,2024-01-25,,Prepaid,0
+C0159,Consumer,Quebec,2023-09-23,,Prepaid,0
+C0160,Consumer,Quebec,2024-12-30,,Prepaid,0
+C0161,Consumer,Ontario,2023-05-12,,Prepaid,0
+C0162,Consumer,BC,2024-02-28,,Prepaid,0
+C0163,Consumer,Quebec,2023-07-29,,Prepaid,0
+C0164,Consumer,Prairies,2025-01-17,,Prepaid,0
+C0165,Consumer,Quebec,2025-02-08,,Prepaid,0
+C0166,Consumer,Ontario,2023-11-17,,Prepaid,0
+C0167,Consumer,Quebec,2023-08-09,,Prepaid,0
+C0168,Consumer,BC,2024-12-05,,Prepaid,0
+C0169,Consumer,Prairies,2023-04-07,,Prepaid,0
+C0170,Consumer,Ontario,2023-06-10,,Prepaid,0
+C0171,Consumer,Quebec,2025-09-30,,Prepaid,0
+C0172,Consumer,Atlantic,2026-02-13,,Prepaid,0
+C0173,Consumer,Ontario,2023-02-21,,Prepaid,0
+C0174,Consumer,Prairies,2025-05-16,,Prepaid,0
+C0175,Consumer,Quebec,2026-05-07,,Prepaid,0
+C0176,Consumer,Quebec,2025-10-25,,Prepaid,0
+C0177,Consumer,Ontario,2024-05-31,,Prepaid,0
+C0178,Consumer,Quebec,2024-02-17,,Prepaid,0
+C0179,Consumer,Quebec,2024-05-05,,Prepaid,0
+C0180,Consumer,Atlantic,2025-01-17,,Prepaid,0
+C0181,Consumer,Quebec,2026-02-12,,Prepaid,0
+C0182,Consumer,Ontario,2023-09-21,,Prepaid,0
+C0183,Consumer,Ontario,2025-03-29,,Prepaid,0
+C0184,Consumer,Prairies,2025-05-04,,Prepaid,0
+C0185,Consumer,Prairies,2024-06-20,,Prepaid,0
+C0186,Consumer,Prairies,2023-02-02,,Prepaid,0
+C0187,Consumer,Quebec,2023-09-11,,Prepaid,0
+C0188,Consumer,Ontario,2025-09-17,,Prepaid,0
+C0189,Consumer,Quebec,2023-12-17,,Prepaid,0
+C0190,Consumer,Quebec,2025-04-12,,Prepaid,0
+C0191,Consumer,Atlantic,2023-06-17,,Prepaid,0
+C0192,Consumer,Prairies,2026-01-16,,Prepaid,0
+C0193,Consumer,BC,2024-09-12,,Prepaid,0
+C0194,Consumer,BC,2024-02-27,,Prepaid,0
+C0195,Consumer,Quebec,2024-04-20,,Prepaid,0
+C0196,Consumer,Quebec,2023-09-24,,Prepaid,0
+C0197,Consumer,Quebec,2024-08-29,,Prepaid,0
+C0198,Consumer,BC,2026-06-04,,Prepaid,0
+C0199,Consumer,Prairies,2023-02-03,,Prepaid,0
+C0200,Consumer,BC,2026-02-13,,Prepaid,0
+C0201,Consumer,Ontario,2026-04-01,,Prepaid,0
+C0202,Consumer,Ontario,2024-03-31,,Prepaid,0
+C0203,Consumer,BC,2024-07-25,,Prepaid,0
+C0204,Consumer,Ontario,2024-09-18,,Prepaid,0
+C0205,Consumer,Atlantic,2025-09-15,,Prepaid,0
+C0206,Consumer,Ontario,2024-08-01,,Prepaid,0
+C0207,Consumer,Ontario,2024-01-10,,Prepaid,0
+C0208,Consumer,Quebec,2025-12-29,,Prepaid,0
+C0209,Consumer,Prairies,2025-01-09,,Prepaid,0
+C0210,Consumer,Quebec,2025-05-22,,Prepaid,0
+C0211,Consumer,Ontario,2023-09-25,,Prepaid,0
+C0212,Consumer,Ontario,2024-02-02,,Prepaid,0
+C0213,Consumer,BC,2026-04-08,,Prepaid,0
+C0214,Consumer,Prairies,2025-01-01,,Prepaid,0
+C0215,Consumer,Ontario,2023-11-23,,Prepaid,0
+C0216,Consumer,Ontario,2024-01-17,,Prepaid,0
+C0217,Consumer,Ontario,2025-08-14,,Prepaid,0
+C0218,Consumer,Atlantic,2025-07-12,,Prepaid,0
+C0219,Consumer,Ontario,2024-11-29,,Prepaid,0
+C0220,Consumer,Quebec,2026-04-07,,Prepaid,0
+C0221,Consumer,Ontario,2023-04-27,,Prepaid,0
+C0222,Consumer,Ontario,2024-02-25,,Prepaid,0
+C0223,Consumer,Ontario,2025-01-30,,Prepaid,0
+C0224,Consumer,BC,2023-08-04,,Prepaid,0
+C0225,Consumer,Quebec,2023-03-10,,Prepaid,0
+C0226,Consumer,Quebec,2025-06-21,,Prepaid,0
+C0227,Consumer,Quebec,2024-12-20,,Prepaid,0
+C0228,Consumer,Ontario,2025-01-17,,Prepaid,0
+C0229,Consumer,BC,2024-02-17,,Prepaid,0
+C0230,Consumer,Atlantic,2024-11-30,,Prepaid,0
+C0231,Consumer,Quebec,2024-12-03,,Prepaid,0
+C0232,Consumer,Prairies,2023-04-07,,Prepaid,0
+C0233,Consumer,Atlantic,2023-06-19,,Prepaid,0
+C0234,Consumer,Ontario,2024-05-03,,Prepaid,0
+C0235,Consumer,Ontario,2024-01-03,,Prepaid,0
+C0236,Consumer,Atlantic,2024-03-09,,Prepaid,0
+C0237,Consumer,Quebec,2023-05-10,,Prepaid,0
+C0238,Consumer,Atlantic,2024-02-12,,Prepaid,0
+C0239,Consumer,Ontario,2025-11-11,,Prepaid,0
+C0240,Consumer,Ontario,2026-03-11,,Prepaid,0
+C0241,Consumer,Ontario,2023-11-09,,Prepaid,0
+C0242,Consumer,Ontario,2023-03-12,,Prepaid,0
+C0243,Consumer,Atlantic,2023-05-06,,Prepaid,0
+C0244,Consumer,Ontario,2023-04-20,,Prepaid,0
+C0245,Consumer,Quebec,2023-05-20,,Prepaid,0
+C0246,Consumer,Ontario,2024-05-16,,Prepaid,0
+C0247,Consumer,Prairies,2025-09-18,,Prepaid,0
+C0248,Consumer,Prairies,2024-03-29,,Prepaid,0
+C0249,Consumer,Quebec,2025-07-24,,Prepaid,0
+C0250,Consumer,Ontario,2026-04-05,,Prepaid,0
+C0251,Consumer,Quebec,2025-06-25,,Prepaid,0
+C0252,Consumer,Ontario,2025-08-05,,Prepaid,0
+C0253,Consumer,Quebec,2026-04-15,,Prepaid,0
+C0254,Consumer,Ontario,2024-11-16,,Prepaid,0
+C0255,Consumer,Quebec,2024-09-19,,Prepaid,0
+C0256,Consumer,Ontario,2024-02-11,,Prepaid,0
+C0257,Consumer,Ontario,2023-07-29,,Prepaid,0
+C0258,Consumer,Quebec,2023-11-21,,Prepaid,0
+C0259,Consumer,Quebec,2024-03-20,,Prepaid,0
+C0260,Consumer,Ontario,2024-04-10,,Prepaid,0
+C0261,Consumer,Ontario,2025-05-28,,Prepaid,0
+C0262,Consumer,Atlantic,2025-04-08,,Prepaid,0
+C0263,Consumer,Prairies,2025-01-11,,Prepaid,0
+C0264,Consumer,Quebec,2023-03-24,,Prepaid,0
+C0265,Consumer,Quebec,2025-11-24,,Prepaid,0
+C0266,Consumer,Prairies,2023-12-29,,Prepaid,0
+C0267,Consumer,BC,2024-04-04,,Prepaid,0
+C0268,Consumer,Prairies,2024-08-26,,Prepaid,0
+C0269,Consumer,Quebec,2024-09-03,,Prepaid,0
+C0270,Consumer,Ontario,2025-09-10,,Prepaid,0
+C0271,Consumer,Ontario,2023-11-01,,Prepaid,0
+C0272,Consumer,Prairies,2025-10-08,,Prepaid,0
+C0273,Consumer,Ontario,2024-10-20,,Prepaid,0
+C0274,Consumer,Quebec,2024-06-29,,Prepaid,0
+C0275,Consumer,Ontario,2025-10-17,,Prepaid,0
+C0276,Consumer,Atlantic,2025-11-15,,Prepaid,0
+C0277,Consumer,Ontario,2024-03-07,,Prepaid,0
+C0278,Consumer,Ontario,2025-04-22,,Prepaid,0
+C0279,Consumer,Ontario,2026-05-24,,Prepaid,0
+C0280,Consumer,Ontario,2024-10-14,,Prepaid,0
+C0281,Consumer,Quebec,2025-04-20,,Prepaid,0
+C0282,Consumer,Quebec,2025-05-13,,Prepaid,0
+C0283,Consumer,Ontario,2024-03-07,,Prepaid,0
+C0284,Consumer,Prairies,2024-07-13,,Prepaid,0
+C0285,Consumer,Quebec,2024-12-30,,Prepaid,0
+C0286,Consumer,BC,2023-07-26,,Prepaid,0
+C0287,Consumer,Ontario,2026-05-02,,Prepaid,0
+C0288,Consumer,BC,2026-01-24,,Prepaid,0
+C0289,Consumer,BC,2025-01-04,,Prepaid,0
+C0290,Consumer,Ontario,2025-11-27,,Prepaid,0
+C0291,Consumer,Atlantic,2025-06-22,,Prepaid,0
+C0292,Consumer,BC,2023-03-25,,Prepaid,0
+C0293,Consumer,Prairies,2026-02-21,,Prepaid,0
+C0294,Consumer,Quebec,2023-05-22,,Prepaid,0
+C0295,Consumer,Ontario,2025-11-14,,Prepaid,0
+C0296,Consumer,Ontario,2023-07-20,,Prepaid,0
+C0297,Consumer,Quebec,2025-02-18,,Prepaid,0
+C0298,Consumer,Prairies,2024-10-23,,Prepaid,0
+C0299,Consumer,Ontario,2025-08-23,,Prepaid,0
+C0300,Consumer,Prairies,2025-03-01,,Prepaid,0
+C0301,Consumer,Ontario,2024-09-17,,Prepaid,0
+C0302,Consumer,Ontario,2025-08-17,,Prepaid,0
+C0303,Consumer,Prairies,2026-02-20,,Prepaid,0
+C0304,Consumer,Prairies,2025-03-08,,Prepaid,0
+C0305,Consumer,Ontario,2024-03-27,,Prepaid,0
+C0306,Consumer,Ontario,2024-12-17,,Prepaid,0
+C0307,Consumer,Quebec,2023-05-16,,Prepaid,0
+C0308,Consumer,Quebec,2026-01-02,,Prepaid,0
+C0309,Consumer,BC,2023-05-24,,Prepaid,0
+C0310,Consumer,Ontario,2024-04-01,,Prepaid,0
+C0311,Consumer,Quebec,2023-03-05,,Prepaid,0
+C0312,Consumer,Quebec,2026-05-24,,Prepaid,0
+C0313,Consumer,Ontario,2023-10-05,,Prepaid,0
+C0314,Consumer,Quebec,2024-12-23,,Prepaid,0
+C0315,Consumer,Atlantic,2026-04-11,,Prepaid,0
+C0316,Consumer,Ontario,2023-12-09,,Prepaid,0
+C0317,Consumer,BC,2024-10-08,,Prepaid,0
+C0318,Consumer,Ontario,2026-04-29,,Prepaid,0
+C0319,Consumer,Atlantic,2023-07-13,,Prepaid,0
+C0320,Consumer,Ontario,2024-01-24,,Prepaid,0
+C0321,Consumer,BC,2026-03-20,,Prepaid,0
+C0322,Consumer,Quebec,2025-04-18,,Prepaid,0
+C0323,Consumer,Ontario,2025-08-14,,Prepaid,0
+C0324,Consumer,BC,2026-05-12,,Prepaid,0
+C0325,Consumer,Quebec,2026-01-25,,Prepaid,0
+C0326,Consumer,Quebec,2023-06-30,,Prepaid,0
+C0327,Consumer,Ontario,2024-07-12,,Prepaid,0
+C0328,Consumer,Quebec,2025-09-02,,Prepaid,0
+C0329,Consumer,Quebec,2024-10-27,,Prepaid,0
+C0330,Consumer,Atlantic,2025-01-17,,Prepaid,0
+C0331,Consumer,Quebec,2023-05-15,,Prepaid,0
+C0332,Consumer,Quebec,2024-09-05,,Prepaid,0
+C0333,Consumer,Quebec,2023-05-18,,Prepaid,0
+C0334,Consumer,Quebec,2025-12-26,,Prepaid,0
+C0335,Consumer,Prairies,2023-07-29,,Prepaid,0
+C0336,Consumer,Quebec,2026-04-16,,Prepaid,0
+C0337,Consumer,Quebec,2024-10-05,,Prepaid,0
+C0338,Consumer,Quebec,2026-03-07,,Prepaid,0
+C0339,Consumer,Prairies,2025-12-17,,Prepaid,0
+C0340,Consumer,Quebec,2024-10-08,,Prepaid,0
+C0341,Consumer,Ontario,2024-12-08,,Prepaid,0
+C0342,Consumer,Ontario,2024-04-02,,Prepaid,0
+C0343,Consumer,Ontario,2024-05-09,,Prepaid,0
+C0344,Consumer,Ontario,2024-05-07,,Prepaid,0
+C0345,Consumer,Prairies,2026-03-04,,Prepaid,0
+C0346,Consumer,Prairies,2025-05-17,,Prepaid,0
+C0347,Consumer,Prairies,2025-07-23,,Prepaid,0
+C0348,Consumer,Quebec,2024-09-17,,Prepaid,0
+C0349,Consumer,Ontario,2023-09-04,,Prepaid,0
+C0350,Consumer,Quebec,2026-05-18,,Prepaid,0
+C0351,Consumer,Ontario,2023-05-08,,Prepaid,0
+C0352,Consumer,Quebec,2026-03-08,,Prepaid,0
+C0353,Consumer,Quebec,2023-09-05,,Prepaid,0
+C0354,Consumer,Prairies,2025-09-15,,Prepaid,0
+C0355,Consumer,Quebec,2024-05-12,,Prepaid,0
+C0356,Consumer,Ontario,2024-10-05,,Prepaid,0
+C0357,Consumer,Prairies,2025-08-08,,Prepaid,0
+C0358,Consumer,Ontario,2024-04-29,,Prepaid,0
+C0359,Consumer,Quebec,2026-05-16,,Prepaid,0
+C0360,Consumer,Ontario,2025-05-14,,Prepaid,0
+C0361,Consumer,Quebec,2025-09-11,,Prepaid,0
+C0362,Consumer,Ontario,2024-07-04,,Prepaid,0
+C0363,Consumer,Quebec,2023-11-07,,Prepaid,0
+C0364,Consumer,Ontario,2023-09-10,,Prepaid,0
+C0365,Consumer,Ontario,2025-09-13,,Prepaid,0
+C0366,Consumer,Quebec,2025-01-01,,Prepaid,0
+C0367,Consumer,Prairies,2025-12-23,,Prepaid,0
+C0368,Consumer,Ontario,2023-10-07,,Prepaid,0
+C0369,Consumer,Ontario,2025-10-22,,Prepaid,0
+C0370,Consumer,Quebec,2023-11-09,,Prepaid,0
+C0371,Consumer,Ontario,2026-01-18,,Prepaid,0
+C0372,Consumer,Prairies,2023-08-11,,Prepaid,0
+C0373,Consumer,Quebec,2023-04-17,,Prepaid,0
+C0374,Consumer,BC,2024-04-25,,Prepaid,0
+C0375,Consumer,Ontario,2024-07-17,,Prepaid,0
+C0376,Consumer,Ontario,2023-02-21,,Prepaid,0
+C0377,Consumer,Quebec,2024-10-15,,Prepaid,0
+C0378,Consumer,Atlantic,2023-09-13,,Prepaid,0
+C0379,Consumer,Ontario,2025-03-14,,Prepaid,0
+C0380,Consumer,Ontario,2026-02-16,,Prepaid,0
+C0381,Consumer,Quebec,2024-05-22,,Prepaid,0
+C0382,Consumer,BC,2025-03-15,,Prepaid,0
+C0383,Consumer,Quebec,2025-03-18,,Prepaid,0
+C0384,Consumer,Quebec,2024-12-29,,Prepaid,0
+C0385,Consumer,Quebec,2023-08-03,,Prepaid,0
+C0386,Consumer,Prairies,2024-11-25,,Prepaid,0
+C0387,Consumer,Quebec,2024-12-16,,Prepaid,0
+C0388,Consumer,Ontario,2025-09-29,,Prepaid,0
+C0389,Consumer,Quebec,2024-02-03,,Prepaid,0
+C0390,Consumer,Quebec,2024-08-19,,Prepaid,0
+C0391,Consumer,Atlantic,2026-05-31,,Prepaid,0
+C0392,Consumer,Quebec,2025-11-18,,Prepaid,0
+C0393,Consumer,Quebec,2023-11-12,,Prepaid,0
+C0394,Consumer,Quebec,2023-12-07,,Prepaid,0
+C0395,Consumer,Prairies,2023-10-14,,Prepaid,0
+C0396,Consumer,Quebec,2024-08-08,,Prepaid,0
+C0397,Consumer,Quebec,2025-01-02,,Prepaid,0
+C0398,Consumer,Ontario,2024-04-03,,Prepaid,0
+C0399,Consumer,BC,2024-01-24,,Prepaid,0
+C0400,Consumer,Ontario,2026-05-24,,Prepaid,0
+C0401,Consumer,BC,2025-02-09,,Prepaid,0
+C0402,Consumer,Ontario,2025-09-13,,Prepaid,0
+C0403,Consumer,Ontario,2026-01-10,,Prepaid,0
+C0404,Consumer,Quebec,2024-03-26,,Prepaid,0
+C0405,Consumer,Ontario,2026-04-25,,Prepaid,0
+C0406,Consumer,Ontario,2025-05-06,,Prepaid,0
+C0407,Consumer,Ontario,2025-11-29,,Prepaid,0
+C0408,Consumer,Ontario,2024-03-20,,Prepaid,0
+C0409,Consumer,Quebec,2024-05-13,,Prepaid,0
+C0410,Consumer,Quebec,2023-08-27,,Prepaid,0
+C0411,Consumer,Quebec,2025-12-22,,Prepaid,0
+C0412,Consumer,BC,2025-07-21,,Prepaid,0
+C0413,Consumer,Ontario,2025-05-03,,Prepaid,0
+C0414,Consumer,Atlantic,2025-03-15,,Prepaid,0
+C0415,Consumer,Ontario,2023-11-08,,Prepaid,0
+C0416,Consumer,Ontario,2025-03-25,,Prepaid,0
+C0417,Consumer,Ontario,2026-05-23,,Prepaid,0
+C0418,Consumer,BC,2026-01-13,,Prepaid,0
+C0419,Consumer,Ontario,2025-11-14,,Prepaid,0
+C0420,Consumer,Ontario,2023-02-20,,Prepaid,0
+C0421,Consumer,Ontario,2024-07-05,,Prepaid,0
+C0422,Consumer,BC,2025-04-24,,Prepaid,0
+C0423,Consumer,Ontario,2026-05-21,,Prepaid,0
+C0424,Consumer,Quebec,2024-05-04,,Prepaid,0
+C0425,Consumer,Atlantic,2025-02-16,,Prepaid,0
+C0426,Consumer,Ontario,2023-04-11,,Prepaid,0
+C0427,Consumer,BC,2025-01-27,,Prepaid,0
+C0428,Consumer,Atlantic,2024-08-18,,Prepaid,0
+C0429,Consumer,Quebec,2026-03-03,,Prepaid,0
+C0430,Consumer,Prairies,2024-09-16,,Prepaid,0
+C0431,Consumer,Atlantic,2025-02-15,,Prepaid,0
+C0432,Consumer,Quebec,2024-06-06,,Prepaid,0
+C0433,Consumer,Quebec,2024-03-25,,Prepaid,0
+C0434,Consumer,Ontario,2023-02-16,,Prepaid,0
+C0435,Consumer,Ontario,2023-07-05,,Prepaid,0
+C0436,Consumer,Quebec,2024-05-20,,Prepaid,0
+C0437,Consumer,Ontario,2026-04-08,,Prepaid,0
+C0438,Consumer,Quebec,2025-06-27,,Prepaid,0
+C0439,Consumer,Prairies,2024-11-08,,Prepaid,0
+C0440,Consumer,Ontario,2024-03-30,,Prepaid,0
+C0441,Consumer,Ontario,2024-01-07,,Prepaid,0
+C0442,Consumer,Quebec,2025-05-11,,Prepaid,0
+C0443,Consumer,Ontario,2024-11-03,,Prepaid,0
+C0444,Consumer,Ontario,2023-08-04,,Prepaid,0
+C0445,Consumer,BC,2026-03-14,,Prepaid,0
+C0446,Consumer,Ontario,2025-05-16,,Prepaid,0
+C0447,Consumer,Quebec,2025-03-17,,Prepaid,0
+C0448,Consumer,Ontario,2024-04-17,,Prepaid,0
+C0449,Consumer,Ontario,2024-06-19,,Prepaid,0
+C0450,Consumer,Ontario,2025-10-17,,Prepaid,0
+C0451,Consumer,Quebec,2024-04-18,,Prepaid,0
+C0452,Consumer,Prairies,2025-08-10,,Prepaid,0
+C0453,Consumer,Ontario,2023-09-02,,Prepaid,0
+C0454,Consumer,Quebec,2024-07-27,,Prepaid,0
+C0455,Consumer,Prairies,2023-10-08,,Prepaid,0
+C0456,Consumer,Ontario,2023-09-07,,Prepaid,0
+C0457,Consumer,BC,2024-02-13,,Prepaid,0
+C0458,Consumer,BC,2023-04-27,,Prepaid,0
+C0459,Consumer,Ontario,2023-09-11,,Prepaid,0
+C0460,Consumer,BC,2024-01-09,,Prepaid,0
+C0461,Consumer,Atlantic,2024-10-10,,Prepaid,0
+C0462,Consumer,Prairies,2025-04-24,,Prepaid,0
+C0463,Consumer,Ontario,2023-10-05,,Prepaid,0
+C0464,Consumer,Quebec,2025-08-13,,Prepaid,0
+C0465,Consumer,Quebec,2025-06-14,,Prepaid,0
+C0466,Consumer,Atlantic,2025-11-29,,Prepaid,0
+C0467,Consumer,Ontario,2024-12-29,,Prepaid,0
+C0468,Consumer,Ontario,2025-11-14,,Prepaid,0
+C0469,Consumer,BC,2023-10-08,,Prepaid,0
+C0470,Consumer,Atlantic,2026-05-22,,Prepaid,0
+C0471,Consumer,Quebec,2026-04-02,,Prepaid,0
+C0472,Consumer,Quebec,2024-11-01,,Prepaid,0
+C0473,Consumer,Ontario,2026-01-23,,Prepaid,0
+C0474,Consumer,BC,2023-08-26,,Prepaid,0
+C0475,Consumer,Quebec,2024-02-05,,Prepaid,0
+C0476,Consumer,Atlantic,2024-01-20,,Prepaid,0
+C0477,Consumer,Atlantic,2024-10-31,,Prepaid,0
+C0478,Consumer,Ontario,2025-07-30,,Prepaid,0
+C0479,Consumer,Ontario,2023-03-04,,Prepaid,0
+C0480,Consumer,Quebec,2024-04-17,,Prepaid,0
+C0481,Consumer,BC,2023-05-14,,Prepaid,0
+C0482,Consumer,Quebec,2025-11-30,,Prepaid,0
+C0483,Consumer,Quebec,2024-10-14,,Prepaid,0
+C0484,Consumer,Quebec,2025-08-31,,Prepaid,0
+C0485,Consumer,Prairies,2023-07-22,,Prepaid,0
+C0486,Consumer,Quebec,2024-04-17,,Prepaid,0
+C0487,Consumer,Atlantic,2024-03-24,,Prepaid,0
+C0488,Consumer,Prairies,2024-05-09,,Prepaid,0
+C0489,Consumer,Atlantic,2024-04-24,,Prepaid,0
+C0490,Consumer,Ontario,2023-08-29,,Prepaid,0
+C0491,Consumer,Ontario,2023-07-12,,Prepaid,0
+C0492,Consumer,Atlantic,2024-01-02,,Prepaid,0
+C0493,Consumer,Ontario,2025-07-31,,Prepaid,0
+C0494,Consumer,Prairies,2026-01-07,,Prepaid,0
+C0495,Consumer,Quebec,2023-07-04,,Prepaid,0
+C0496,Consumer,Ontario,2023-03-30,,Prepaid,0
+C0497,Consumer,Atlantic,2024-12-19,,Prepaid,0
+C0498,Consumer,Ontario,2024-05-10,,Prepaid,0
+C0499,Consumer,BC,2023-03-31,,Prepaid,0
+C0500,Consumer,Ontario,2025-01-08,,Prepaid,0
+C0501,Consumer,Ontario,2025-01-31,,Prepaid,0
+C0502,Consumer,Quebec,2025-03-24,,Prepaid,0
+C0503,Consumer,Quebec,2023-02-27,,Prepaid,0
+C0504,Consumer,Quebec,2025-02-16,,Prepaid,0
+C0505,Consumer,BC,2024-01-30,,Prepaid,0
+C0506,Consumer,Ontario,2023-08-08,,Prepaid,0
+C0507,Consumer,Ontario,2024-10-28,,Prepaid,0
+C0508,Consumer,Quebec,2023-04-09,,Prepaid,0
+C0509,Consumer,Quebec,2023-07-17,,Prepaid,0
+C0510,Consumer,BC,2023-06-17,,Prepaid,0
+C0511,Consumer,Prairies,2023-09-17,,Prepaid,0
+C0512,Consumer,Ontario,2023-10-22,,Prepaid,0
+C0513,Consumer,Quebec,2025-03-24,,Prepaid,0
+C0514,Consumer,Quebec,2024-04-04,,Prepaid,0
+C0515,Consumer,Quebec,2023-10-20,,Prepaid,0
+C0516,Consumer,BC,2024-08-13,,Prepaid,0
+C0517,Consumer,Atlantic,2023-11-25,,Prepaid,0
+C0518,Consumer,Atlantic,2023-06-02,,Prepaid,0
+C0519,Consumer,Prairies,2024-11-04,,Prepaid,0
+C0520,Consumer,Atlantic,2025-11-01,,Prepaid,0
+C0521,Consumer,Quebec,2023-05-31,,Prepaid,0
+C0522,Consumer,Ontario,2024-06-21,,Prepaid,0
+C0523,Consumer,Ontario,2025-04-06,,Prepaid,0
+C0524,Consumer,Quebec,2023-05-31,,Prepaid,0
+C0525,Consumer,Prairies,2025-11-25,,Prepaid,0
+C0526,Consumer,Ontario,2023-08-11,,Prepaid,0
+C0527,Consumer,Ontario,2024-05-30,,Prepaid,0
+C0528,Consumer,Ontario,2024-04-27,,Prepaid,0
+C0529,Consumer,Prairies,2025-09-05,,Prepaid,0
+C0530,Consumer,Prairies,2024-12-10,,Prepaid,0
+C0531,Consumer,Atlantic,2025-12-08,,Prepaid,0
+C0532,Consumer,Ontario,2023-10-21,,Prepaid,0
+C0533,Consumer,Ontario,2023-10-08,,Prepaid,0
+C0534,Consumer,Atlantic,2023-02-22,,Prepaid,0
+C0535,Consumer,Atlantic,2024-06-16,,Prepaid,0
+C0536,Consumer,Ontario,2023-08-27,,Prepaid,0
+C0537,Consumer,BC,2024-09-20,,Prepaid,0
+C0538,Consumer,Prairies,2024-03-24,,Prepaid,0
+C0539,Consumer,Ontario,2023-07-07,,Prepaid,0
+C0540,Consumer,Quebec,2026-05-25,,Prepaid,0
+C0541,Consumer,Ontario,2025-12-17,,Prepaid,0
+C0542,Consumer,Atlantic,2025-05-28,,Prepaid,0
+C0543,Consumer,Prairies,2026-04-11,,Prepaid,0
+C0544,Consumer,Ontario,2025-12-15,,Prepaid,0
+C0545,Consumer,Ontario,2024-11-14,,Prepaid,0
+C0546,Consumer,Ontario,2025-04-01,,Prepaid,0
+C0547,Consumer,Ontario,2024-01-20,,Prepaid,0
+C0548,Consumer,Prairies,2024-12-28,,Prepaid,0
+C0549,Consumer,Atlantic,2025-01-15,,Prepaid,0
+C0550,Consumer,BC,2025-08-25,,Prepaid,0
+C0551,Consumer,BC,2023-04-10,,Prepaid,0
+C0552,Consumer,Prairies,2023-02-23,,Prepaid,0
+C0553,Consumer,Quebec,2024-12-09,,Prepaid,0
+C0554,Consumer,Quebec,2024-01-02,,Prepaid,0
+C0555,Consumer,Ontario,2024-03-26,,Prepaid,0
+C0556,Consumer,Ontario,2023-07-13,,Prepaid,0
+C0557,Consumer,Atlantic,2025-09-28,,Prepaid,0
+C0558,Consumer,BC,2024-04-07,,Prepaid,0
+C0559,Consumer,Ontario,2023-02-15,,Prepaid,0
+C0560,Consumer,Prairies,2025-12-31,,Prepaid,0
+C0561,Consumer,Ontario,2024-01-22,,Prepaid,0
+C0562,Consumer,Quebec,2023-10-28,,Prepaid,0
+C0563,Consumer,Ontario,2025-10-03,,Prepaid,0
+C0564,Consumer,Ontario,2026-01-19,,Prepaid,0
+C0565,Consumer,Quebec,2026-04-22,,Prepaid,0
+C0566,Consumer,Quebec,2024-11-18,,Prepaid,0
+C0567,Consumer,BC,2024-07-25,,Prepaid,0
+C0568,Consumer,Quebec,2025-05-07,,Prepaid,0
+C0569,Consumer,Quebec,2024-01-01,,Prepaid,0
+C0570,Consumer,Ontario,2025-07-21,,Prepaid,0
+C0571,Consumer,Ontario,2023-08-20,,Prepaid,0
+C0572,Consumer,Quebec,2024-07-11,,Prepaid,0
+C0573,Consumer,Ontario,2025-11-16,,Prepaid,0
+C0574,Consumer,Quebec,2024-08-02,,Prepaid,0
+C0575,Consumer,BC,2024-04-01,,Prepaid,0
+C0576,Consumer,BC,2024-08-23,,Prepaid,0
+C0577,Consumer,Ontario,2025-06-11,,Prepaid,0
+C0578,Consumer,Atlantic,2023-05-30,,Prepaid,0
+C0579,Consumer,Ontario,2025-12-20,,Prepaid,0
+C0580,Consumer,Atlantic,2023-07-23,,Prepaid,0
+C0581,Consumer,Quebec,2023-09-19,,Prepaid,0
+C0582,Consumer,Ontario,2024-10-01,,Prepaid,0
+C0583,Consumer,Quebec,2025-08-31,,Prepaid,0
+C0584,Consumer,Quebec,2025-09-18,,Prepaid,0
+C0585,Consumer,Quebec,2023-06-08,,Prepaid,0
+C0586,Consumer,BC,2023-08-14,,Prepaid,0
+C0587,Consumer,Atlantic,2025-04-19,,Prepaid,0
+C0588,Consumer,Quebec,2024-11-21,,Prepaid,0
+C0589,Consumer,BC,2025-11-21,,Prepaid,0
+C0590,Consumer,Ontario,2024-02-17,,Prepaid,0
+C0591,Consumer,Quebec,2023-03-04,,Prepaid,0
+C0592,Consumer,Quebec,2025-12-01,,Prepaid,0
+C0593,Consumer,Ontario,2025-08-22,,Prepaid,0
+C0594,Consumer,Quebec,2024-01-30,,Prepaid,0
+C0595,Consumer,Ontario,2023-05-31,,Prepaid,0
+C0596,Consumer,Ontario,2025-03-06,,Prepaid,0
+C0597,Consumer,Ontario,2023-06-14,,Prepaid,0
+C0598,Consumer,Ontario,2023-07-17,,Prepaid,0
+C0599,Consumer,Prairies,2025-09-27,,Prepaid,0
+C0600,Consumer,Prairies,2026-04-29,,Prepaid,0
+C0601,Consumer,Ontario,2024-04-04,,Prepaid,0
+C0602,Consumer,Ontario,2025-03-04,,Prepaid,0
+C0603,Consumer,Quebec,2023-03-13,,Prepaid,0
+C0604,Consumer,Ontario,2025-11-21,,Prepaid,0
+C0605,Consumer,Quebec,2023-11-10,,Prepaid,0
+C0606,Consumer,Ontario,2025-04-16,,Prepaid,0
+C0607,Consumer,Ontario,2024-07-15,,Prepaid,0
+C0608,Consumer,Ontario,2023-11-20,,Prepaid,0
+C0609,Consumer,Quebec,2024-05-19,,Prepaid,0
+C0610,Consumer,Prairies,2023-09-06,,Prepaid,0
+C0611,Consumer,Ontario,2023-06-04,,Prepaid,0
+C0612,Consumer,Quebec,2025-01-02,,Prepaid,0
+C0613,Consumer,Prairies,2026-03-01,,Prepaid,0
+C0614,Consumer,Prairies,2025-04-30,,Prepaid,0
+C0615,Consumer,Ontario,2025-04-02,,Prepaid,0
+C0616,Consumer,Atlantic,2025-04-08,,Prepaid,0
+C0617,Consumer,Ontario,2023-11-22,,Prepaid,0
+C0618,Consumer,Quebec,2025-03-18,,Prepaid,0
+C0619,Consumer,Prairies,2023-04-03,,Prepaid,0
+C0620,Consumer,Ontario,2024-07-23,,Prepaid,0
+C0621,Consumer,Prairies,2023-09-29,,Prepaid,0
+C0622,Consumer,Quebec,2025-04-22,,Prepaid,0
+C0623,Consumer,Quebec,2026-03-25,,Prepaid,0
+C0624,Consumer,Ontario,2025-06-20,,Prepaid,0
+C0625,Consumer,Quebec,2024-03-18,,Prepaid,0
+C0626,Consumer,Atlantic,2023-08-28,,Prepaid,0
+C0627,Consumer,Prairies,2023-03-04,,Prepaid,0
+C0628,Consumer,Quebec,2026-05-10,,Prepaid,0
+C0629,Consumer,Quebec,2024-08-04,,Prepaid,0
+C0630,Consumer,Prairies,2024-11-24,,Prepaid,0
+C0631,Consumer,Ontario,2025-08-28,,Prepaid,0
+C0632,Consumer,Ontario,2024-03-17,,Prepaid,0
+C0633,Consumer,Ontario,2025-04-03,,Prepaid,0
+C0634,Consumer,Prairies,2024-03-29,,Prepaid,0
+C0635,Consumer,Prairies,2025-06-06,,Prepaid,0
+C0636,Consumer,Ontario,2024-05-26,,Prepaid,0
+C0637,Consumer,Ontario,2023-02-04,,Prepaid,0
+C0638,Consumer,Quebec,2025-12-28,,Prepaid,0
+C0639,Consumer,Quebec,2025-06-02,,Prepaid,0
+C0640,Consumer,BC,2023-11-22,,Prepaid,0
+C0641,Consumer,Ontario,2023-08-25,,Prepaid,0
+C0642,Consumer,BC,2026-02-12,,Prepaid,0
+C0643,Consumer,Quebec,2023-07-11,,Prepaid,0
+C0644,Consumer,Quebec,2024-05-23,,Prepaid,0
+C0645,Consumer,Ontario,2025-10-26,,Prepaid,0
+C0646,Consumer,Prairies,2024-01-30,,Prepaid,0
+C0647,Consumer,Quebec,2023-11-13,,Prepaid,0
+C0648,Consumer,Atlantic,2025-01-12,,Prepaid,0
+C0649,Consumer,Quebec,2023-07-02,,Prepaid,0
+C0650,Consumer,Prairies,2023-10-11,,Prepaid,0
+C0651,Consumer,Ontario,2024-11-08,,Prepaid,0
+C0652,Consumer,Quebec,2023-11-04,,Prepaid,0
+C0653,Consumer,Quebec,2024-07-23,,Prepaid,0
+C0654,Consumer,Quebec,2024-03-06,,Prepaid,0
+C0655,Consumer,Ontario,2024-02-26,,Prepaid,0
+C0656,Consumer,Ontario,2023-12-16,,Prepaid,0
+C0657,Consumer,BC,2023-10-01,,Prepaid,0
+C0658,Consumer,Prairies,2023-06-01,,Prepaid,0
+C0659,Consumer,Quebec,2025-02-14,,Prepaid,0
+C0660,Consumer,BC,2025-05-09,,Prepaid,0
+C0661,Consumer,BC,2024-12-19,,Prepaid,0
+C0662,Consumer,Quebec,2024-10-08,,Prepaid,0
+C0663,Consumer,Quebec,2024-02-19,,Prepaid,0
+C0664,Consumer,Ontario,2024-11-02,,Prepaid,0
+C0665,Consumer,Quebec,2023-08-25,,Prepaid,0
+C0666,Consumer,Ontario,2026-01-11,,Prepaid,0
+C0667,Consumer,Quebec,2023-09-07,,Prepaid,0
+C0668,Consumer,Ontario,2024-07-05,,Prepaid,0
+C0669,Consumer,Quebec,2026-04-26,,Prepaid,0
+C0670,Consumer,Quebec,2025-09-15,,Prepaid,0
+C0671,Consumer,Atlantic,2026-02-23,,Prepaid,0
+C0672,Consumer,Ontario,2026-02-04,,Prepaid,0
+C0673,Consumer,Ontario,2024-04-30,,Prepaid,0
+C0674,Consumer,BC,2023-04-04,,Prepaid,0
+C0675,Consumer,Quebec,2025-02-11,,Prepaid,0
+C0676,Consumer,Prairies,2023-07-04,,Prepaid,0
+C0677,Consumer,Ontario,2026-03-11,,Prepaid,0
+C0678,Consumer,Quebec,2023-06-30,,Prepaid,0
+C0679,Consumer,Ontario,2025-04-18,,Prepaid,0
+C0680,Consumer,BC,2023-12-09,,Prepaid,0
+C0681,Consumer,Quebec,2023-05-31,,Prepaid,0
+C0682,Consumer,Ontario,2024-05-11,,Prepaid,0
+C0683,Consumer,Ontario,2026-04-19,,Prepaid,0
+C0684,Consumer,Quebec,2024-08-23,,Prepaid,0
+C0685,Consumer,Ontario,2024-12-05,,Prepaid,0
+C0686,Consumer,Atlantic,2024-01-11,,Prepaid,0
+C0687,Consumer,Ontario,2023-02-27,,Prepaid,0
+C0688,Consumer,Quebec,2023-06-25,,Prepaid,0
+C0689,Consumer,Ontario,2025-05-03,,Prepaid,0
+C0690,Consumer,Quebec,2026-03-06,,Prepaid,0
+C0691,Consumer,Ontario,2026-03-10,,Prepaid,0
+C0692,Consumer,BC,2024-01-01,,Prepaid,0
+C0693,Consumer,Atlantic,2024-08-25,,Prepaid,0
+C0694,Consumer,Prairies,2025-12-30,,Prepaid,0
+C0695,Consumer,Ontario,2023-03-01,,Prepaid,0
+C0696,Consumer,Quebec,2025-06-10,,Prepaid,0
+C0697,Consumer,Quebec,2026-02-19,,Prepaid,0
+C0698,Consumer,Atlantic,2026-03-15,,Prepaid,0
+C0699,Consumer,Ontario,2025-05-18,,Prepaid,0
+C0700,Consumer,Quebec,2024-01-21,,Prepaid,0
+C0701,Consumer,BC,2026-01-19,,Prepaid,0
+C0702,Consumer,BC,2023-03-10,,Prepaid,0
+C0703,Consumer,Ontario,2023-07-12,,Prepaid,0
+C0704,Consumer,BC,2026-01-27,,Prepaid,0
+C0705,Consumer,Ontario,2024-02-11,,Prepaid,0
+C0706,Consumer,Atlantic,2025-09-15,,Prepaid,0
+C0707,Consumer,Atlantic,2025-07-23,,Prepaid,0
+C0708,Consumer,Ontario,2023-03-05,,Prepaid,0
+C0709,Consumer,Quebec,2026-02-28,,Prepaid,0
+C0710,Consumer,Ontario,2025-01-23,,Prepaid,0
+C0711,Consumer,Quebec,2024-08-10,,Prepaid,0
+C0712,Consumer,Quebec,2024-07-11,,Prepaid,0
+C0713,Consumer,Quebec,2023-08-17,,Prepaid,0
+C0714,Consumer,Ontario,2024-12-30,,Prepaid,0
+C0715,Consumer,Ontario,2026-01-03,,Prepaid,0
+C0716,Consumer,Quebec,2025-08-27,,Prepaid,0
+C0717,Consumer,Ontario,2026-01-18,,Prepaid,0
+C0718,Consumer,Ontario,2024-09-08,,Prepaid,0
+C0719,Consumer,BC,2026-05-20,,Prepaid,0
+C0720,Consumer,Quebec,2025-03-28,,Prepaid,0
+C0721,Consumer,Quebec,2025-01-25,,Prepaid,0
+C0722,Consumer,Atlantic,2024-10-22,,Prepaid,0
+C0723,Consumer,Atlantic,2024-10-10,,Prepaid,0
+C0724,Consumer,Ontario,2024-12-23,,Prepaid,0
+C0725,Consumer,BC,2024-05-04,,Prepaid,0
+C0726,Consumer,Prairies,2025-11-09,,Prepaid,0
+C0727,Consumer,Ontario,2025-11-03,,Prepaid,0
+C0728,Consumer,Quebec,2024-03-08,,Prepaid,0
+C0729,Consumer,Quebec,2023-04-10,,Prepaid,0
+C0730,Consumer,Atlantic,2023-11-13,,Prepaid,0
+C0731,Consumer,Quebec,2024-03-26,,Prepaid,0
+C0732,Consumer,Prairies,2024-05-26,,Prepaid,0
+C0733,Consumer,Ontario,2025-02-23,,Prepaid,0
+C0734,Consumer,BC,2024-11-09,,Prepaid,0
+C0735,Consumer,Ontario,2023-04-09,,Prepaid,0
+C0736,Consumer,Quebec,2026-03-06,,Prepaid,0
+C0737,Consumer,Ontario,2025-01-01,,Prepaid,0
+C0738,Consumer,Prairies,2023-12-24,,Prepaid,0
+C0739,Consumer,Prairies,2023-03-20,,Prepaid,0
+C0740,Consumer,Quebec,2024-10-04,,Prepaid,0
+C0741,Consumer,Quebec,2024-06-30,,Prepaid,0
+C0742,Consumer,BC,2023-04-09,,Prepaid,0
+C0743,Consumer,BC,2024-11-04,,Prepaid,0
+C0744,Consumer,BC,2025-05-13,,Prepaid,0
+C0745,Consumer,Ontario,2025-03-16,,Prepaid,0
+C0746,Consumer,Ontario,2024-08-02,,Prepaid,0
+C0747,Consumer,BC,2024-12-24,,Prepaid,0
+C0748,Consumer,Ontario,2023-11-25,,Prepaid,0
+C0749,Consumer,Quebec,2024-11-12,,Prepaid,0
+C0750,Consumer,Quebec,2023-09-13,,Prepaid,0
+C0751,Consumer,Prairies,2024-05-01,,Prepaid,0
+C0752,Consumer,Ontario,2023-05-21,,Prepaid,0
+C0753,Consumer,Quebec,2024-07-01,,Prepaid,0
+C0754,Consumer,Prairies,2023-12-13,,Prepaid,0
+C0755,Consumer,Atlantic,2023-12-18,,Prepaid,0
+C0756,Consumer,Quebec,2023-03-23,,Prepaid,0
+C0757,Consumer,Quebec,2024-10-26,,Prepaid,0
+C0758,Consumer,Atlantic,2024-01-27,,Prepaid,0
+C0759,Consumer,Quebec,2026-01-23,,Prepaid,0
+C0760,Consumer,Quebec,2025-02-02,,Prepaid,0
+C0761,Consumer,Ontario,2024-08-20,,Prepaid,0
+C0762,Consumer,Quebec,2023-11-05,,Prepaid,0
+C0763,Consumer,Atlantic,2024-08-09,,Prepaid,0
+C0764,Consumer,Prairies,2023-04-09,,Prepaid,0
+C0765,Consumer,Ontario,2026-05-08,,Prepaid,0
+C0766,Consumer,Ontario,2023-03-30,,Prepaid,0
+C0767,Consumer,Quebec,2024-03-24,,Prepaid,0
+C0768,Consumer,Atlantic,2025-04-15,,Prepaid,0
+C0769,Consumer,Quebec,2025-05-30,,Prepaid,0
+C0770,Consumer,Ontario,2025-07-24,,Prepaid,0
+C0771,Consumer,BC,2024-07-29,,Prepaid,0
+C0772,Consumer,Ontario,2023-02-20,,Prepaid,0
+C0773,Consumer,Ontario,2026-01-05,,Prepaid,0
+C0774,Consumer,Ontario,2025-04-01,,Prepaid,0
+C0775,Consumer,Quebec,2025-06-19,,Prepaid,0
+C0776,Consumer,Quebec,2023-02-21,,Prepaid,0
+C0777,Consumer,Quebec,2025-05-02,,Prepaid,0
+C0778,Consumer,Ontario,2023-08-28,,Prepaid,0
+C0779,Consumer,Quebec,2023-06-10,,Prepaid,0
+C0780,Consumer,Prairies,2025-10-18,,Prepaid,0
+C0781,Consumer,Ontario,2023-05-02,,Prepaid,0
+C0782,Consumer,BC,2026-03-22,,Prepaid,0
+C0783,Consumer,Prairies,2023-07-18,,Prepaid,0
+C0784,Consumer,BC,2024-02-28,,Prepaid,0
+C0785,Consumer,Quebec,2025-03-19,,Prepaid,0
+C0786,Consumer,Ontario,2025-07-12,,Prepaid,0
+C0787,Consumer,Ontario,2023-03-19,,Prepaid,0
+C0788,Consumer,Quebec,2024-06-19,,Prepaid,0
+C0789,Consumer,Quebec,2024-10-18,,Prepaid,0
+C0790,Consumer,Ontario,2023-11-20,,Prepaid,0
+C0791,Consumer,BC,2025-08-07,,Prepaid,0
+C0792,Consumer,Quebec,2026-01-11,,Prepaid,0
+C0793,Consumer,Prairies,2025-11-25,,Prepaid,0
+C0794,Consumer,Ontario,2023-10-14,,Prepaid,0
+C0795,Consumer,Prairies,2025-10-12,,Prepaid,0
+C0796,Consumer,Ontario,2023-11-19,,Prepaid,0
+C0797,Consumer,Atlantic,2023-08-30,,Prepaid,0
+C0798,Consumer,Prairies,2025-05-07,,Prepaid,0
+C0799,Consumer,Atlantic,2023-07-25,,Prepaid,0
+C0800,Consumer,BC,2024-06-22,,Prepaid,0
+C0801,Consumer,Ontario,2023-07-26,,Prepaid,0
+C0802,Consumer,BC,2024-12-30,,Prepaid,0
+C0803,Consumer,Quebec,2025-05-08,,Prepaid,0
+C0804,Consumer,Ontario,2026-02-11,,Prepaid,0
+C0805,Consumer,Ontario,2024-09-18,,Prepaid,0
+C0806,Consumer,Quebec,2023-04-30,,Prepaid,0
+C0807,Consumer,Atlantic,2025-10-09,,Prepaid,0
+C0808,Consumer,Prairies,2024-03-13,,Prepaid,0
+C0809,Consumer,Prairies,2026-02-23,,Prepaid,0
+C0810,Consumer,Quebec,2026-01-10,,Prepaid,0
+C0811,Consumer,Ontario,2024-09-02,,Prepaid,0
+C0812,Consumer,Atlantic,2023-05-31,,Prepaid,0
+C0813,Consumer,Ontario,2024-10-13,,Prepaid,0
+C0814,Consumer,BC,2024-09-25,,Prepaid,0
+C0815,Consumer,Atlantic,2026-04-21,,Prepaid,0
+C0816,Consumer,Atlantic,2025-01-09,,Prepaid,0
+C0817,Consumer,Ontario,2023-08-12,,Prepaid,0
+C0818,Consumer,Atlantic,2026-01-23,,Prepaid,0
+C0819,Consumer,BC,2025-10-14,,Prepaid,0
+C0820,Consumer,Atlantic,2023-05-23,,Prepaid,0
+C0821,Consumer,Prairies,2025-11-07,,Prepaid,0
+C0822,Consumer,Ontario,2025-07-08,,Prepaid,0
+C0823,Consumer,Prairies,2024-10-27,,Prepaid,0
+C0824,Consumer,Ontario,2025-11-18,,Prepaid,0
+C0825,Consumer,Quebec,2024-04-19,,Prepaid,0
+C0826,Consumer,Prairies,2023-07-03,,Prepaid,0
+C0827,Consumer,Ontario,2024-06-02,,Prepaid,0
+C0828,Consumer,Ontario,2025-08-29,,Prepaid,0
+C0829,Consumer,Prairies,2023-02-03,,Prepaid,0
+C0830,Consumer,Ontario,2024-11-15,,Prepaid,0
+C0831,Consumer,Quebec,2025-06-02,,Prepaid,0
+C0832,Consumer,Atlantic,2024-04-02,,Prepaid,0
+C0833,Consumer,Prairies,2025-07-26,,Prepaid,0
+C0834,Consumer,Quebec,2025-07-21,,Prepaid,0
+C0835,Consumer,Ontario,2024-10-02,,Prepaid,0
+C0836,Consumer,Ontario,2023-07-18,,Prepaid,0
+C0837,Consumer,Ontario,2024-10-06,,Prepaid,0
+C0838,Consumer,Ontario,2026-03-07,,Prepaid,0
+C0839,Consumer,BC,2024-01-02,,Prepaid,0
+C0840,Consumer,Ontario,2024-07-11,,Prepaid,0
+C0841,Consumer,Prairies,2024-07-14,,Prepaid,0
+C0842,Consumer,Quebec,2024-11-28,,Prepaid,0
+C0843,Consumer,Quebec,2025-03-31,,Prepaid,0
+C0844,Consumer,Ontario,2025-02-06,,Prepaid,0
+C0845,Consumer,BC,2026-04-06,,Prepaid,0
+C0846,Consumer,Ontario,2024-08-03,,Prepaid,0
+C0847,Consumer,Ontario,2024-06-15,,Prepaid,0
+C0848,Consumer,Quebec,2023-10-27,,Prepaid,0
+C0849,Consumer,Prairies,2025-10-22,,Prepaid,0
+C0850,Consumer,Prairies,2026-06-02,,Prepaid,0
+C0851,Consumer,Ontario,2025-05-31,,Prepaid,0
+C0852,Consumer,Prairies,2024-12-18,,Prepaid,0
+C0853,Consumer,Ontario,2024-09-27,,Prepaid,0
+C0854,Consumer,Quebec,2026-05-16,,Prepaid,0
+C0855,Consumer,Ontario,2025-12-15,,Prepaid,0
+C0856,Consumer,Prairies,2023-11-07,,Prepaid,0
+C0857,Consumer,Atlantic,2025-11-25,,Prepaid,0
+C0858,Consumer,Quebec,2024-09-21,,Prepaid,0
+C0859,Consumer,Ontario,2026-01-13,,Prepaid,0
+C0860,Consumer,Ontario,2024-10-31,,Prepaid,0
+C0861,Consumer,Prairies,2025-10-14,,Prepaid,0
+C0862,Consumer,Ontario,2023-03-27,,Prepaid,0
+C0863,Consumer,BC,2025-05-07,,Prepaid,0
+C0864,Consumer,Quebec,2023-09-29,,Prepaid,0
+C0865,Consumer,Ontario,2023-08-17,,Prepaid,0
+C0866,Consumer,Quebec,2023-02-15,,Prepaid,0
+C0867,Consumer,Quebec,2024-12-26,,Prepaid,0
+C0868,Consumer,Ontario,2024-10-22,,Prepaid,0
+C0869,Consumer,Quebec,2024-05-06,,Prepaid,0
+C0870,Consumer,Ontario,2024-05-12,,Prepaid,0
+C0871,Consumer,Quebec,2023-11-28,,Prepaid,0
+C0872,Consumer,Quebec,2025-06-21,,Prepaid,0
+C0873,Consumer,Prairies,2025-10-31,,Prepaid,0
+C0874,Consumer,Quebec,2024-04-01,,Prepaid,0
+C0875,Consumer,Quebec,2024-10-29,,Prepaid,0
+C0876,Consumer,Quebec,2026-05-11,,Prepaid,0
+C0877,Consumer,Atlantic,2025-05-09,,Prepaid,0
+C0878,Consumer,BC,2024-08-24,,Prepaid,0
+C0879,Consumer,Ontario,2023-07-22,,Prepaid,0
+C0880,Consumer,Ontario,2023-08-21,,Prepaid,0
+C0881,Consumer,Ontario,2025-03-02,,Prepaid,0
+C0882,Consumer,Ontario,2024-06-28,,Prepaid,0
+C0883,Consumer,Quebec,2023-08-29,,Prepaid,0
+C0884,Consumer,Quebec,2024-09-23,,Prepaid,0
+C0885,Consumer,Quebec,2024-04-15,,Prepaid,0
+C0886,Consumer,Ontario,2025-11-08,,Prepaid,0
+C0887,Consumer,Quebec,2024-04-07,,Prepaid,0
+C0888,Consumer,Quebec,2024-04-16,,Prepaid,0
+C0889,Consumer,Atlantic,2025-03-30,,Prepaid,0
+C0890,Consumer,Atlantic,2023-05-05,,Prepaid,0
+C0891,Consumer,Ontario,2023-08-06,,Prepaid,0
+C0892,Consumer,Ontario,2023-09-07,,Prepaid,0
+C0893,Consumer,Quebec,2025-05-23,,Prepaid,0
+C0894,Consumer,Prairies,2026-04-23,,Prepaid,0
+C0895,Consumer,Atlantic,2025-07-11,,Prepaid,0
+C0896,Consumer,Quebec,2023-07-06,,Prepaid,0
+C0897,Consumer,Quebec,2023-03-08,,Prepaid,0
+C0898,Consumer,Atlantic,2023-08-05,,Prepaid,0
+C0899,Consumer,Atlantic,2023-05-20,,Prepaid,0
+C0900,Consumer,Quebec,2025-01-08,,Prepaid,0
+C0901,SMB,Atlantic,2026-01-14,R07,Net 30,15000
+C0902,SMB,Quebec,2024-01-28,R03,Net 30,15000
+C0903,SMB,Prairies,2024-08-14,R08,Net 30,15000
+C0904,SMB,Quebec,2024-03-09,R01,Net 30,5000
+C0905,SMB,Ontario,2026-04-01,R05,Net 30,15000
+C0906,SMB,Atlantic,2024-05-06,R07,Net 30,10000
+C0907,SMB,Ontario,2026-01-10,R05,Net 30,15000
+C0908,SMB,Ontario,2023-06-20,R04,Net 30,5000
+C0909,SMB,Quebec,2023-12-18,R01,Net 30,15000
+C0910,SMB,Quebec,2025-10-11,R01,Net 30,10000
+C0911,SMB,Prairies,2023-07-10,R08,Net 30,5000
+C0912,SMB,BC,2026-04-19,R11,Net 30,15000
+C0913,SMB,Ontario,2023-10-30,R05,Net 30,5000
+C0914,SMB,Quebec,2025-02-19,R03,Net 30,15000
+C0915,SMB,Ontario,2025-06-04,R04,Net 30,15000
+C0916,SMB,Ontario,2025-08-08,R04,Net 30,5000
+C0917,SMB,Prairies,2025-12-31,R09,Net 30,10000
+C0918,SMB,Prairies,2024-10-25,R08,Net 30,5000
+C0919,SMB,Ontario,2026-06-03,R05,Net 30,5000
+C0920,SMB,Atlantic,2025-04-09,R07,Net 30,5000
+C0921,SMB,Prairies,2023-02-15,R08,Net 30,15000
+C0922,SMB,Quebec,2024-06-30,R02,Net 30,15000
+C0923,SMB,Ontario,2025-12-12,R06,Net 30,5000
+C0924,SMB,BC,2024-04-28,R10,Net 30,15000
+C0925,SMB,Ontario,2023-06-24,R04,Net 30,5000
+C0926,SMB,Ontario,2025-06-04,R06,Net 30,15000
+C0927,SMB,Atlantic,2024-09-13,R07,Net 30,10000
+C0928,SMB,Quebec,2025-08-03,R03,Net 30,10000
+C0929,SMB,Atlantic,2023-10-04,R07,Net 30,10000
+C0930,SMB,Quebec,2023-10-01,R02,Net 30,5000
+C0931,SMB,Atlantic,2024-07-17,R07,Net 30,5000
+C0932,SMB,BC,2024-01-06,R10,Net 30,10000
+C0933,SMB,Ontario,2025-03-21,R04,Net 30,10000
+C0934,SMB,Ontario,2023-11-26,R06,Net 30,10000
+C0935,SMB,Ontario,2023-12-21,R04,Net 30,5000
+C0936,SMB,Quebec,2024-05-14,R02,Net 30,15000
+C0937,SMB,Quebec,2026-03-29,R02,Net 30,15000
+C0938,SMB,Quebec,2023-07-21,R02,Net 30,10000
+C0939,SMB,BC,2025-11-04,R10,Net 30,10000
+C0940,SMB,Atlantic,2025-04-03,R07,Net 30,10000
+C0941,SMB,BC,2025-11-23,R11,Net 30,15000
+C0942,SMB,Quebec,2024-12-17,R01,Net 30,15000
+C0943,SMB,BC,2024-12-14,R10,Net 30,15000
+C0944,SMB,Quebec,2024-08-27,R03,Net 30,15000
+C0945,SMB,Ontario,2026-04-19,R04,Net 30,10000
+C0946,SMB,BC,2023-06-28,R11,Net 30,10000
+C0947,SMB,BC,2023-05-22,R11,Net 30,10000
+C0948,SMB,Quebec,2025-11-09,R01,Net 30,10000
+C0949,SMB,Prairies,2023-03-03,R09,Net 30,10000
+C0950,SMB,Quebec,2024-07-11,R03,Net 30,10000
+C0951,SMB,Quebec,2025-03-18,R03,Net 30,10000
+C0952,SMB,BC,2023-02-18,R10,Net 30,5000
+C0953,SMB,Quebec,2025-05-02,R03,Net 30,10000
+C0954,SMB,Atlantic,2023-02-27,R07,Net 30,10000
+C0955,SMB,Ontario,2024-08-12,R05,Net 30,15000
+C0956,SMB,Ontario,2025-11-30,R06,Net 30,5000
+C0957,SMB,Quebec,2024-11-06,R03,Net 30,5000
+C0958,SMB,Prairies,2024-01-16,R09,Net 30,5000
+C0959,SMB,Quebec,2024-07-17,R01,Net 30,15000
+C0960,SMB,BC,2025-12-24,R10,Net 30,10000
+C0961,SMB,Quebec,2025-04-04,R01,Net 30,5000
+C0962,SMB,BC,2024-12-30,R11,Net 30,5000
+C0963,SMB,Ontario,2023-10-25,R05,Net 30,5000
+C0964,SMB,Quebec,2023-12-26,R01,Net 30,15000
+C0965,SMB,BC,2024-05-15,R10,Net 30,15000
+C0966,SMB,Ontario,2024-09-05,R04,Net 30,15000
+C0967,SMB,Quebec,2026-03-09,R01,Net 30,10000
+C0968,SMB,Ontario,2026-05-07,R05,Net 30,5000
+C0969,SMB,Quebec,2026-05-21,R02,Net 30,10000
+C0970,SMB,Ontario,2024-02-16,R04,Net 30,5000
+C0971,SMB,Ontario,2026-03-20,R04,Net 30,10000
+C0972,SMB,Ontario,2024-07-27,R05,Net 30,15000
+C0973,SMB,BC,2024-10-27,R10,Net 30,10000
+C0974,SMB,Quebec,2023-10-06,R03,Net 30,10000
+C0975,SMB,Ontario,2026-01-04,R06,Net 30,5000
+C0976,SMB,Prairies,2024-10-22,R08,Net 30,15000
+C0977,SMB,Quebec,2025-10-13,R02,Net 30,10000
+C0978,SMB,Quebec,2024-07-01,R03,Net 30,5000
+C0979,SMB,Quebec,2024-10-25,R02,Net 30,10000
+C0980,SMB,Atlantic,2025-06-13,R07,Net 30,5000
+C0981,SMB,Ontario,2025-11-13,R04,Net 30,10000
+C0982,SMB,Ontario,2025-11-08,R05,Net 30,5000
+C0983,SMB,Quebec,2023-02-07,R01,Net 30,10000
+C0984,SMB,Ontario,2026-05-30,R05,Net 30,10000
+C0985,SMB,Ontario,2025-05-20,R06,Net 30,5000
+C0986,SMB,Ontario,2023-07-03,R05,Net 30,5000
+C0987,SMB,Ontario,2025-07-26,R04,Net 30,15000
+C0988,SMB,BC,2024-10-30,R11,Net 30,5000
+C0989,SMB,Quebec,2024-06-15,R01,Net 30,10000
+C0990,SMB,Ontario,2026-04-01,R06,Net 30,10000
+C0991,SMB,Atlantic,2024-04-03,R07,Net 30,10000
+C0992,SMB,Atlantic,2023-05-24,R07,Net 30,5000
+C0993,SMB,BC,2023-04-17,R11,Net 30,10000
+C0994,SMB,Ontario,2024-08-28,R06,Net 30,10000
+C0995,SMB,BC,2025-04-30,R11,Net 30,15000
+C0996,SMB,Atlantic,2024-02-05,R07,Net 30,15000
+C0997,SMB,Atlantic,2024-04-25,R07,Net 30,5000
+C0998,SMB,Quebec,2023-02-02,R03,Net 30,5000
+C0999,SMB,Quebec,2025-08-28,R02,Net 30,5000
+C1000,SMB,Quebec,2024-10-22,R02,Net 30,5000
+C1001,SMB,Prairies,2026-01-29,R09,Net 30,5000
+C1002,SMB,Quebec,2025-04-21,R01,Net 30,10000
+C1003,SMB,Atlantic,2024-07-24,R07,Net 30,10000
+C1004,SMB,BC,2023-10-23,R10,Net 30,15000
+C1005,SMB,Ontario,2023-03-15,R05,Net 30,5000
+C1006,SMB,Ontario,2025-10-15,R06,Net 30,15000
+C1007,SMB,Quebec,2023-12-27,R01,Net 30,15000
+C1008,SMB,Ontario,2023-02-09,R06,Net 30,5000
+C1009,SMB,Quebec,2026-02-05,R02,Net 30,15000
+C1010,SMB,Ontario,2023-07-07,R06,Net 30,15000
+C1011,SMB,Ontario,2025-10-22,R05,Net 30,15000
+C1012,SMB,Ontario,2025-01-10,R04,Net 30,15000
+C1013,SMB,Ontario,2023-05-04,R05,Net 30,10000
+C1014,SMB,Prairies,2023-07-25,R08,Net 30,5000
+C1015,SMB,BC,2023-10-24,R11,Net 30,15000
+C1016,SMB,Ontario,2023-06-22,R04,Net 30,5000
+C1017,SMB,Quebec,2023-12-30,R01,Net 30,15000
+C1018,SMB,Quebec,2024-02-25,R02,Net 30,15000
+C1019,SMB,Ontario,2025-07-03,R05,Net 30,10000
+C1020,SMB,Ontario,2024-11-28,R06,Net 30,10000
+C1021,SMB,Quebec,2023-02-22,R02,Net 30,15000
+C1022,SMB,Prairies,2024-04-08,R08,Net 30,15000
+C1023,SMB,BC,2023-06-21,R10,Net 30,15000
+C1024,SMB,BC,2023-05-31,R10,Net 30,5000
+C1025,SMB,Prairies,2026-02-19,R08,Net 30,5000
+C1026,SMB,Prairies,2026-04-26,R08,Net 30,10000
+C1027,SMB,Prairies,2025-04-26,R08,Net 30,10000
+C1028,SMB,Prairies,2023-02-26,R08,Net 30,5000
+C1029,SMB,BC,2023-07-08,R11,Net 30,15000
+C1030,SMB,Quebec,2023-02-19,R01,Net 30,15000
+C1031,SMB,BC,2023-06-06,R11,Net 30,5000
+C1032,SMB,Ontario,2023-09-28,R06,Net 30,5000
+C1033,SMB,Quebec,2025-11-23,R02,Net 30,5000
+C1034,SMB,Prairies,2025-09-29,R08,Net 30,5000
+C1035,SMB,Quebec,2026-05-30,R02,Net 30,5000
+C1036,SMB,Quebec,2025-11-10,R03,Net 30,15000
+C1037,SMB,Atlantic,2023-02-12,R07,Net 30,10000
+C1038,SMB,Ontario,2023-03-26,R06,Net 30,15000
+C1039,SMB,Ontario,2024-01-21,R05,Net 30,10000
+C1040,SMB,BC,2024-04-06,R10,Net 30,5000
+C1041,SMB,Ontario,2025-06-01,R05,Net 30,15000
+C1042,SMB,Ontario,2023-11-04,R05,Net 30,15000
+C1043,SMB,Quebec,2025-08-25,R02,Net 30,15000
+C1044,SMB,BC,2026-03-23,R11,Net 30,10000
+C1045,SMB,Prairies,2023-09-06,R08,Net 30,5000
+C1046,SMB,Atlantic,2024-02-17,R07,Net 30,15000
+C1047,SMB,Ontario,2025-12-24,R05,Net 30,15000
+C1048,SMB,Ontario,2026-05-28,R06,Net 30,10000
+C1049,SMB,Prairies,2026-04-10,R08,Net 30,5000
+C1050,SMB,BC,2025-12-22,R11,Net 30,5000
+C1051,SMB,Quebec,2025-05-03,R02,Net 30,5000
+C1052,SMB,Quebec,2025-05-28,R02,Net 30,5000
+C1053,SMB,Ontario,2025-10-02,R04,Net 30,5000
+C1054,SMB,Atlantic,2023-08-25,R07,Net 30,15000
+C1055,SMB,Ontario,2023-04-03,R04,Net 30,5000
+C1056,SMB,Quebec,2025-03-01,R03,Net 30,15000
+C1057,SMB,Ontario,2023-06-11,R06,Net 30,5000
+C1058,SMB,Ontario,2025-12-23,R06,Net 30,10000
+C1059,SMB,Prairies,2024-07-08,R08,Net 30,5000
+C1060,SMB,Prairies,2026-05-18,R08,Net 30,10000
+C1061,SMB,BC,2023-09-06,R10,Net 30,15000
+C1062,SMB,Atlantic,2025-09-18,R07,Net 30,10000
+C1063,SMB,Prairies,2026-05-29,R09,Net 30,15000
+C1064,SMB,Ontario,2025-02-17,R04,Net 30,15000
+C1065,SMB,Ontario,2025-03-27,R05,Net 30,15000
+C1066,SMB,Quebec,2026-01-30,R01,Net 30,5000
+C1067,SMB,BC,2023-11-12,R10,Net 30,5000
+C1068,SMB,Ontario,2024-04-14,R06,Net 30,15000
+C1069,SMB,Ontario,2025-05-04,R05,Net 30,10000
+C1070,SMB,Ontario,2024-10-20,R06,Net 30,15000
+C1071,SMB,Quebec,2026-04-27,R03,Net 30,5000
+C1072,SMB,Quebec,2025-02-21,R02,Net 30,10000
+C1073,SMB,Ontario,2025-12-11,R06,Net 30,15000
+C1074,SMB,Quebec,2025-04-16,R02,Net 30,10000
+C1075,SMB,Ontario,2023-03-16,R04,Net 30,15000
+C1076,SMB,BC,2024-12-23,R11,Net 30,15000
+C1077,SMB,Quebec,2024-03-22,R01,Net 30,5000
+C1078,SMB,Ontario,2023-04-29,R06,Net 30,10000
+C1079,SMB,Quebec,2024-03-26,R03,Net 30,10000
+C1080,SMB,Ontario,2023-07-06,R04,Net 30,10000
+C1081,SMB,BC,2024-08-09,R11,Net 30,10000
+C1082,SMB,Ontario,2025-04-14,R05,Net 30,5000
+C1083,SMB,Ontario,2024-08-28,R04,Net 30,10000
+C1084,SMB,Ontario,2025-10-18,R04,Net 30,5000
+C1085,SMB,Quebec,2025-05-18,R01,Net 30,15000
+C1086,SMB,Quebec,2025-12-17,R01,Net 30,15000
+C1087,SMB,Atlantic,2024-06-21,R07,Net 30,15000
+C1088,SMB,Quebec,2023-08-12,R03,Net 30,5000
+C1089,SMB,BC,2024-06-03,R10,Net 30,15000
+C1090,SMB,Ontario,2023-02-25,R05,Net 30,15000
+C1091,SMB,Prairies,2025-07-30,R09,Net 30,10000
+C1092,SMB,Quebec,2026-01-28,R03,Net 30,10000
+C1093,SMB,Atlantic,2025-09-01,R07,Net 30,10000
+C1094,SMB,Ontario,2024-01-05,R05,Net 30,10000
+C1095,SMB,Ontario,2025-12-19,R04,Net 30,15000
+C1096,SMB,Ontario,2025-03-08,R06,Net 30,5000
+C1097,SMB,Ontario,2023-07-22,R05,Net 30,10000
+C1098,SMB,Ontario,2024-12-16,R04,Net 30,10000
+C1099,SMB,Ontario,2024-08-31,R05,Net 30,5000
+C1100,SMB,Prairies,2024-10-12,R08,Net 30,5000
+C1101,SMB,Prairies,2025-07-31,R08,Net 30,10000
+C1102,SMB,Prairies,2023-12-11,R08,Net 30,5000
+C1103,SMB,Ontario,2025-09-27,R05,Net 30,10000
+C1104,SMB,Quebec,2024-02-03,R02,Net 30,10000
+C1105,SMB,Ontario,2026-02-23,R04,Net 30,5000
+C1106,SMB,Ontario,2025-03-15,R04,Net 30,15000
+C1107,SMB,BC,2025-06-02,R10,Net 30,15000
+C1108,SMB,Ontario,2023-08-31,R04,Net 30,5000
+C1109,SMB,Ontario,2024-10-08,R06,Net 30,10000
+C1110,SMB,Ontario,2025-02-10,R04,Net 30,5000
+C1111,SMB,Quebec,2025-10-03,R01,Net 30,15000
+C1112,SMB,Quebec,2024-03-26,R02,Net 30,15000
+C1113,SMB,Quebec,2023-03-31,R03,Net 30,15000
+C1114,SMB,Quebec,2024-02-15,R03,Net 30,5000
+C1115,SMB,Ontario,2026-04-13,R06,Net 30,10000
+C1116,SMB,Quebec,2026-01-18,R03,Net 30,5000
+C1117,SMB,Prairies,2024-06-17,R08,Net 30,5000
+C1118,SMB,Quebec,2026-05-02,R01,Net 30,10000
+C1119,SMB,Prairies,2023-10-28,R09,Net 30,5000
+C1120,SMB,Atlantic,2023-09-15,R07,Net 30,10000
+C1121,SMB,Quebec,2025-04-17,R02,Net 30,15000
+C1122,SMB,Quebec,2023-05-13,R01,Net 30,10000
+C1123,SMB,Ontario,2023-05-28,R04,Net 30,15000
+C1124,SMB,Ontario,2025-06-14,R06,Net 30,5000
+C1125,SMB,Ontario,2026-01-24,R06,Net 30,15000
+C1126,SMB,BC,2024-05-13,R10,Net 30,5000
+C1127,SMB,Quebec,2025-06-23,R03,Net 30,10000
+C1128,SMB,Ontario,2023-08-24,R05,Net 30,10000
+C1129,SMB,Ontario,2025-02-05,R05,Net 30,5000
+C1130,SMB,Ontario,2025-08-08,R06,Net 30,15000
+C1131,Enterprise,BC,2025-02-22,R11,Net 60,60000
+C1132,Enterprise,Quebec,2023-05-12,R03,Net 60,40000
+C1133,Enterprise,Atlantic,2024-01-09,R07,Net 60,60000
+C1134,Enterprise,Prairies,2025-05-05,R08,Net 60,60000
+C1135,Enterprise,Quebec,2025-07-24,R03,Net 60,60000
+C1136,Enterprise,Ontario,2025-05-07,R04,Net 60,60000
+C1137,Enterprise,Ontario,2023-07-28,R05,Net 60,80000
+C1138,Enterprise,Ontario,2024-11-26,R06,Net 60,60000
+C1139,Enterprise,Ontario,2025-10-24,R05,Net 60,60000
+C1140,Enterprise,Quebec,2024-02-05,R02,Net 60,40000
+C1141,Enterprise,BC,2025-06-03,R10,Net 60,60000
+C1142,Enterprise,Ontario,2023-12-21,R06,Net 60,40000
+C1143,Enterprise,Quebec,2025-11-22,R03,Net 60,60000
+C1144,Enterprise,Prairies,2023-09-26,R09,Net 60,40000
+C1145,Enterprise,Quebec,2023-03-05,R01,Net 60,60000
+C1146,Enterprise,Ontario,2023-09-11,R06,Net 60,80000
+C1147,Enterprise,Ontario,2025-07-04,R05,Net 60,40000
+C1148,Enterprise,Ontario,2025-03-06,R04,Net 60,40000
+C1149,Enterprise,Atlantic,2023-08-22,R07,Net 60,80000
+C1150,Enterprise,Ontario,2024-10-04,R06,Net 60,60000
+C1151,Enterprise,Ontario,2023-10-06,R05,Net 60,80000
+C1152,Enterprise,Atlantic,2025-08-06,R07,Net 60,80000
+C1153,Enterprise,Atlantic,2024-09-27,R07,Net 60,80000
+C1154,Enterprise,BC,2023-04-16,R11,Net 60,60000
+C1155,Enterprise,Atlantic,2023-10-31,R07,Net 60,60000
+C1156,Enterprise,BC,2023-12-23,R10,Net 60,60000
+C1157,Enterprise,Ontario,2024-05-08,R06,Net 60,80000
+C1158,Enterprise,Atlantic,2025-10-29,R07,Net 60,80000
+C1159,Enterprise,Quebec,2026-02-16,R03,Net 60,40000
+C1160,Enterprise,Quebec,2025-05-05,R03,Net 60,40000
+C1161,Enterprise,Quebec,2023-05-12,R01,Net 60,60000
+C1162,Enterprise,Ontario,2026-02-01,R06,Net 60,80000
+C1163,Enterprise,Prairies,2025-08-22,R09,Net 60,60000
+C1164,Enterprise,Ontario,2024-03-08,R04,Net 60,40000
+C1165,Enterprise,Prairies,2024-02-10,R09,Net 60,40000
+C1166,Enterprise,Ontario,2024-05-18,R05,Net 60,40000
+C1167,Enterprise,Atlantic,2023-05-14,R07,Net 60,60000
+C1168,Enterprise,Ontario,2023-11-03,R06,Net 60,80000
+C1169,Enterprise,BC,2025-08-09,R11,Net 60,60000
+C1170,Enterprise,BC,2025-12-31,R11,Net 60,60000
+C1171,Enterprise,Atlantic,2024-07-01,R07,Net 60,40000
+C1172,Enterprise,Quebec,2024-03-03,R03,Net 60,40000
+C1173,Enterprise,Ontario,2023-03-06,R04,Net 60,25000
+C1174,Enterprise,Ontario,2024-02-02,R06,Net 60,80000
+C1175,Enterprise,Ontario,2024-07-18,R06,Net 60,40000
+C1176,Reseller,Atlantic,2024-02-19,R07,Net 30,20000
+C1177,Reseller,Atlantic,2023-06-04,R07,Net 30,30000
+C1178,Reseller,Atlantic,2024-03-11,R07,Net 30,30000
+C1179,Reseller,Atlantic,2025-12-05,R07,Net 30,30000
+C1180,Reseller,Atlantic,2025-04-07,R07,Net 30,30000
+C1181,Reseller,Atlantic,2024-12-26,R07,Net 30,30000
+C1182,Reseller,Atlantic,2025-12-09,R07,Net 30,30000
+C1183,Reseller,Quebec,2023-07-26,R03,Net 30,20000
+C1184,Reseller,Ontario,2023-05-20,R06,Net 30,20000
+C1185,Reseller,Ontario,2024-03-30,R06,Net 30,30000
+C1186,Reseller,BC,2025-01-25,R10,Net 30,20000
+C1187,Reseller,Ontario,2026-04-09,R05,Net 30,20000
+C1188,Reseller,Atlantic,2024-05-01,R07,Net 30,30000
+C1189,Reseller,Ontario,2025-02-09,R05,Net 30,20000
+C1190,Reseller,Atlantic,2024-10-28,R07,Net 30,30000
+C1191,Reseller,Prairies,2023-06-05,R08,Net 30,30000
+C1192,Reseller,Quebec,2023-07-10,R01,Net 30,30000
+C1193,Reseller,Ontario,2024-10-15,R06,Net 30,30000
+C1194,Reseller,Quebec,2025-10-29,R01,Net 30,20000
+C1195,Reseller,Quebec,2025-11-02,R03,Net 30,20000
+C1196,Reseller,Ontario,2026-02-02,R04,Net 30,30000
+C1197,Reseller,Atlantic,2026-04-21,R07,Net 30,30000
+C1198,Reseller,Prairies,2024-08-04,R08,Net 30,30000
+C1199,Reseller,Prairies,2026-04-02,R09,Net 30,30000
+C1200,Reseller,Quebec,2025-05-03,R01,Net 30,30000
+C1201,Reseller,Ontario,2025-02-08,R06,Net 30,30000
+C1202,Reseller,BC,2024-02-22,R10,Net 30,30000
+C1203,Reseller,Atlantic,2024-03-06,R07,Net 30,20000
+C1204,Reseller,Ontario,2023-03-16,R05,Net 30,30000
+C1205,Reseller,Quebec,2026-02-24,R03,Net 30,20000
+C1206,Reseller,Ontario,2025-11-21,R04,Net 30,30000
+C1207,Reseller,Prairies,2024-09-01,R09,Net 30,30000
+C1208,Reseller,Ontario,2025-11-05,R05,Net 30,30000
+C1209,Reseller,BC,2026-04-18,R10,Net 30,20000
+C1210,Reseller,Ontario,2025-10-21,R05,Net 30,30000

@@ -1,7 +1,7 @@
 [project]
-name = "scs-insurance-claims"
+name = "scs-sales-finance"
 version = "0.1.0"
-description = "Exploratory analysis of Millennium Mutual policies and claims"
+description = "Exploratory analysis of Chrome & Oak sales, margins, payments, and returns"
 requires-python = ">=3.12"
 dependencies = [
   "pandas>=2.2,<3",

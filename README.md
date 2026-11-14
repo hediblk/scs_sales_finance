@@ -1,48 +1,53 @@
-# scs_insurance_claims
+# Chrome & Oak — Sales & Finance
 
-Deep exploratory analysis of Millennium Mutual's policy and claim exports. The notebook's sole purpose is EDA: no predictive model, app, or automation.
+Option B for the SCS hackathon: understand where sales growth fails to translate into margin and cash, then build a focused tool for staff to act on it. Two people, four hours.
 
-Start with the [executed notebook](output/jupyter-notebook/insurance_claims_eda.ipynb), or download and open the [HTML companion](output/jupyter-notebook/insurance_claims_eda.html) to read all outputs without Python.
+Start with the [executed EDA notebook](output/jupyter-notebook/chrome_and_oak_eda.ipynb) or download the [HTML companion](output/jupyter-notebook/chrome_and_oak_eda.html). The [selected scenario and shared challenge requirements](references/sales_finance_brief.txt) are included.
 
-The analysis includes **144 cells, 185 figures, and 185 exported CSV tables** across 21 sections:
+The notebook contains 37 code cells and 115 figures across 15 sections. It covers data quality, sales trends, discounts, margins, returns, payment timing, credit exposure, customer activity, and sensitivity checks. The prototype is still to be built.
 
-- Raw schema, inferred column dictionary, missingness, duplicates, date parsing, and key integrity.
-- Numeric distributions, tails, categorical counts, and category-versus-number galleries with mean/median bars and boxplots.
-- Pearson/Spearman correlations, pairwise sample sizes, scatterplots, categorical associations, and cross-tabs.
-- Two-dimensional pivot tables (*tableaux croisés dynamiques*) with counts and sparse-cell masking.
-- Policy cohorts, calendar patterns, portfolio mix, and focused broker B07 comparisons.
-- Team processing times, backlog ages, case mix, and completion rates with equal follow-up.
-- The $10,000 review threshold, payout/deductible reconciliation, renewal experience, and transparent anomaly screens.
-- Sensitivity checks and an evidence summary with interpretation limits.
+## Findings worth building on
+
+- **Growth is outpacing gross profit:** Jan–Sep 2026 revenue rose 33.0% versus Jan–Sep 2025, while known-cost gross profit rose 21.7%. Known-cost weighted margin fell from 29.8% to 27.2%.
+- **Atlantic warrants a closer look:** its full-window known-cost margin is 16.3%, the lowest region. Section 9 checks within-product margins and a common product mix; section 14 checks discount-cleaning sensitivity.
+- **Returns and cash provide supporting context:** furniture accounts for 399,708 currency units in recorded refunds. The open-invoice proxy totals 250,004, including 135,367 past recorded terms. These are not verified ledger balances.
+
+Figures are descriptive under the notebook's assumptions. Missing costs remain unknown; gross profit excludes overhead. Currency is unconfirmed, so amounts use CU. Patterns do not establish causality or rep misconduct.
+
+## Suggested four-hour scope
+
+Build one margin-review screen using the existing cleaning and aggregation logic. Show two charts: comparable revenue versus gross-profit growth, and regional margins with product drill-down.
+
+Detect two conditions: (1) a known-cost order has negative gross profit; (2) a region/product group's weighted margin falls below a clearly labeled, configurable review threshold, with a minimum group size. Automatically create an in-app review task containing the affected orders, the trigger, and supporting amounts. Treat this as a review lead; do not present hypothetical recovered margin as guaranteed savings.
+
+Person 1 handles data preparation, calculations, and detections; person 2 handles the screen, review queue, and demo. Spend the first 30 minutes agreeing on definitions, the next two hours building, the next hour integrating and checking, and the final 30 minutes rehearsing.
+
+The brief requires at least two insights, two visualizations, two detected business conditions, and one automated action in a working visual prototype. At least one detection must be explainable team-written logic. Major implementation work belongs during the competition; this repository currently supplies the exploration and source data.
+
+## Data
+
+- `data/raw/customers.csv`: 1,210 customers.
+- `data/raw/orders.csv`: 6,169 raw rows; 6,144 distinct orders after removing 25 exact duplicates; 6,136 valid positive-quantity sales after quarantining 8 rows.
+- `data/raw/returns.csv`: 275 return events.
+
+Orders cover January 2025–September 2026; the payment/return snapshot is October 31, 2026. The notebook normalizes 181 mixed-scale discounts and retains 92 valid sales with unknown costs. It includes alternative assumptions and row-level review tables.
+
+The notebook embeds the original source ZIP and runs without network access or credentials. The three repository CSVs match the embedded files byte for byte. By default, the notebook reads the embedded snapshot; set `DATA_ZIP` in its loading cell to analyze another ZIP. Editing `data/raw/` alone does not change the notebook's input.
 
 ## Run
 
-Use Python 3.12+ and [uv](https://docs.astral.sh/uv/):
+Use Python 3.12+ and uv:
 
 ```bash
 uv sync --locked
 uv run jupyter lab
 ```
 
-Open `output/jupyter-notebook/insurance_claims_eda.ipynb` and run all cells. The notebook locates the repository from either its own directory or the repository root. It needs no credentials or network access to analyze the included CSVs.
-
-To execute and regenerate the HTML from the command line:
+Open `output/jupyter-notebook/chrome_and_oak_eda.ipynb` and run all cells. To execute it and regenerate the HTML:
 
 ```bash
-uv run jupyter nbconvert --to notebook --execute --inplace output/jupyter-notebook/insurance_claims_eda.ipynb --ExecutePreprocessor.timeout=300
-uv run jupyter nbconvert --to html output/jupyter-notebook/insurance_claims_eda.ipynb
+PYTHONDONTWRITEBYTECODE=1 uv run jupyter nbconvert --to notebook --execute --inplace output/jupyter-notebook/chrome_and_oak_eda.ipynb --ExecutePreprocessor.timeout=300
+PYTHONDONTWRITEBYTECODE=1 uv run jupyter nbconvert --to html output/jupyter-notebook/chrome_and_oak_eda.ipynb
 ```
 
-## Data and interpretation
-
-- `data/raw/policies.csv`: 4,684 original policy rows.
-- `data/raw/claims.csv`: 862 original export rows; 847 unique claims after removing 15 exact duplicate rows.
-- `references/business_track_participants.pdf`: supplied scenario, used as context. Its prototype and automation requirements are outside this EDA request.
-- `output/eda/tables/`: reproducible summaries, pivots, cross-tabs, row-level review evidence, and a figure inventory.
-- `pyproject.toml` and `uv.lock`: dependency definitions and locked environment.
-
-The snapshot is **October 31, 2026**. Raw CSVs are preserved; the notebook records their SHA-256 hashes and every cleaning decision. Currency is assumed CAD from the scenario. Dates with slashes are interpreted as day/month/year.
-
-Recorded payouts divided by annual premium are a cohort comparison proxy, not profit or an actuarial loss ratio. Recent cohorts have less follow-up. Renewal comparisons use matured policies and pre-anniversary claim experience. Statistical flags are inspection leads, not fraud labels or causal conclusions.
-
-All 96 code cells were executed top to bottom, all 185 figures are embedded in the notebook and HTML, and representative charts were visually reviewed. No tests or Python docstrings were added.
+The notebook keeps summaries and review tables in memory; optional CSV exports are commented out in the final cell.

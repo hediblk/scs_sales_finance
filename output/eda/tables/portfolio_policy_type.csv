@@ -1,3 +1,0 @@
-policy_type,policies,annual_premium,mean_premium,claims,policies_with_claim,known_paid,unresolved,missing_payouts,missing_claim_amounts,claims_per_policy,claim_policy_share,paid_to_premium_proxy
-Auto,2842,4354029.32,1532.0300211118931,564,512,1645152.52,28,28,5,0.1984517945109078,0.18015482054890922,0.3778459902516228
-Home,1842,2348932.07,1275.207421281216,283,245,1621303.23,20,20,3,0.15363735070575463,0.13300760043431054,0.6902299350019092
