@@ -5,14 +5,12 @@ import { EntityDrawer } from "./components/EntityDrawer.jsx";
 import { ErrorBox, Loading } from "./components/ui.jsx";
 import GapPage from "./pages/GapPage.jsx";
 import QueuePage from "./pages/QueuePage.jsx";
-import AccountsPage from "./pages/AccountsPage.jsx";
-import LogPage from "./pages/LogPage.jsx";
 import AskPage from "./pages/AskPage.jsx";
 import DatasetPage from "./pages/DatasetPage.jsx";
 import CleaningPage from "./pages/CleaningPage.jsx";
-import WhatIfPage from "./pages/WhatIfPage.jsx";
 
-const PAGE_COMPONENTS = { dataset: DatasetPage, cleaning: CleaningPage, whatif: WhatIfPage, gap: GapPage, queue: QueuePage, accounts: AccountsPage, log: LogPage, ask: AskPage };
+// What if, Accounts & Limits and Activity log are left out of the demo (files kept, not routed).
+const PAGE_COMPONENTS = { dataset: DatasetPage, cleaning: CleaningPage, gap: GapPage, queue: QueuePage, ask: AskPage };
 
 function Shell() {
   const { meta, labels, error, retry, route, go } = useApp();

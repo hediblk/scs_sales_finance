@@ -159,8 +159,8 @@ def overview(ds: Dataset):
     ]
     recommendation = [
         "Pay quota on revenue net of returns after 45 days, and require approval for quarter-end discounts of 25% or more. Condition C1 automates it.",
-        "Fix long-haul furniture shipping to BC and the Prairies, and call every business customer right after a damaged return. Condition C2 automates it.",
-        "Collections: keep as is. It is not what changed.",
+        "Unpaid invoices: monitor with condition C3. Real but small and flat since 2025, so no automatic action.",
+        "Out of scope for this tool: long-haul furniture damage (BC, Prairies). Fix packaging or carrier.",
     ]
     return {"kpis": kpis, "charts": charts, "who_is_right": who, "recommendation": recommendation}
 

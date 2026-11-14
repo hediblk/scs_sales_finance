@@ -120,12 +120,16 @@ export function DynamicChart({ preset = {}, height = 250 }) {
         )}
       </figcaption>
 
-      <div className="dyn-controls" onFocus={() => setCtlFocus(true)} onBlur={() => setCtlFocus(false)}>
-        <Select label="Metric" value={metric} onChange={setMetric} options={opts.data?.metrics ?? [{ id: metric, label: metric }]} />
-        <Select label="Group by" value={by} onChange={chooseBy} options={opts.data?.by ?? [{ id: by, label: by }]} />
-        <Select label="Split" value={split === by ? "" : split} onChange={setSplit} allowNone options={(opts.data?.split ?? []).filter((o) => o.id !== by)} />
-        {fixed.length > 0 && <span className="dyn-fixed">{fixed.map(([k, v]) => `${k}: ${v.join(", ")}`).join(" · ")}</span>}
-      </div>
+      {/* Folded by default: the story view is what the demo shows; exploring is one click away. */}
+      <details className="dyn-explore" open={!asPreset}>
+        <summary>Change the view</summary>
+        <div className="dyn-controls" onFocus={() => setCtlFocus(true)} onBlur={() => setCtlFocus(false)}>
+          <Select label="Metric" value={metric} onChange={setMetric} options={opts.data?.metrics ?? [{ id: metric, label: metric }]} />
+          <Select label="Group by" value={by} onChange={chooseBy} options={opts.data?.by ?? [{ id: by, label: by }]} />
+          <Select label="Split" value={split === by ? "" : split} onChange={setSplit} allowNone options={(opts.data?.split ?? []).filter((o) => o.id !== by)} />
+          {fixed.length > 0 && <span className="dyn-fixed">{fixed.map(([k, v]) => `${k}: ${v.join(", ")}`).join(" · ")}</span>}
+        </div>
+      </details>
 
       {state.error && <ErrorBox error={state.error} onRetry={() => setAttempt((n) => n + 1)} />}
       {chart?.note && <p className="dyn-note">{chart.note}</p>}

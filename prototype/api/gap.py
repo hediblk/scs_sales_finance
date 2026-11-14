@@ -14,7 +14,7 @@ DRIVER_TEXT = {
     "qe_push": {"title": "Quarter-end discount push (R07, Atlantic resellers)",
                 "why": "Quarterly target and bonus on gross revenue: deep discounts in the last 14 days, resellers send the overstock back about a month later.",
                 "todo": "Pay quota on revenue net of returns after 45 days; require approval for quarter-end discounts of 25% or more.",
-                "handled_by": ["qe_discount", "reps"], "chart_id": "discount_band_returns", "controllable": True, "rule_catchable": True},
+                "handled_by": ["qe_discount"], "chart_id": "discount_band_returns", "controllable": True, "rule_catchable": True},
     "transit_damage": {"title": "Furniture damaged in transit (BC, Prairies)",
                        "why": "Long-haul shipping of big items from Montreal; BC is also the fastest-growing region.",
                        "todo": "Change packaging or carrier for long-haul furniture.",
@@ -23,15 +23,16 @@ DRIVER_TEXT = {
                         "why": "A bad return (damaged, defective, wrong item) comes before the silence for most of them, and nobody calls.",
                         "todo": "Contact the customer right after a bad return.",
                         "handled_by": ["quiet_after_bad_return"], "chart_id": "quiet_vs_bad_return", "controllable": True, "rule_catchable": True},
-    "late_payments": {"title": "Late payments",
-                      "why": "Steady since 2025: not what changed.",
-                      "todo": "Monitor; credit hold only on clear cases.",
-                      "handled_by": ["overdue_or_over_limit", "accounts"], "chart_id": None, "controllable": True, "rule_catchable": True},
+    "late_payments": {"title": "Unpaid invoices",
+                      "why": "Steady since 2025: real, but not what changed.",
+                      "todo": "Monitor; follow up only on clear cases (long overdue or over the credit limit).",
+                      "handled_by": ["overdue_or_over_limit"], "chart_id": None, "controllable": True, "rule_catchable": True},
 }
-WHY_FIRST = ("Ranked on four plain criteria: size in dollars, did it change in 2026, can the company control it, can a rule catch it early. "
-             "The quarter-end discount push is the largest controllable piece, it is new in 2026, it has one cause, and a rule catches it "
-             "with almost no false alarms. That is what the tool automates first. Transit damage and quiet customers come second: large, "
-             "but the root fix is operational, so the tool handles the customer side. Late payments are real but flat and smaller: monitor only.")
+WHY_FIRST = ("Revenue on paper fails to become cash in two ways: it comes back, or it is never paid. "
+             "The quarter-end discount push is the big one: new in 2026, one cause (a quota paid on gross revenue), and a rule catches it "
+             "with almost no false alarms, so the tool acts on it automatically. Unpaid invoices are real but small and flat since 2025: "
+             "the tool flags them and a person decides. Furniture damage on long routes also costs refunds, but its fix is operational "
+             "(packaging, carrier), so it stays out of this tool.")
 
 
 def _totals(df):
@@ -75,7 +76,7 @@ def gap(ds: Dataset):
         _bar("unknown_cost", "Revenue on lines with no unit cost (left out of profit)", d["rev_unknown_cost"]),
         _bar("cogs", "Extra cost of goods", d["cogs"]),
         _bar("gross_profit", "Gross profit growth", d["gp"], kind="subtotal"),
-        _bar("refunds", "Extra refunds", d["refunds"], driver_id="transit_damage", split=split),
+        _bar("refunds", "Extra refunds", d["refunds"], split=split),
         _bar("result", "Profit after refunds growth", par, kind="end"),
     ]
     residual = d["list"] - d["discount"] - d["rev_unknown_cost"] - d["cogs"] - d["refunds"] - par
@@ -116,8 +117,9 @@ def gap(ds: Dataset):
          "impact": round(float(ar.overdue_amt.sum()), 2), "impact_note": "Overdue at extraction",
          "changed_in_2026": bool(abs(late.get(2026, 0) - late.get(2025, 0)) > 0.05)},
     ]
-    for dr in drivers:
-        dr.update(DRIVER_TEXT[dr["id"]])
+    drivers = [dr for dr in drivers if dr["id"] in ("qe_push", "late_payments")]
+    for rank, dr in enumerate(drivers, 1):
+        dr.update(DRIVER_TEXT[dr["id"]], rank=rank)
 
     g = headline(ds)["growth"]
     who = [

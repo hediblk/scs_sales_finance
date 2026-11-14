@@ -256,6 +256,8 @@ def overdue_simulate(ds: Dataset, days=60):
 
 
 # ---------------------------------------------------------------- registry
+# The demo story is "revenue on paper that never becomes cash": it comes back (C1) or it is never paid (C3).
+# C2 (bad return on a business account) stays implemented above but is left out of the app.
 CONDITIONS = {
     "qe_discount": {
         "name": "Quarter-end discount push",
@@ -265,15 +267,8 @@ CONDITIONS = {
         "triggers_action": True,
         "actions": ["flag", "quota_hold", "notify", "release", "resolve"],
     },
-    "quiet_after_bad_return": {
-        "name": "Bad return on a business account",
-        "rule_text": "Business customer gets a damaged, defective or wrong-item return. Escalate to win-back after {value}x their usual gap with no reorder",
-        "threshold": {"label": "Escalate after", "min": 1, "max": 3, "step": 0.5, "value": 1, "unit": "x usual gap"},
-        "triggers_action": True,
-        "actions": ["flag", "notify", "draft", "winback_task", "resolve"],
-    },
     "overdue_or_over_limit": {
-        "name": "Overdue or over credit limit",
+        "name": "Unpaid or over credit limit",
         "rule_text": "Business customer with an invoice more than {value} days past due, or a balance above the credit limit",
         "threshold": {"label": "Days overdue", "min": 0, "max": 120, "step": 5, "value": 60, "unit": "days"},
         "triggers_action": False,

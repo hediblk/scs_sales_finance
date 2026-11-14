@@ -71,7 +71,7 @@ function AlertQueue({ params }) {
           {main && <ConditionControl condition={main} />}
           {others.length > 0 && (
             <details className="other-rules">
-              <summary>Other rules ({others.map((c) => c.name).join(", ")})</summary>
+              <summary>Second rule: {others.map((c) => c.name.toLowerCase()).join(", ")} (detection only)</summary>
               <div className="sliders">{others.map((c) => <ConditionControl key={c.id} condition={c} compact />)}</div>
             </details>
           )}
@@ -80,10 +80,6 @@ function AlertQueue({ params }) {
 
       <div className="filters">
         <div className="tabs" role="tablist" aria-label="Condition">
-          {/* While a search is typed, it covers every rule, so no rule tab shows as selected. */}
-          <button type="button" role="tab" aria-selected={!needle && cond === "all"} className={!needle && cond === "all" ? "is-on" : ""} onClick={() => setCond("all")}>
-            All<span className="count">{countFor("all")}</span>
-          </button>
           {conditions.map((c) => (
             <button key={c.id} type="button" role="tab" aria-selected={!needle && cond === c.id} className={!needle && cond === c.id ? "is-on" : ""} onClick={() => setCond(c.id)}>
               {c.name}<span className="count">{countFor(c.id)}</span>
@@ -101,19 +97,7 @@ function AlertQueue({ params }) {
             {uniq(alerts.map((a) => a.owner)).map((r) => <option key={r} value={r}>{r}</option>)}
           </select>
         </label>
-        <label className="select"><span className="sr-only">Region</span>
-          <select value={region} onChange={(e) => setRegion(e.target.value)}>
-            <option value="">Every region</option>
-            {uniq(alerts.map((a) => a.region)).map((r) => <option key={r} value={r}>{r}</option>)}
-          </select>
-        </label>
-        <label className="select"><span className="sr-only">Segment</span>
-          <select value={segment} onChange={(e) => setSegment(e.target.value)}>
-            <option value="">Every segment</option>
-            {uniq(alerts.map((a) => a.segment)).map((r) => <option key={r} value={r}>{r}</option>)}
-          </select>
-        </label>
-        <input className="search" type="search" placeholder="Find an order, return or customer id" value={find}
+        <input className="search" type="search" placeholder="Find an order or customer id" value={find}
           onChange={(e) => { setFind(e.target.value); setShown(PAGE); }} aria-label="Find an alert" style={{ minWidth: 230 }} />
         {needle && <span className="muted small">Searching every rule and status</span>}
         {alertsLoading && <span className="muted small">Recounting...</span>}
@@ -160,7 +144,6 @@ function AlertQueue({ params }) {
   );
 }
 
-// The queue shows only the alerts our rules raised on the data (the three rule-based conditions).
 export default function QueuePage({ params }) {
   return <AlertQueue params={params} />;
 }

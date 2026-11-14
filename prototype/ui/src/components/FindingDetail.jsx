@@ -172,13 +172,7 @@ export function FindingDetail({ alert, condition }) {
       )}
 
       <div className="actions">
-        <button type="button" className={`btn btn-quiet btn-sm${panel === "triage" ? " is-on" : ""}`} onClick={() => load("triage")}>
-          {busy === "triage" ? "Writing..." : "Advisory note"}
-        </button>
-        <button type="button" className={`btn btn-quiet btn-sm${panel === "draft" ? " is-on" : ""}`} onClick={() => load("draft")}>
-          {busy === "draft" ? "Drafting..." : "Email draft"}
-        </button>
-        <button type="button" className="btn btn-quiet btn-sm" onClick={() => askAbout(alert)}>Ask about this alert</button>
+        <button type="button" className="btn btn-primary btn-sm" onClick={() => askAbout(alert)}>Ask about this alert</button>
         <span className="spacer" />
         {open
           ? <button type="button" className={`btn btn-outline-danger btn-sm${panel === "override" ? " is-on" : ""}`} onClick={() => setPanel(panel === "override" ? null : "override")}>{releaseLabel(alert)}</button>
