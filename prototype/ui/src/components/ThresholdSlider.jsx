@@ -44,7 +44,8 @@ function Slider({ id, spec, value, onChange }) {
       <label htmlFor={id}>{spec.label}</label>
       <output htmlFor={id}>{fmt(value, spec.unit)}</output>
       <input id={id} type="range" min={spec.min} max={spec.max} step={spec.step} value={value}
-        onChange={(e) => onChange(Number(e.target.value))} />
+        style={{ "--fill": `${((value - spec.min) / ((spec.max - spec.min) || 1)) * 100}%` }}
+        aria-valuetext={fmt(value, spec.unit)} onChange={(e) => onChange(Number(e.target.value))} />
     </div>
   );
 }

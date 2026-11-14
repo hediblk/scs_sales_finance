@@ -29,7 +29,19 @@ export const PAGES = [
     page: "queue",
   },
   {
-    key: "ask", step: "05", label: "Ask", hint: "Read-only questions",
+    key: "whatif", step: "05", label: "What if", hint: "Forecast with the rules on",
+    title: "Forecast: what the rules would earn",
+    lead: "Today's policy against the rules on, quarter by quarter. Turn a rule on or off, or move its setting, and the forecast follows.",
+    page: "whatif",
+  },
+  {
+    key: "accounts", step: "06", label: "Accounts & Limits", hint: "Customers and reps",
+    title: "Accounts and limits",
+    lead: (L) => `Business ${L.entities}: credit limit against open balance, terms and days overdue. Reps: revenue gross, net of returns and quota-countable.`,
+    page: "accounts",
+  },
+  {
+    key: "ask", step: "07", label: "Ask", hint: "Read-only questions",
     title: "Ask the data",
     lead: "Plain-English questions over the clean tables, or open it from an alert to dig into why it fired. The AI writes one SELECT, a read-only connection runs it, and you see the query. It cannot change an alert.",
     page: "ask",

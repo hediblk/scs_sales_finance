@@ -99,33 +99,6 @@ function DriverCard({ d, chart, highlight }) {
   );
 }
 
-const VERDICT = { right: ["good", "Right"], partly: ["warn", "Partly right"], wrong: ["bad", "Wrong"] };
-
-function WhoIsRight({ rows }) {
-  return (
-    <section className="card table-card">
-      <div style={{ padding: "16px 18px 6px" }}><h2 style={{ fontSize: 16 }}>Who is right</h2></div>
-      <table className="table">
-        <thead><tr><th>Executive</th><th>Claim</th><th>Verdict</th></tr></thead>
-        <tbody>
-          {rows.map((r) => {
-            const v = VERDICT[r.verdict];
-            return (
-              <tr key={r.exec}>
-                <td><b>{r.exec}</b></td>
-                <td>{plainRules(r.claim)}</td>
-                <td>
-                  {v ? <><Chip tone={v[0]}>{v[1]}</Chip><div className="small" style={{ marginTop: 6 }}>{plainRules(r.evidence)}</div></> : plainRules(r.verdict)}
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
-    </section>
-  );
-}
-
 export default function GapPage() {
   const gap = useResource("gap", api.gap);
   const ov = useResource("overview", api.overview);
@@ -137,7 +110,6 @@ export default function GapPage() {
   const o = ov.data;
   const charts = Object.fromEntries((o.charts ?? []).map((c) => [c.id, c]));
   const drivers = [...(g.drivers ?? [])].sort((a, b) => a.rank - b.rank);
-  const who = g.who_is_right?.length ? g.who_is_right : o.who_is_right ?? [];
   const reco = o.recommendation ?? [];
 
   const selectBar = (b) => {
@@ -203,7 +175,6 @@ export default function GapPage() {
         </section>
       )}
 
-      {who.length > 0 && <section className="block"><WhoIsRight rows={who} /></section>}
     </>
   );
 }

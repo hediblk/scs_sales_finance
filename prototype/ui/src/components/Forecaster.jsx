@@ -143,7 +143,7 @@ export function Forecaster({ params }) {
       {lastF && (
         <p className="fc-gap">Gap in {lastF.quarter}: <b className={good(lastF.with_rules - lastF.current, dir)}>{signed(lastF.with_rules - lastF.current)}</b> {mLabel.toLowerCase()} with the rules on.</p>
       )}
-      <p className="fc-method">Run-rate projection: same quarter last year x this year's growth. Not a forecasting model.</p>
+      <p className="fc-method">Replay of 2026 orders plus a run-rate projection: same quarter last year x this year's growth. Not a forecasting model.</p>
       {state.error && <ErrorBox error={state.error} onRetry={() => setAttempt((n) => n + 1)} />}
     </section>
   );
