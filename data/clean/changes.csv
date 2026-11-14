@@ -1,0 +1,709 @@
+file,raw_line,order_id,column,old,new,step
+orders.csv,12,SO-000011,discount,5.6,0.056,discount_pct
+orders.csv,167,SO-000166,discount,11.8,0.118,discount_pct
+orders.csv,168,SO-000167,discount,10.0,0.1,discount_pct
+orders.csv,204,SO-000203,discount,10.4,0.104,discount_pct
+orders.csv,256,SO-000255,discount,9.4,0.094,discount_pct
+orders.csv,331,SO-000330,discount,5.1,0.051,discount_pct
+orders.csv,385,SO-000385,discount,2.6,0.026,discount_pct
+orders.csv,427,SO-000427,discount,13.1,0.131,discount_pct
+orders.csv,486,SO-000486,discount,5.4,0.054,discount_pct
+orders.csv,495,SO-000495,discount,10.0,0.1,discount_pct
+orders.csv,519,SO-000521,discount,15.2,0.152,discount_pct
+orders.csv,526,SO-000528,discount,3.7,0.037,discount_pct
+orders.csv,541,SO-000543,discount,10.4,0.104,discount_pct
+orders.csv,550,SO-000552,discount,5.0,0.05,discount_pct
+orders.csv,567,SO-000569,discount,3.7,0.037,discount_pct
+orders.csv,587,SO-000589,discount,13.9,0.139,discount_pct
+orders.csv,652,SO-000655,discount,16.6,0.166,discount_pct
+orders.csv,678,SO-000681,discount,6.2,0.062,discount_pct
+orders.csv,689,SO-000694,discount,12.9,0.129,discount_pct
+orders.csv,710,SO-000715,discount,6.5,0.065,discount_pct
+orders.csv,720,SO-000725,discount,3.6,0.036,discount_pct
+orders.csv,721,SO-000726,discount,16.4,0.164,discount_pct
+orders.csv,752,SO-000757,discount,6.9,0.069,discount_pct
+orders.csv,757,SO-000762,discount,7.0,0.07,discount_pct
+orders.csv,766,SO-000771,discount,2.0,0.02,discount_pct
+orders.csv,769,SO-000774,discount,5.4,0.054,discount_pct
+orders.csv,817,SO-000823,discount,6.9,0.069,discount_pct
+orders.csv,857,SO-000863,discount,12.7,0.127,discount_pct
+orders.csv,865,SO-000871,discount,8.1,0.081,discount_pct
+orders.csv,880,SO-000887,discount,10.2,0.102,discount_pct
+orders.csv,890,SO-000897,discount,15.9,0.159,discount_pct
+orders.csv,896,SO-000903,discount,4.7,0.047,discount_pct
+orders.csv,1005,SO-001014,discount,18.8,0.188,discount_pct
+orders.csv,1030,SO-001042,discount,7.7,0.077,discount_pct
+orders.csv,1127,SO-001142,discount,8.1,0.081,discount_pct
+orders.csv,1171,SO-001186,discount,5.0,0.05,discount_pct
+orders.csv,1215,SO-001229,discount,14.4,0.144,discount_pct
+orders.csv,1219,SO-001233,discount,5.9,0.059,discount_pct
+orders.csv,1254,SO-001272,discount,10.1,0.101,discount_pct
+orders.csv,1281,SO-001299,discount,2.5,0.025,discount_pct
+orders.csv,1316,SO-001337,discount,38.3,0.383,discount_pct
+orders.csv,1332,SO-001354,discount,15.8,0.158,discount_pct
+orders.csv,1369,SO-001394,discount,8.1,0.081,discount_pct
+orders.csv,1387,SO-001413,discount,16.8,0.168,discount_pct
+orders.csv,1484,SO-001512,discount,9.8,0.098,discount_pct
+orders.csv,1493,SO-001521,discount,17.1,0.171,discount_pct
+orders.csv,1532,SO-001562,discount,15.3,0.153,discount_pct
+orders.csv,1673,SO-001710,discount,3.6,0.036,discount_pct
+orders.csv,1719,SO-001759,discount,10.5,0.105,discount_pct
+orders.csv,1767,SO-001809,discount,11.2,0.112,discount_pct
+orders.csv,1819,SO-001866,discount,10.0,0.1,discount_pct
+orders.csv,1850,SO-001897,discount,4.2,0.042,discount_pct
+orders.csv,1863,SO-001910,discount,8.1,0.081,discount_pct
+orders.csv,1898,SO-001947,discount,11.2,0.112,discount_pct
+orders.csv,1915,SO-001966,discount,13.4,0.134,discount_pct
+orders.csv,1920,SO-001972,discount,10.0,0.1,discount_pct
+orders.csv,1997,SO-002052,discount,3.7,0.037,discount_pct
+orders.csv,2056,SO-002116,discount,9.9,0.099,discount_pct
+orders.csv,2086,SO-002151,discount,10.0,0.1,discount_pct
+orders.csv,2108,SO-002173,discount,6.5,0.065,discount_pct
+orders.csv,2139,SO-002204,discount,22.7,0.227,discount_pct
+orders.csv,2188,SO-002260,discount,14.7,0.147,discount_pct
+orders.csv,2189,SO-002261,discount,36.4,0.364,discount_pct
+orders.csv,2265,SO-002339,discount,8.7,0.087,discount_pct
+orders.csv,2268,SO-002342,discount,6.4,0.064,discount_pct
+orders.csv,2295,SO-002371,discount,17.5,0.175,discount_pct
+orders.csv,2336,SO-002415,discount,19.2,0.192,discount_pct
+orders.csv,2375,SO-002457,discount,4.5,0.045,discount_pct
+orders.csv,2403,SO-002486,discount,13.5,0.135,discount_pct
+orders.csv,2533,SO-002629,discount,5.0,0.05,discount_pct
+orders.csv,2554,SO-002652,discount,9.3,0.093,discount_pct
+orders.csv,2577,SO-002676,discount,11.1,0.111,discount_pct
+orders.csv,2597,SO-002698,discount,18.5,0.185,discount_pct
+orders.csv,2735,SO-002844,discount,19.5,0.195,discount_pct
+orders.csv,2754,SO-002868,discount,6.9,0.069,discount_pct
+orders.csv,2807,SO-002922,discount,15.4,0.154,discount_pct
+orders.csv,2815,SO-002931,discount,8.3,0.083,discount_pct
+orders.csv,2820,SO-002937,discount,16.9,0.169,discount_pct
+orders.csv,2828,SO-002945,discount,5.0,0.05,discount_pct
+orders.csv,2830,SO-002947,discount,10.4,0.104,discount_pct
+orders.csv,2832,SO-002949,discount,22.9,0.229,discount_pct
+orders.csv,2855,SO-002972,discount,15.2,0.152,discount_pct
+orders.csv,2873,SO-002992,discount,4.9,0.049,discount_pct
+orders.csv,2884,SO-003004,discount,14.1,0.141,discount_pct
+orders.csv,2905,SO-003025,discount,10.0,0.1,discount_pct
+orders.csv,2913,SO-003035,discount,14.0,0.14,discount_pct
+orders.csv,2997,SO-003128,discount,11.2,0.112,discount_pct
+orders.csv,3072,SO-003210,discount,20.7,0.207,discount_pct
+orders.csv,3073,SO-003211,discount,4.0,0.04,discount_pct
+orders.csv,3094,SO-003234,discount,10.0,0.1,discount_pct
+orders.csv,3169,SO-003313,discount,7.1,0.071,discount_pct
+orders.csv,3209,SO-003357,discount,8.0,0.08,discount_pct
+orders.csv,3236,SO-003393,discount,25.2,0.252,discount_pct
+orders.csv,3245,SO-003403,discount,13.3,0.133,discount_pct
+orders.csv,3294,SO-003457,discount,19.0,0.19,discount_pct
+orders.csv,3317,SO-003482,discount,16.5,0.165,discount_pct
+orders.csv,3359,SO-003528,discount,12.5,0.125,discount_pct
+orders.csv,3366,SO-003536,discount,10.0,0.1,discount_pct
+orders.csv,3372,SO-003542,discount,10.0,0.1,discount_pct
+orders.csv,3410,SO-003583,discount,32.1,0.321,discount_pct
+orders.csv,3443,SO-003619,discount,9.7,0.097,discount_pct
+orders.csv,3473,SO-003654,discount,10.0,0.1,discount_pct
+orders.csv,3490,SO-003671,discount,1.4,0.014,discount_pct
+orders.csv,3531,SO-003720,discount,3.5,0.035,discount_pct
+orders.csv,3610,SO-003807,discount,8.8,0.088,discount_pct
+orders.csv,3673,SO-003875,discount,13.9,0.139,discount_pct
+orders.csv,3704,SO-003911,discount,11.5,0.115,discount_pct
+orders.csv,3720,SO-003928,discount,10.3,0.103,discount_pct
+orders.csv,3805,SO-004028,discount,5.0,0.05,discount_pct
+orders.csv,3828,SO-004051,discount,7.8,0.078,discount_pct
+orders.csv,3848,SO-004073,discount,7.1,0.071,discount_pct
+orders.csv,3864,SO-004091,discount,8.9,0.089,discount_pct
+orders.csv,3938,SO-004175,discount,5.0,0.05,discount_pct
+orders.csv,3957,SO-004197,discount,13.8,0.138,discount_pct
+orders.csv,4024,SO-004270,discount,20.0,0.2,discount_pct
+orders.csv,4026,SO-004272,discount,10.0,0.1,discount_pct
+orders.csv,4038,SO-004285,discount,41.6,0.416,discount_pct
+orders.csv,4045,SO-004292,discount,10.2,0.102,discount_pct
+orders.csv,4083,SO-004332,discount,7.1,0.071,discount_pct
+orders.csv,4119,SO-004377,discount,10.0,0.1,discount_pct
+orders.csv,4134,SO-004394,discount,7.5,0.075,discount_pct
+orders.csv,4173,SO-004439,discount,5.0,0.05,discount_pct
+orders.csv,4188,SO-004457,discount,5.0,0.05,discount_pct
+orders.csv,4220,SO-004491,discount,5.4,0.054,discount_pct
+orders.csv,4310,SO-004592,discount,18.5,0.185,discount_pct
+orders.csv,4318,SO-004600,discount,3.8,0.038,discount_pct
+orders.csv,4368,SO-004663,discount,5.2,0.052,discount_pct
+orders.csv,4411,SO-004711,discount,7.3,0.073,discount_pct
+orders.csv,4446,SO-004752,discount,7.1,0.071,discount_pct
+orders.csv,4510,SO-004824,discount,12.4,0.124,discount_pct
+orders.csv,4511,SO-004825,discount,5.0,0.05,discount_pct
+orders.csv,4537,SO-004855,discount,27.1,0.271,discount_pct
+orders.csv,4548,SO-004866,discount,3.3,0.033,discount_pct
+orders.csv,4568,SO-004887,discount,5.3,0.053,discount_pct
+orders.csv,4619,SO-004946,discount,9.3,0.093,discount_pct
+orders.csv,4684,SO-005018,discount,5.0,0.05,discount_pct
+orders.csv,4783,SO-005135,discount,10.0,0.1,discount_pct
+orders.csv,4849,SO-005214,discount,15.5,0.155,discount_pct
+orders.csv,4896,SO-005266,discount,27.2,0.272,discount_pct
+orders.csv,4904,SO-005276,discount,10.5,0.105,discount_pct
+orders.csv,4917,SO-005290,discount,5.0,0.05,discount_pct
+orders.csv,4991,SO-005373,discount,11.3,0.113,discount_pct
+orders.csv,5002,SO-005388,discount,35.1,0.351,discount_pct
+orders.csv,5003,SO-005389,discount,16.4,0.164,discount_pct
+orders.csv,5006,SO-005392,discount,7.3,0.073,discount_pct
+orders.csv,5029,SO-005420,discount,13.5,0.135,discount_pct
+orders.csv,5037,SO-005429,discount,10.0,0.1,discount_pct
+orders.csv,5054,SO-005447,discount,39.8,0.398,discount_pct
+orders.csv,5081,SO-005478,discount,30.9,0.309,discount_pct
+orders.csv,5106,SO-005506,discount,33.7,0.337,discount_pct
+orders.csv,5141,SO-005551,discount,5.7,0.057,discount_pct
+orders.csv,5179,SO-005590,discount,9.3,0.093,discount_pct
+orders.csv,5184,SO-005595,discount,3.0,0.03,discount_pct
+orders.csv,5211,SO-005626,discount,9.1,0.091,discount_pct
+orders.csv,5252,SO-005673,discount,10.0,0.1,discount_pct
+orders.csv,5283,SO-005708,discount,14.5,0.145,discount_pct
+orders.csv,5332,SO-005770,discount,4.6,0.046,discount_pct
+orders.csv,5366,SO-005807,discount,6.2,0.062,discount_pct
+orders.csv,5425,SO-005871,discount,10.9,0.109,discount_pct
+orders.csv,5426,SO-005872,discount,5.8,0.058,discount_pct
+orders.csv,5460,SO-005915,discount,5.6,0.056,discount_pct
+orders.csv,5464,SO-005919,discount,3.9,0.039,discount_pct
+orders.csv,5512,SO-005971,discount,11.3,0.113,discount_pct
+orders.csv,5591,SO-006061,discount,8.2,0.082,discount_pct
+orders.csv,5607,SO-006080,discount,8.1,0.081,discount_pct
+orders.csv,5654,SO-006137,discount,9.9,0.099,discount_pct
+orders.csv,5687,SO-006173,discount,23.1,0.231,discount_pct
+orders.csv,5690,SO-006176,discount,3.2,0.032,discount_pct
+orders.csv,5753,SO-006259,discount,6.4,0.064,discount_pct
+orders.csv,5788,SO-006301,discount,12.0,0.12,discount_pct
+orders.csv,5799,SO-006314,discount,10.6,0.106,discount_pct
+orders.csv,5869,SO-006394,discount,11.8,0.118,discount_pct
+orders.csv,5872,SO-006397,discount,3.9,0.039,discount_pct
+orders.csv,5903,SO-006435,discount,4.9,0.049,discount_pct
+orders.csv,5926,SO-006464,discount,11.8,0.118,discount_pct
+orders.csv,6019,SO-006575,discount,16.8,0.168,discount_pct
+orders.csv,6102,SO-006672,discount,11.4,0.114,discount_pct
+orders.csv,6145,SO-006718,discount,18.7,0.187,discount_pct
+orders.csv,6151,SO-006725,discount,10.6,0.106,discount_pct
+orders.csv,6157,SO-006731,discount,12.9,0.129,discount_pct
+orders.csv,6167,SO-006742,discount,19.3,0.193,discount_pct
+orders.csv,64,SO-000063,region,atlantic,Atlantic,region
+orders.csv,69,SO-000068,region,atlantic,Atlantic,region
+orders.csv,74,SO-000073,region,British Columbia,BC,region
+orders.csv,119,SO-000118,region,ON,Ontario,region
+orders.csv,124,SO-000123,region,ON,Ontario,region
+orders.csv,191,SO-000190,region,prairies,Prairies,region
+orders.csv,268,SO-000267,region,quebec,Quebec,region
+orders.csv,318,SO-000317,region,ontario,Ontario,region
+orders.csv,399,SO-000399,region,ontario,Ontario,region
+orders.csv,402,SO-000401,region,prairies,Prairies,region
+orders.csv,403,SO-000402,region,QC,Quebec,region
+orders.csv,407,SO-000406,region,ontario,Ontario,region
+orders.csv,413,SO-000412,region,QC,Quebec,region
+orders.csv,415,SO-000414,region,prairies,Prairies,region
+orders.csv,454,SO-000454,region,ON,Ontario,region
+orders.csv,488,SO-000488,region,prairies,Prairies,region
+orders.csv,598,SO-000601,region,ATL,Atlantic,region
+orders.csv,599,SO-000602,region,prairies,Prairies,region
+orders.csv,624,SO-000627,region,Québec,Quebec,region
+orders.csv,644,SO-000647,region,British Columbia,BC,region
+orders.csv,671,SO-000674,region,B.C.,BC,region
+orders.csv,677,SO-000680,region,British Columbia,BC,region
+orders.csv,712,SO-000717,region,ON,Ontario,region
+orders.csv,745,SO-000750,region,QC,Quebec,region
+orders.csv,767,SO-000772,region,ontario,Ontario,region
+orders.csv,805,SO-000811,region,prairies,Prairies,region
+orders.csv,813,SO-000819,region,quebec,Quebec,region
+orders.csv,834,SO-000840,region,atlantic,Atlantic,region
+orders.csv,839,SO-000845,region,ontario,Ontario,region
+orders.csv,956,SO-000965,region,B.C.,BC,region
+orders.csv,957,SO-000966,region,ON,Ontario,region
+orders.csv,972,SO-000981,region,ON,Ontario,region
+orders.csv,987,SO-000996,region,prairies,Prairies,region
+orders.csv,991,SO-001000,region,ON,Ontario,region
+orders.csv,1048,SO-001061,region,ATL,Atlantic,region
+orders.csv,1075,SO-001088,region,ontario,Ontario,region
+orders.csv,1076,SO-001089,region,ontario,Ontario,region
+orders.csv,1078,SO-001091,region,ON,Ontario,region
+orders.csv,1091,SO-001105,region,ontario,Ontario,region
+orders.csv,1099,SO-001113,region,prairies,Prairies,region
+orders.csv,1120,SO-001134,region,quebec,Quebec,region
+orders.csv,1212,SO-001226,region,ontario,Ontario,region
+orders.csv,1240,SO-001257,region,quebec,Quebec,region
+orders.csv,1269,SO-001287,region,ontario,Ontario,region
+orders.csv,1327,SO-001348,region,B.C.,BC,region
+orders.csv,1341,SO-001364,region,ATL,Atlantic,region
+orders.csv,1357,SO-001381,region,quebec,Quebec,region
+orders.csv,1375,SO-001401,region,ATL,Atlantic,region
+orders.csv,1412,SO-001439,region,Québec,Quebec,region
+orders.csv,1438,SO-001465,region,ON,Ontario,region
+orders.csv,1479,SO-001507,region,ON,Ontario,region
+orders.csv,1482,SO-001510,region,quebec,Quebec,region
+orders.csv,1486,SO-001514,region,ontario,Ontario,region
+orders.csv,1520,SO-001549,region,atlantic,Atlantic,region
+orders.csv,1528,SO-001558,region,ON,Ontario,region
+orders.csv,1531,SO-001561,region,ON,Ontario,region
+orders.csv,1538,SO-001568,region,QC,Quebec,region
+orders.csv,1558,SO-001589,region,B.C.,BC,region
+orders.csv,1579,SO-001611,region,ON,Ontario,region
+orders.csv,1615,SO-001649,region,ON,Ontario,region
+orders.csv,1616,SO-001650,region,QC,Quebec,region
+orders.csv,1719,SO-001759,region,Québec,Quebec,region
+orders.csv,1809,SO-001855,region,prairies,Prairies,region
+orders.csv,1822,SO-001869,region,Québec,Quebec,region
+orders.csv,1823,SO-001870,region,QC,Quebec,region
+orders.csv,1852,SO-001899,region,ON,Ontario,region
+orders.csv,1873,SO-001922,region,B.C.,BC,region
+orders.csv,1900,SO-001949,region,QC,Quebec,region
+orders.csv,1922,SO-001974,region,British Columbia,BC,region
+orders.csv,1932,SO-001984,region,Québec,Quebec,region
+orders.csv,1950,SO-002003,region,QC,Quebec,region
+orders.csv,2028,SO-002087,region,ontario,Ontario,region
+orders.csv,2031,SO-002091,region,ON,Ontario,region
+orders.csv,2038,SO-002098,region,QC,Quebec,region
+orders.csv,2048,SO-002108,region,ON,Ontario,region
+orders.csv,2074,SO-002137,region,ontario,Ontario,region
+orders.csv,2082,SO-002145,region,Québec,Quebec,region
+orders.csv,2113,SO-002178,region,British Columbia,BC,region
+orders.csv,2150,SO-002216,region,British Columbia,BC,region
+orders.csv,2156,SO-002225,region,atlantic,Atlantic,region
+orders.csv,2173,SO-002242,region,QC,Quebec,region
+orders.csv,2204,SO-002276,region,ontario,Ontario,region
+orders.csv,2214,SO-002286,region,Québec,Quebec,region
+orders.csv,2265,SO-002339,region,quebec,Quebec,region
+orders.csv,2280,SO-002355,region,Québec,Quebec,region
+orders.csv,2283,SO-002358,region,B.C.,BC,region
+orders.csv,2287,SO-002363,region,ON,Ontario,region
+orders.csv,2317,SO-002395,region,quebec,Quebec,region
+orders.csv,2358,SO-002440,region,quebec,Quebec,region
+orders.csv,2369,SO-002451,region,atlantic,Atlantic,region
+orders.csv,2409,SO-002492,region,quebec,Quebec,region
+orders.csv,2462,SO-002551,region,ontario,Ontario,region
+orders.csv,2465,SO-002554,region,ON,Ontario,region
+orders.csv,2474,SO-002563,region,British Columbia,BC,region
+orders.csv,2533,SO-002629,region,Québec,Quebec,region
+orders.csv,2583,SO-002683,region,quebec,Quebec,region
+orders.csv,2590,SO-002690,region,ATL,Atlantic,region
+orders.csv,2619,SO-002720,region,ontario,Ontario,region
+orders.csv,2623,SO-002724,region,prairies,Prairies,region
+orders.csv,2624,SO-002725,region,Québec,Quebec,region
+orders.csv,2629,SO-002730,region,ON,Ontario,region
+orders.csv,2660,SO-002763,region,quebec,Quebec,region
+orders.csv,2734,SO-002843,region,British Columbia,BC,region
+orders.csv,2822,SO-002939,region,ontario,Ontario,region
+orders.csv,2832,SO-002949,region,ATL,Atlantic,region
+orders.csv,2843,SO-002960,region,atlantic,Atlantic,region
+orders.csv,2853,SO-002970,region,Québec,Quebec,region
+orders.csv,2854,SO-002971,region,B.C.,BC,region
+orders.csv,2906,SO-003026,region,ontario,Ontario,region
+orders.csv,2915,SO-003037,region,atlantic,Atlantic,region
+orders.csv,2925,SO-003048,region,prairies,Prairies,region
+orders.csv,2971,SO-003098,region,ON,Ontario,region
+orders.csv,2981,SO-003110,region,ATL,Atlantic,region
+orders.csv,2992,SO-003122,region,QC,Quebec,region
+orders.csv,2996,SO-003127,region,ON,Ontario,region
+orders.csv,3008,SO-003139,region,quebec,Quebec,region
+orders.csv,3021,SO-003152,region,British Columbia,BC,region
+orders.csv,3024,SO-003156,region,quebec,Quebec,region
+orders.csv,3040,SO-003173,region,prairies,Prairies,region
+orders.csv,3062,SO-003197,region,atlantic,Atlantic,region
+orders.csv,3067,SO-003205,region,ontario,Ontario,region
+orders.csv,3079,SO-003218,region,ontario,Ontario,region
+orders.csv,3082,SO-003221,region,atlantic,Atlantic,region
+orders.csv,3105,SO-003245,region,QC,Quebec,region
+orders.csv,3109,SO-003250,region,ON,Ontario,region
+orders.csv,3126,SO-003267,region,QC,Quebec,region
+orders.csv,3134,SO-003275,region,B.C.,BC,region
+orders.csv,3146,SO-003288,region,ontario,Ontario,region
+orders.csv,3233,SO-003388,region,ontario,Ontario,region
+orders.csv,3243,SO-003400,region,British Columbia,BC,region
+orders.csv,3267,SO-003429,region,B.C.,BC,region
+orders.csv,3284,SO-003446,region,ontario,Ontario,region
+orders.csv,3289,SO-003451,region,ontario,Ontario,region
+orders.csv,3321,SO-003487,region,ontario,Ontario,region
+orders.csv,3336,SO-003503,region,prairies,Prairies,region
+orders.csv,3359,SO-003528,region,quebec,Quebec,region
+orders.csv,3390,SO-003562,region,QC,Quebec,region
+orders.csv,3397,SO-003570,region,Québec,Quebec,region
+orders.csv,3401,SO-003574,region,ontario,Ontario,region
+orders.csv,3404,SO-003577,region,British Columbia,BC,region
+orders.csv,3424,SO-003597,region,Québec,Quebec,region
+orders.csv,3442,SO-003618,region,ON,Ontario,region
+orders.csv,3451,SO-003626,region,Québec,Quebec,region
+orders.csv,3484,SO-003665,region,ATL,Atlantic,region
+orders.csv,3517,SO-003702,region,prairies,Prairies,region
+orders.csv,3525,SO-003712,region,atlantic,Atlantic,region
+orders.csv,3564,SO-003755,region,ATL,Atlantic,region
+orders.csv,3577,SO-003768,region,ontario,Ontario,region
+orders.csv,3605,SO-003801,region,ontario,Ontario,region
+orders.csv,3654,SO-003855,region,QC,Quebec,region
+orders.csv,3675,SO-003877,region,ontario,Ontario,region
+orders.csv,3766,SO-003983,region,ON,Ontario,region
+orders.csv,3798,SO-004020,region,quebec,Quebec,region
+orders.csv,3802,SO-004024,region,ON,Ontario,region
+orders.csv,3826,SO-004049,region,quebec,Quebec,region
+orders.csv,3828,SO-004051,region,B.C.,BC,region
+orders.csv,3930,SO-004167,region,ontario,Ontario,region
+orders.csv,3931,SO-004168,region,B.C.,BC,region
+orders.csv,3935,SO-004172,region,atlantic,Atlantic,region
+orders.csv,3937,SO-004174,region,British Columbia,BC,region
+orders.csv,3972,SO-004214,region,QC,Quebec,region
+orders.csv,3982,SO-004225,region,atlantic,Atlantic,region
+orders.csv,4021,SO-004267,region,QC,Quebec,region
+orders.csv,4033,SO-004279,region,Québec,Quebec,region
+orders.csv,4109,SO-004365,region,atlantic,Atlantic,region
+orders.csv,4138,SO-004398,region,ATL,Atlantic,region
+orders.csv,4179,SO-004446,region,Québec,Quebec,region
+orders.csv,4180,SO-004449,region,British Columbia,BC,region
+orders.csv,4212,SO-004483,region,Québec,Quebec,region
+orders.csv,4235,SO-004508,region,ontario,Ontario,region
+orders.csv,4236,SO-004509,region,quebec,Quebec,region
+orders.csv,4278,SO-004555,region,atlantic,Atlantic,region
+orders.csv,4289,SO-004568,region,ON,Ontario,region
+orders.csv,4295,SO-004576,region,ON,Ontario,region
+orders.csv,4307,SO-004588,region,ON,Ontario,region
+orders.csv,4308,SO-004589,region,ontario,Ontario,region
+orders.csv,4309,SO-004590,region,ON,Ontario,region
+orders.csv,4323,SO-004606,region,ON,Ontario,region
+orders.csv,4354,SO-004647,region,Québec,Quebec,region
+orders.csv,4374,SO-004670,region,B.C.,BC,region
+orders.csv,4411,SO-004711,region,ON,Ontario,region
+orders.csv,4413,SO-004713,region,ON,Ontario,region
+orders.csv,4422,SO-004723,region,ON,Ontario,region
+orders.csv,4482,SO-004792,region,B.C.,BC,region
+orders.csv,4494,SO-004806,region,quebec,Quebec,region
+orders.csv,4501,SO-004814,region,atlantic,Atlantic,region
+orders.csv,4515,SO-004829,region,QC,Quebec,region
+orders.csv,4534,SO-004851,region,ON,Ontario,region
+orders.csv,4535,SO-004852,region,atlantic,Atlantic,region
+orders.csv,4538,SO-004856,region,prairies,Prairies,region
+orders.csv,4558,SO-004877,region,quebec,Quebec,region
+orders.csv,4576,SO-004895,region,ontario,Ontario,region
+orders.csv,4596,SO-004919,region,atlantic,Atlantic,region
+orders.csv,4648,SO-004979,region,ontario,Ontario,region
+orders.csv,4659,SO-004990,region,ontario,Ontario,region
+orders.csv,4690,SO-005025,region,ON,Ontario,region
+orders.csv,4701,SO-005037,region,ontario,Ontario,region
+orders.csv,4734,SO-005075,region,ontario,Ontario,region
+orders.csv,4768,SO-005118,region,atlantic,Atlantic,region
+orders.csv,4851,SO-005216,region,atlantic,Atlantic,region
+orders.csv,4871,SO-005238,region,Québec,Quebec,region
+orders.csv,4885,SO-005253,region,British Columbia,BC,region
+orders.csv,4913,SO-005286,region,ontario,Ontario,region
+orders.csv,4932,SO-005305,region,Québec,Quebec,region
+orders.csv,4935,SO-005308,region,ON,Ontario,region
+orders.csv,4966,SO-005344,region,ontario,Ontario,region
+orders.csv,4977,SO-005356,region,ON,Ontario,region
+orders.csv,5046,SO-005438,region,ontario,Ontario,region
+orders.csv,5064,SO-005458,region,prairies,Prairies,region
+orders.csv,5074,SO-005471,region,ATL,Atlantic,region
+orders.csv,5096,SO-005495,region,ATL,Atlantic,region
+orders.csv,5157,SO-005568,region,QC,Quebec,region
+orders.csv,5163,SO-005574,region,ontario,Ontario,region
+orders.csv,5166,SO-005577,region,prairies,Prairies,region
+orders.csv,5226,SO-005644,region,ON,Ontario,region
+orders.csv,5230,SO-005648,region,QC,Quebec,region
+orders.csv,5303,SO-005734,region,QC,Quebec,region
+orders.csv,5398,SO-005840,region,atlantic,Atlantic,region
+orders.csv,5400,SO-005844,region,ON,Ontario,region
+orders.csv,5468,SO-005923,region,ON,Ontario,region
+orders.csv,5497,SO-005957,region,ontario,Ontario,region
+orders.csv,5534,SO-005995,region,British Columbia,BC,region
+orders.csv,5568,SO-006033,region,ontario,Ontario,region
+orders.csv,5597,SO-006068,region,Québec,Quebec,region
+orders.csv,5616,SO-006094,region,ON,Ontario,region
+orders.csv,5617,SO-006095,region,prairies,Prairies,region
+orders.csv,5689,SO-006175,region,quebec,Quebec,region
+orders.csv,5710,SO-006201,region,quebec,Quebec,region
+orders.csv,5734,SO-006233,region,QC,Quebec,region
+orders.csv,5773,SO-006283,region,Québec,Quebec,region
+orders.csv,5796,SO-006311,region,ON,Ontario,region
+orders.csv,5807,SO-006323,region,ontario,Ontario,region
+orders.csv,5841,SO-006361,region,Québec,Quebec,region
+orders.csv,5845,SO-006366,region,ATL,Atlantic,region
+orders.csv,5874,SO-006400,region,ON,Ontario,region
+orders.csv,5916,SO-006453,region,B.C.,BC,region
+orders.csv,5958,SO-006501,region,prairies,Prairies,region
+orders.csv,6019,SO-006575,region,Québec,Quebec,region
+orders.csv,6033,SO-006592,region,quebec,Quebec,region
+orders.csv,6034,SO-006593,region,prairies,Prairies,region
+orders.csv,6047,SO-006608,region,British Columbia,BC,region
+orders.csv,6051,SO-006614,region,B.C.,BC,region
+orders.csv,6053,SO-006616,region,QC,Quebec,region
+orders.csv,6074,SO-006638,region,prairies,Prairies,region
+orders.csv,6135,SO-006708,region,British Columbia,BC,region
+orders.csv,22,SO-000021,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,48,SO-000047,product,24in Monitor,"Monitor 24""",product
+orders.csv,78,SO-000077,product,Monitor 24,"Monitor 24""",product
+orders.csv,84,SO-000083,product,"monitor 27""","Monitor 27""",product
+orders.csv,87,SO-000086,product,Monitor 24,"Monitor 24""",product
+orders.csv,92,SO-000091,product,usb-c dock,USB-C Dock,product
+orders.csv,110,SO-000109,product,USB C Dock,USB-C Dock,product
+orders.csv,210,SO-000209,product,27in Monitor,"Monitor 27""",product
+orders.csv,321,SO-000320,product,Monitor 24,"Monitor 24""",product
+orders.csv,354,SO-000353,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,367,SO-000367,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,381,SO-000381,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,402,SO-000401,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,533,SO-000535,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,537,SO-000539,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,547,SO-000549,product,usb-c dock,USB-C Dock,product
+orders.csv,560,SO-000562,product,27in Monitor,"Monitor 27""",product
+orders.csv,672,SO-000675,product,27in Monitor,"Monitor 27""",product
+orders.csv,712,SO-000717,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,811,SO-000817,product,Monitor 24,"Monitor 24""",product
+orders.csv,861,SO-000867,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,866,SO-000872,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,900,SO-000907,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,932,SO-000939,product,USB C Dock,USB-C Dock,product
+orders.csv,980,SO-000989,product,Monitor 24,"Monitor 24""",product
+orders.csv,985,SO-000994,product,Monitor 24,"Monitor 24""",product
+orders.csv,1155,SO-001170,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,1213,SO-001227,product,ErgoLift Desk,ErgoLift Standing Desk,product
+orders.csv,1291,SO-001310,product,"monitor 27""","Monitor 27""",product
+orders.csv,1314,SO-001335,product,USB C Dock,USB-C Dock,product
+orders.csv,1368,SO-001392,product,usb-c dock,USB-C Dock,product
+orders.csv,1375,SO-001401,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,1412,SO-001439,product,USB C Dock,USB-C Dock,product
+orders.csv,1441,SO-001468,product,24in Monitor,"Monitor 24""",product
+orders.csv,1480,SO-001508,product,Monitor 24,"Monitor 24""",product
+orders.csv,1488,SO-001516,product,USB C Dock,USB-C Dock,product
+orders.csv,1490,SO-001518,product,24in Monitor,"Monitor 24""",product
+orders.csv,1494,SO-001522,product,usb-c dock,USB-C Dock,product
+orders.csv,1593,SO-001626,product,USB C Dock,USB-C Dock,product
+orders.csv,1618,SO-001652,product,24in Monitor,"Monitor 24""",product
+orders.csv,1679,SO-001716,product,24in Monitor,"Monitor 24""",product
+orders.csv,1689,SO-001726,product,24in Monitor,"Monitor 24""",product
+orders.csv,1845,SO-001892,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,1848,SO-001895,product,usb-c dock,USB-C Dock,product
+orders.csv,1938,SO-001990,product,27in Monitor,"Monitor 27""",product
+orders.csv,1940,SO-001992,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,1989,SO-002043,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,2038,SO-002098,product,USB C Dock,USB-C Dock,product
+orders.csv,2067,SO-002129,product,USB C Dock,USB-C Dock,product
+orders.csv,2075,SO-002138,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,2096,SO-002161,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,2102,SO-002167,product,Monitor 27,"Monitor 27""",product
+orders.csv,2117,SO-002182,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,2165,SO-002234,product,Monitor 27,"Monitor 27""",product
+orders.csv,2195,SO-002267,product,27in Monitor,"Monitor 27""",product
+orders.csv,2264,SO-002338,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,2317,SO-002395,product,24in Monitor,"Monitor 24""",product
+orders.csv,2349,SO-002429,product,usb-c dock,USB-C Dock,product
+orders.csv,2352,SO-002433,product,27in Monitor,"Monitor 27""",product
+orders.csv,2361,SO-002443,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,2389,SO-002470,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,2435,SO-002521,product,USB C Dock,USB-C Dock,product
+orders.csv,2494,SO-002584,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,2568,SO-002667,product,24in Monitor,"Monitor 24""",product
+orders.csv,2588,SO-002688,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,2595,SO-002695,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,2619,SO-002720,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,2634,SO-002735,product,ErgoLift Desk,ErgoLift Standing Desk,product
+orders.csv,2649,SO-002752,product,USB C Dock,USB-C Dock,product
+orders.csv,2692,SO-002799,product,Monitor 27,"Monitor 27""",product
+orders.csv,2746,SO-002857,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,2918,SO-003041,product,27in Monitor,"Monitor 27""",product
+orders.csv,2962,SO-003090,product,USB C Dock,USB-C Dock,product
+orders.csv,2968,SO-003096,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,2974,SO-003102,product,27in Monitor,"Monitor 27""",product
+orders.csv,2996,SO-003127,product,Monitor 24,"Monitor 24""",product
+orders.csv,3020,SO-003151,product,ErgoLift Desk,ErgoLift Standing Desk,product
+orders.csv,3054,SO-003187,product,usb-c dock,USB-C Dock,product
+orders.csv,3078,SO-003217,product,27in Monitor,"Monitor 27""",product
+orders.csv,3108,SO-003249,product,usb-c dock,USB-C Dock,product
+orders.csv,3111,SO-003252,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,3146,SO-003288,product,USB C Dock,USB-C Dock,product
+orders.csv,3259,SO-003421,product,27in Monitor,"Monitor 27""",product
+orders.csv,3279,SO-003441,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,3323,SO-003489,product,24in Monitor,"Monitor 24""",product
+orders.csv,3405,SO-003578,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,3434,SO-003609,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,3507,SO-003691,product,Monitor 27,"Monitor 27""",product
+orders.csv,3528,SO-003715,product,24in Monitor,"Monitor 24""",product
+orders.csv,3553,SO-003742,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,3560,SO-003750,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,3565,SO-003756,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,3568,SO-003759,product,"monitor 27""","Monitor 27""",product
+orders.csv,3633,SO-003831,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,3638,SO-003837,product,27in Monitor,"Monitor 27""",product
+orders.csv,3641,SO-003841,product,USB C Dock,USB-C Dock,product
+orders.csv,3661,SO-003862,product,usb-c dock,USB-C Dock,product
+orders.csv,3715,SO-003922,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,3766,SO-003983,product,Monitor 24,"Monitor 24""",product
+orders.csv,3797,SO-004018,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,3826,SO-004049,product,24in Monitor,"Monitor 24""",product
+orders.csv,4012,SO-004257,product,24in Monitor,"Monitor 24""",product
+orders.csv,4050,SO-004297,product,24in Monitor,"Monitor 24""",product
+orders.csv,4059,SO-004306,product,usb-c dock,USB-C Dock,product
+orders.csv,4102,SO-004356,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,4109,SO-004365,product,Monitor 24,"Monitor 24""",product
+orders.csv,4123,SO-004381,product,Monitor 24,"Monitor 24""",product
+orders.csv,4125,SO-004383,product,"monitor 27""","Monitor 27""",product
+orders.csv,4144,SO-004407,product,USB C Dock,USB-C Dock,product
+orders.csv,4156,SO-004422,product,"monitor 27""","Monitor 27""",product
+orders.csv,4197,SO-004467,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,4276,SO-004553,product,ErgoLift Desk,ErgoLift Standing Desk,product
+orders.csv,4313,SO-004595,product,27in Monitor,"Monitor 27""",product
+orders.csv,4434,SO-004740,product,USB C Dock,USB-C Dock,product
+orders.csv,4504,SO-004817,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,4506,SO-004819,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,4629,SO-004957,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,4646,SO-004977,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,4705,SO-005043,product,Monitor 24,"Monitor 24""",product
+orders.csv,4715,SO-005055,product,ErgoLift Desk,ErgoLift Standing Desk,product
+orders.csv,4899,SO-005270,product,Monitor 27,"Monitor 27""",product
+orders.csv,4908,SO-005279,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,4926,SO-005299,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,4938,SO-005312,product,Monitor 27,"Monitor 27""",product
+orders.csv,4956,SO-005333,product,USB C Dock,USB-C Dock,product
+orders.csv,4989,SO-005371,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,5001,SO-005387,product,Monitor 24,"Monitor 24""",product
+orders.csv,5044,SO-005436,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,5063,SO-005457,product,24in Monitor,"Monitor 24""",product
+orders.csv,5070,SO-005467,product,24in Monitor,"Monitor 24""",product
+orders.csv,5137,SO-005547,product,Monitor 27,"Monitor 27""",product
+orders.csv,5138,SO-005548,product,ErgoLift Desk,ErgoLift Standing Desk,product
+orders.csv,5180,SO-005591,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,5239,SO-005659,product,"monitor 27""","Monitor 27""",product
+orders.csv,5249,SO-005670,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,5302,SO-005733,product,Monitor 27,"Monitor 27""",product
+orders.csv,5342,SO-005780,product,27in Monitor,"Monitor 27""",product
+orders.csv,5357,SO-005796,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,5389,SO-005830,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,5399,SO-005841,product,USB C Dock,USB-C Dock,product
+orders.csv,5441,SO-005891,product,ErgoLift Desk,ErgoLift Standing Desk,product
+orders.csv,5462,SO-005917,product,ErgoLift Desk,ErgoLift Standing Desk,product
+orders.csv,5468,SO-005923,product,ERGOLIFT STANDING DESK,ErgoLift Standing Desk,product
+orders.csv,5470,SO-005925,product,Monitor 27,"Monitor 27""",product
+orders.csv,5509,SO-005968,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,5510,SO-005969,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,5535,SO-005996,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,5537,SO-005998,product,Ergolift Standing Desk,ErgoLift Standing Desk,product
+orders.csv,5627,SO-006106,product,"monitor 27""","Monitor 27""",product
+orders.csv,5682,SO-006168,product,usb-c dock,USB-C Dock,product
+orders.csv,5703,SO-006192,product,ErgoLift Desk,ErgoLift Standing Desk,product
+orders.csv,5742,SO-006244,product,Monitor 24,"Monitor 24""",product
+orders.csv,5808,SO-006324,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,5814,SO-006330,product,mechanical keyboard,Mechanical Keyboard,product
+orders.csv,5845,SO-006366,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,5941,SO-006481,product,Mech Keyboard,Mechanical Keyboard,product
+orders.csv,6125,SO-006698,product,ErgoLift Desk,ErgoLift Standing Desk,product
+orders.csv,6154,SO-006728,product,ErgoLift Desk,ErgoLift Standing Desk,product
+orders.csv,6167,SO-006742,product,24in Monitor,"Monitor 24""",product
+orders.csv,6168,SO-006744,product,27in Monitor,"Monitor 27""",product
+orders.csv,25,SO-000024,order_date,01/04/2025,2025-01-04,date_format
+orders.csv,41,SO-000040,order_date,01/07/2025,2025-01-07,date_format
+orders.csv,51,SO-000050,order_date,01/08/2025,2025-01-08,date_format
+orders.csv,83,SO-000082,order_date,01/13/2025,2025-01-13,date_format
+orders.csv,105,SO-000104,order_date,01/15/2025,2025-01-15,date_format
+orders.csv,187,SO-000186,order_date,01/27/2025,2025-01-27,date_format
+orders.csv,377,SO-000377,order_date,02/22/2025,2025-02-22,date_format
+orders.csv,380,SO-000380,order_date,02/22/2025,2025-02-22,date_format
+orders.csv,389,SO-000389,order_date,02/24/2025,2025-02-24,date_format
+orders.csv,401,SO-000400,order_date,02/26/2025,2025-02-26,date_format
+orders.csv,409,SO-000408,order_date,02/27/2025,2025-02-27,date_format
+orders.csv,445,SO-000445,order_date,03/04/2025,2025-03-04,date_format
+orders.csv,459,SO-000459,order_date,03/05/2025,2025-03-05,date_format
+orders.csv,485,SO-000485,order_date,03/10/2025,2025-03-10,date_format
+orders.csv,488,SO-000488,order_date,03/10/2025,2025-03-10,date_format
+orders.csv,501,SO-000501,order_date,03/12/2025,2025-03-12,date_format
+orders.csv,535,SO-000537,order_date,03/16/2025,2025-03-16,date_format
+orders.csv,587,SO-000589,order_date,03/22/2025,2025-03-22,date_format
+orders.csv,692,SO-000697,order_date,04/05/2025,2025-04-05,date_format
+orders.csv,714,SO-000719,order_date,04/08/2025,2025-04-08,date_format
+orders.csv,947,SO-000955,order_date,05/11/2025,2025-05-11,date_format
+orders.csv,992,SO-001001,order_date,05/15/2025,2025-05-15,date_format
+orders.csv,1066,SO-001079,order_date,05/24/2025,2025-05-24,date_format
+orders.csv,1141,SO-001156,order_date,06/02/2025,2025-06-02,date_format
+orders.csv,1176,SO-001191,order_date,06/06/2025,2025-06-06,date_format
+orders.csv,1184,SO-001199,order_date,06/07/2025,2025-06-07,date_format
+orders.csv,1203,SO-001217,order_date,06/09/2025,2025-06-09,date_format
+orders.csv,1228,SO-001243,order_date,06/12/2025,2025-06-12,date_format
+orders.csv,1232,SO-001247,order_date,06/12/2025,2025-06-12,date_format
+orders.csv,1261,SO-001279,order_date,06/16/2025,2025-06-16,date_format
+orders.csv,1342,SO-001365,order_date,06/25/2025,2025-06-25,date_format
+orders.csv,1362,SO-001386,order_date,06/27/2025,2025-06-27,date_format
+orders.csv,1385,SO-001411,order_date,06/29/2025,2025-06-29,date_format
+orders.csv,1426,SO-001453,order_date,07/04/2025,2025-07-04,date_format
+orders.csv,1460,SO-001488,order_date,07/07/2025,2025-07-07,date_format
+orders.csv,1524,SO-001554,order_date,07/14/2025,2025-07-14,date_format
+orders.csv,1637,SO-001673,order_date,07/29/2025,2025-07-29,date_format
+orders.csv,1652,SO-001689,order_date,07/31/2025,2025-07-31,date_format
+orders.csv,1687,SO-001724,order_date,08/03/2025,2025-08-03,date_format
+orders.csv,1715,SO-001754,order_date,08/07/2025,2025-08-07,date_format
+orders.csv,1751,SO-001793,order_date,08/11/2025,2025-08-11,date_format
+orders.csv,1755,SO-001797,order_date,08/11/2025,2025-08-11,date_format
+orders.csv,1817,SO-001863,order_date,08/18/2025,2025-08-18,date_format
+orders.csv,1825,SO-001872,order_date,08/20/2025,2025-08-20,date_format
+orders.csv,1834,SO-001881,order_date,08/20/2025,2025-08-20,date_format
+orders.csv,1840,SO-001887,order_date,08/21/2025,2025-08-21,date_format
+orders.csv,1913,SO-001964,order_date,08/30/2025,2025-08-30,date_format
+orders.csv,1936,SO-001988,order_date,09/01/2025,2025-09-01,date_format
+orders.csv,2148,SO-002214,order_date,09/25/2025,2025-09-25,date_format
+orders.csv,2168,SO-002237,order_date,09/27/2025,2025-09-27,date_format
+orders.csv,2200,SO-002272,order_date,09/30/2025,2025-09-30,date_format
+orders.csv,2207,SO-002279,order_date,09/30/2025,2025-09-30,date_format
+orders.csv,2226,SO-002298,order_date,10/02/2025,2025-10-02,date_format
+orders.csv,2250,SO-002323,order_date,10/05/2025,2025-10-05,date_format
+orders.csv,2319,SO-002398,order_date,10/12/2025,2025-10-12,date_format
+orders.csv,2417,SO-002501,order_date,10/22/2025,2025-10-22,date_format
+orders.csv,2454,SO-002541,order_date,10/26/2025,2025-10-26,date_format
+orders.csv,2477,SO-002566,order_date,10/29/2025,2025-10-29,date_format
+orders.csv,2590,SO-002690,order_date,11/10/2025,2025-11-10,date_format
+orders.csv,2592,SO-002692,order_date,11/10/2025,2025-11-10,date_format
+orders.csv,2594,SO-002694,order_date,11/11/2025,2025-11-11,date_format
+orders.csv,2617,SO-002718,order_date,11/12/2025,2025-11-12,date_format
+orders.csv,2624,SO-002725,order_date,11/13/2025,2025-11-13,date_format
+orders.csv,2655,SO-002758,order_date,11/16/2025,2025-11-16,date_format
+orders.csv,2835,SO-002952,order_date,12/05/2025,2025-12-05,date_format
+orders.csv,2933,SO-003056,order_date,12/14/2025,2025-12-14,date_format
+orders.csv,2992,SO-003122,order_date,12/21/2025,2025-12-21,date_format
+orders.csv,3005,SO-003135,order_date,12/23/2025,2025-12-23,date_format
+orders.csv,3032,SO-003165,order_date,12/26/2025,2025-12-26,date_format
+orders.csv,3071,SO-003209,order_date,12/29/2025,2025-12-29,date_format
+orders.csv,3126,SO-003267,order_date,01/02/2026,2026-01-02,date_format
+orders.csv,3195,SO-003343,order_date,01/09/2026,2026-01-09,date_format
+orders.csv,3210,SO-003358,order_date,01/11/2026,2026-01-11,date_format
+orders.csv,3272,SO-003434,order_date,01/17/2026,2026-01-17,date_format
+orders.csv,3298,SO-003461,order_date,01/19/2026,2026-01-19,date_format
+orders.csv,3321,SO-003487,order_date,01/22/2026,2026-01-22,date_format
+orders.csv,3392,SO-003564,order_date,01/31/2026,2026-01-31,date_format
+orders.csv,3423,SO-003596,order_date,02/03/2026,2026-02-03,date_format
+orders.csv,3653,SO-003854,order_date,02/24/2026,2026-02-24,date_format
+orders.csv,3743,SO-003956,order_date,03/04/2026,2026-03-04,date_format
+orders.csv,3768,SO-003985,order_date,03/08/2026,2026-03-08,date_format
+orders.csv,3769,SO-003986,order_date,03/08/2026,2026-03-08,date_format
+orders.csv,3780,SO-004000,order_date,03/09/2026,2026-03-09,date_format
+orders.csv,3951,SO-004191,order_date,03/25/2026,2026-03-25,date_format
+orders.csv,3952,SO-004192,order_date,03/25/2026,2026-03-25,date_format
+orders.csv,3992,SO-004236,order_date,03/28/2026,2026-03-28,date_format
+orders.csv,4025,SO-004271,order_date,03/30/2026,2026-03-30,date_format
+orders.csv,4103,SO-004357,order_date,04/05/2026,2026-04-05,date_format
+orders.csv,4129,SO-004387,order_date,04/07/2026,2026-04-07,date_format
+orders.csv,4145,SO-004408,order_date,04/09/2026,2026-04-09,date_format
+orders.csv,4196,SO-004466,order_date,04/13/2026,2026-04-13,date_format
+orders.csv,4201,SO-004471,order_date,04/13/2026,2026-04-13,date_format
+orders.csv,4271,SO-004547,order_date,04/20/2026,2026-04-20,date_format
+orders.csv,4385,SO-004681,order_date,05/01/2026,2026-05-01,date_format
+orders.csv,4401,SO-004701,order_date,05/01/2026,2026-05-01,date_format
+orders.csv,4440,SO-004747,order_date,05/05/2026,2026-05-05,date_format
+orders.csv,4583,SO-004903,order_date,05/17/2026,2026-05-17,date_format
+orders.csv,4611,SO-004934,order_date,05/19/2026,2026-05-19,date_format
+orders.csv,4680,SO-005013,order_date,05/25/2026,2026-05-25,date_format
+orders.csv,4785,SO-005137,order_date,06/04/2026,2026-06-04,date_format
+orders.csv,4811,SO-005166,order_date,06/07/2026,2026-06-07,date_format
+orders.csv,4820,SO-005177,order_date,06/07/2026,2026-06-07,date_format
+orders.csv,4821,SO-005179,order_date,06/07/2026,2026-06-07,date_format
+orders.csv,4853,SO-005218,order_date,06/10/2026,2026-06-10,date_format
+orders.csv,4931,SO-005304,order_date,06/17/2026,2026-06-17,date_format
+orders.csv,4944,SO-005320,order_date,06/17/2026,2026-06-17,date_format
+orders.csv,5137,SO-005547,order_date,07/02/2026,2026-07-02,date_format
+orders.csv,5160,SO-005571,order_date,07/05/2026,2026-07-05,date_format
+orders.csv,5211,SO-005626,order_date,07/09/2026,2026-07-09,date_format
+orders.csv,5304,SO-005735,order_date,07/18/2026,2026-07-18,date_format
+orders.csv,5323,SO-005759,order_date,07/20/2026,2026-07-20,date_format
+orders.csv,5579,SO-006046,order_date,08/12/2026,2026-08-12,date_format
+orders.csv,5610,SO-006083,order_date,08/14/2026,2026-08-14,date_format
+orders.csv,5697,SO-006186,order_date,08/22/2026,2026-08-22,date_format
+orders.csv,5709,SO-006200,order_date,08/23/2026,2026-08-23,date_format
+orders.csv,5749,SO-006253,order_date,08/26/2026,2026-08-26,date_format
+orders.csv,5751,SO-006256,order_date,08/27/2026,2026-08-27,date_format
+orders.csv,5768,SO-006275,order_date,08/29/2026,2026-08-29,date_format
+orders.csv,5776,SO-006289,order_date,08/30/2026,2026-08-30,date_format
+orders.csv,6044,SO-006605,order_date,09/23/2026,2026-09-23,date_format
+orders.csv,6046,SO-006607,order_date,09/23/2026,2026-09-23,date_format
+orders.csv,6063,SO-006627,order_date,09/24/2026,2026-09-24,date_format

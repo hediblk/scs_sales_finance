@@ -32,7 +32,9 @@ The brief requires at least two insights, two visualizations, two detected busin
 
 Orders cover January 2025–September 2026; the payment/return snapshot is October 31, 2026. The notebook normalizes 181 mixed-scale discounts and retains 92 valid sales with unknown costs. It includes alternative assumptions and row-level review tables.
 
-The notebook embeds the original source ZIP and runs without network access or credentials. The three repository CSVs match the embedded files byte for byte. By default, the notebook reads the embedded snapshot; set `DATA_ZIP` in its loading cell to analyze another ZIP. Editing `data/raw/` alone does not change the notebook's input.
+`data/clean/` holds the cleaned dataset: duplicates dropped, region and product names normalized, MM/DD/YYYY dates parsed, percent-style discounts divided by 100, the 8 negative-quantity rows set aside (`review_rows.csv`), and blank unit costs left blank (no median fill). `changes.csv` traces every changed cell back to its raw line; `dropped_rows.csv` lists what left the sales view.
+
+By default, the notebook reads `data/clean/` (`USE_CLEAN = True` in its loading cell) and shows the cleaning trail right after loading. Set `USE_CLEAN = False` to run on the original source ZIP embedded in the notebook, or set `DATA_ZIP` to analyze another ZIP. The three `data/raw/` CSVs match the embedded files byte for byte.
 
 ## Run
 
