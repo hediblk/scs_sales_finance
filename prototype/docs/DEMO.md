@@ -1,7 +1,7 @@
 # Demo: 5 minutes + Q&A (Hedi's one-story version + forecast)
 
 Story: **revenue on paper is not cash in the bank.** It fails in two ways: it comes back (quarter-end discount push, C1) or it is never paid (unpaid invoices, C3).
-Menu: Dataset, Data cleaning, The gap, Action queue, What if, Accounts & Limits, Ask.
+Menu: Dataset, Data cleaning, The gap, Action queue, What if, Accounts & Limits, Ask, Activity log.
 Numbers read from the running API on 2026-11-14; provisional until Hedi confirms them.
 
 ## Before you start (5 min before)

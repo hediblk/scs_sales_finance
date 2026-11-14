@@ -10,9 +10,9 @@ import DatasetPage from "./pages/DatasetPage.jsx";
 import CleaningPage from "./pages/CleaningPage.jsx";
 import WhatIfPage from "./pages/WhatIfPage.jsx";
 import AccountsPage from "./pages/AccountsPage.jsx";
+import LogPage from "./pages/LogPage.jsx";
 
-// Activity log is left out of the demo (file kept, not routed).
-const PAGE_COMPONENTS = { dataset: DatasetPage, cleaning: CleaningPage, gap: GapPage, queue: QueuePage, whatif: WhatIfPage, accounts: AccountsPage, ask: AskPage };
+const PAGE_COMPONENTS = { dataset: DatasetPage, cleaning: CleaningPage, gap: GapPage, queue: QueuePage, whatif: WhatIfPage, accounts: AccountsPage, ask: AskPage, log: LogPage };
 
 function Shell() {
   const { meta, labels, error, retry, route, go } = useApp();

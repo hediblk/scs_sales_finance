@@ -1,7 +1,7 @@
 # Page guide: what each page does and what to say
 
 Story: **revenue on paper is not cash in the bank.** It comes back (quarter-end discount push, C1) or it is never paid (unpaid invoices, C3).
-Menu, in pitch order: **Dataset → Data cleaning → The gap → Action queue → What if → Accounts & Limits → Ask.** Numbers are provisional until Hedi confirms them.
+Menu, in pitch order: **Dataset → Data cleaning → The gap → Action queue → What if → Accounts & Limits → Ask → Activity log.** Numbers are provisional until Hedi confirms them.
 
 ## 1. Dataset ("what we received")
 - **Raw / Clean switch**: the 3 files as received, or after cleaning.
@@ -41,3 +41,7 @@ Menu, in pitch order: **Dataset → Data cleaning → The gap → Action queue �
 ## 7. Ask (read only)
 - Plain-English question → chart picked by code, 1 or 2 sentences, the SQL, the table. Reads only the 3 clean tables, refuses anything else, changes nothing.
 - Best from an alert: "Has this order been returned, and how often did this reseller's earlier quarter-end orders come back?"
+
+## 8. Activity log (the audit trail, last in the menu)
+- Every automatic step (flag, quota hold, notify) and every human decision (release with its reason, email draft), newest first; filter by recipient to see the outbox (sales manager, CFO, reps).
+- **Say** (only if asked "how do you know it really did it?"): "Here's every step the rule took on its own, and who overrode what, with their reason."

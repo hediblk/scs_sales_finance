@@ -46,4 +46,10 @@ export const PAGES = [
     lead: "Plain-English questions over the clean tables, or open it from an alert to dig into why it fired. The AI writes one SELECT, a read-only connection runs it, and you see the query. It cannot change an alert.",
     page: "ask",
   },
+  {
+    key: "log", step: "08", label: "Activity log", hint: "System and user steps",
+    title: "Activity log",
+    lead: "Every automatic step and every human decision, newest first, plus the outbox of who got notified. Nothing leaves the app: notify writes to this outbox.",
+    page: "log",
+  },
 ];
