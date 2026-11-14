@@ -5,7 +5,10 @@ import { money, num, plainRules } from "../lib/format.js";
 import { BridgeChart, ChartRenderer, Legend } from "../components/Chart.jsx";
 import { Chip, ErrorBox, Loading, SectionHead, Tile } from "../components/ui.jsx";
 import { DynamicChart } from "../components/DynamicChart.jsx";
-import { FilterBar, FilterProvider } from "../components/Filters.jsx";
+import { FilterProvider } from "../components/Filters.jsx";
+
+// Four tiles that carry the story: how it looks, how it is, revenue that comes back, revenue never paid.
+const TILES = ["revenue", "net_growth", "qe_flagged", "overdue"];
 
 const BUSINESS = ["Reseller", "SMB", "Enterprise"];
 // Each driver chart is a preset of /api/explore that opens on the view the story needs.
@@ -19,11 +22,6 @@ const PRESETS = {
     metric: "revenue", by: "days_to_quarter_end", split: "rep", highlight: "R07", normalize: "share",
     title: "R07 books half the quarter in its last two weeks",
     caption: "Share of each side's revenue by days before quarter end: R07 against every other rep.",
-  },
-  furniture_damage_region: {
-    metric: "return_rate", by: "region", filters: { category: ["Furniture"] },
-    title: "Furniture comes back most on the long routes",
-    caption: "Furniture orders returned, by region (all return reasons).",
   },
 };
 
@@ -45,8 +43,6 @@ function HandledBy({ ids }) {
   const items = ids.map((id) => {
     const c = conditions.find((x) => x.id === id);
     if (c) return { id, label: `${c.name} (queue)`, onClick: () => go("queue", { condition: id }) };
-    if (id === "reps") return { id, label: "Reps tab", onClick: () => go("accounts", { tab: "reps" }) };
-    if (id === "accounts" || id === "customers") return { id, label: "Customers tab", onClick: () => go("accounts", { tab: "customers" }) };
     return { id, label: id };
   });
   return (
@@ -153,7 +149,7 @@ export default function GapPage() {
 
   return (
     <>
-      <div className="tiles">{(o.kpis ?? []).map((k) => <Tile key={k.id} {...k} />)}</div>
+      <div className="tiles">{TILES.map((id) => (o.kpis ?? []).find((k) => k.id === id)).filter(Boolean).map((k) => <Tile key={k.id} {...k} />)}</div>
 
       <div className="gap-hero">
         <section className="card">
@@ -191,10 +187,9 @@ export default function GapPage() {
 
       <FilterProvider id="gap">
         <section className="block">
-          <SectionHead title="What drives the gap, ranked">
-            Same four answers for every driver: what happened, why it happened, what to do, and where the tool handles it.
+          <SectionHead title="Two ways revenue fails to become cash">
+            It comes back, or it is never paid. For each: what happened, why, what to do, and the rule that handles it.
           </SectionHead>
-          <FilterBar note="Filters apply to the driver charts. The bridge and the headline numbers stay on Jan-Sep 2026 vs Jan-Sep 2025." />
           <div className="drivers">
             {drivers.map((d) => <DriverCard key={d.id} d={d} chart={charts[d.chart_id]} highlight={selDriver === d.id} />)}
           </div>
