@@ -1,0 +1,49 @@
+,claim_id,policy_id,adjuster_team,status,city,claim_type,claim_amount,reported_date,open_age_days
+515,CLM-00516,POL-01764,Team C,Under Review,Montreal,Water Damage,22054.27,2026-04-08,206.0
+564,CLM-00565,POL-01405,Team C,Open,Montreal,Water Damage,4114.13,2026-05-11,173.0
+676,CLM-00677,POL-04063,Team C,Under Review,Montreal,Water Damage,14771.85,2026-07-24,99.0
+682,CLM-00683,POL-03473,Team C,Under Review,Montreal,Liability,20204.4,2026-07-29,94.0
+702,CLM-00703,POL-03418,Team C,Open,Montreal,Collision,539.03,2026-08-08,84.0
+726,CLM-00727,POL-02977,Team C,Under Review,Montreal,Collision,17095.36,2026-08-22,70.0
+730,CLM-00731,POL-02480,Team C,Open,Montreal,Collision,4390.4,2026-08-26,66.0
+731,CLM-00732,POL-03497,Team C,Open,Montreal,Collision,6755.82,2026-08-27,65.0
+747,CLM-00748,POL-03616,Team C,Open,Montreal,Collision,2503.07,2026-09-05,56.0
+755,CLM-00756,POL-03310,Team A,Under Review,Toronto,Fire,37475.86,2026-09-07,54.0
+761,CLM-00762,POL-03867,Team A,Under Review,Toronto,Liability,14910.49,2026-09-11,50.0
+762,CLM-00763,POL-04176,Team C,Open,Quebec City,Collision,8017.87,2026-09-11,50.0
+764,CLM-00765,POL-03965,Team C,Open,Quebec City,Glass,876.13,2026-09-13,48.0
+768,CLM-00769,POL-02405,Team C,Open,Quebec City,Glass,517.57,2026-09-15,46.0
+778,CLM-00779,POL-02245,Team C,Open,Montreal,Water Damage,5657.22,2026-09-23,38.0
+787,CLM-00788,POL-02955,Team C,Open,Montreal,Wind/Hail,3029.11,2026-10-01,30.0
+788,CLM-00789,POL-04387,Team C,Open,Montreal,Theft,2659.41,2026-10-01,30.0
+789,CLM-00790,POL-04272,Team A,Under Review,Ottawa,Liability,10653.33,2026-10-01,30.0
+791,CLM-00792,POL-04244,Team C,Open,Montreal,Water Damage,7914.82,2026-10-03,28.0
+793,CLM-00794,POL-03586,Team C,Open,Quebec City,Collision,2695.4,2026-10-03,28.0
+794,CLM-00795,POL-04283,Team C,Open,Montreal,Collision,3093.04,2026-10-06,25.0
+796,CLM-00797,POL-02771,Team C,Open,Quebec City,Collision,2845.77,2026-10-08,23.0
+797,CLM-00798,POL-02446,Team B,Open,Calgary,Theft,4244.46,2026-10-08,23.0
+799,CLM-00800,POL-03328,Team C,Open,Montreal,Water Damage,3670.45,2026-10-08,23.0
+803,CLM-00804,POL-03902,Team C,Open,Montreal,Glass,684.2,2026-10-10,21.0
+801,CLM-00802,POL-02720,Team B,Under Review,Calgary,Fire,24518.08,2026-10-10,21.0
+802,CLM-00803,POL-02852,Team C,Open,Montreal,Glass,531.55,2026-10-10,21.0
+807,CLM-00808,POL-04276,Team C,Open,Quebec City,Glass,830.07,2026-10-12,19.0
+808,CLM-00809,POL-03049,Team C,Open,Montreal,Collision,5993.09,2026-10-12,19.0
+811,CLM-00812,POL-02317,Team A,Under Review,Toronto,Fire,21462.72,2026-10-15,16.0
+813,CLM-00814,POL-02161,Team C,Under Review,Quebec City,Liability,18332.96,2026-10-18,13.0
+814,CLM-00815,POL-02875,Team C,Open,Montreal,Collision,1743.66,2026-10-19,12.0
+815,CLM-00816,POL-03490,Team C,Open,Montreal,Collision,3757.67,2026-10-20,11.0
+817,CLM-00818,POL-02348,Team C,Open,Montreal,Collision,2985.08,2026-10-21,10.0
+820,CLM-00821,POL-03392,Team B,Open,Calgary,Water Damage,5189.93,2026-10-24,7.0
+821,CLM-00822,POL-04638,Team C,Open,Montreal,Water Damage,7335.74,2026-10-25,6.0
+824,CLM-00825,POL-03264,Team C,Open,Montreal,Theft,4425.21,2026-10-26,5.0
+822,CLM-00823,POL-03979,Team C,Open,Quebec City,Collision,9354.39,2026-10-26,5.0
+825,CLM-00826,POL-02708,Team C,Open,Montreal,Water Damage,9913.84,2026-10-27,4.0
+826,CLM-00827,POL-02350,Team B,Open,Calgary,Collision,2819.12,2026-10-27,4.0
+827,CLM-00828,POL-02991,Team C,Open,Montreal,Theft,5609.18,2026-10-27,4.0
+828,CLM-00829,POL-03985,Team C,Open,Quebec City,Water Damage,5279.94,2026-10-28,3.0
+829,CLM-00830,POL-03315,Team C,Open,Montreal,Glass,495.86,2026-10-29,2.0
+830,CLM-00831,POL-02801,Team C,Open,Montreal,Wind/Hail,6895.63,2026-10-30,1.0
+831,CLM-00832,POL-03683,Team C,Open,Montreal,Collision,2669.19,2026-10-30,1.0
+832,CLM-00833,POL-03773,Team B,Open,Calgary,Theft,8739.69,2026-10-30,1.0
+833,CLM-00834,POL-04662,Team C,Open,Montreal,Water Damage,6214.95,2026-10-30,1.0
+834,CLM-00835,POL-04462,Team A,Under Review,Toronto,Water Damage,20401.6,2026-10-31,0.0

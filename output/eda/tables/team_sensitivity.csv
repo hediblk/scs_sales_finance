@@ -1,0 +1,10 @@
+,scenario,team,claims,median_closure_days,mean_claim_CAD,recorded_paid_CAD
+0,Baseline,Team A,375,12.0,5794.387272727272,1567807.6800000002
+1,Baseline,Team B,134,13.0,5182.21104477612,450519.70999999996
+2,Baseline,Team C,338,18.0,5613.039637462236,1248128.3599999999
+3,Exclude amount > p99 (retain missing),Team A,371,12.0,5399.587216216216,1443365.07
+4,Exclude amount > p99 (retain missing),Team B,133,12.5,5003.897744360903,424899.89
+5,Exclude amount > p99 (retain missing),Team C,334,18.0,5257.80996941896,1145242.5299999998
+6,Exclude report-before-loss,Team A,372,12.0,5817.246388140162,1562807.38
+7,Exclude report-before-loss,Team B,133,13.0,5195.0980451127825,449569.51999999996
+8,Exclude report-before-loss,Team C,336,18.0,5610.204498480242,1237096.55

@@ -1,0 +1,10 @@
+,table,column,parse_failures
+0,policies,start_date,0
+1,claims,loss_date,0
+2,claims,reported_date,0
+3,claims,closed_date,0
+4,policies,annual_premium,0
+5,policies,deductible,0
+6,policies,customer_age,0
+7,claims,claim_amount,0
+8,claims,paid_amount,0

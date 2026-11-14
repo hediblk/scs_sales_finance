@@ -1,0 +1,3 @@
+broker_comparison,policies,annual_premium,mean_premium,claims,policies_with_claim,known_paid,unresolved,missing_payouts,missing_claim_amounts,claims_per_policy,claim_policy_share,paid_to_premium_proxy
+B07,173,234592.66,1356.026936416185,70,63,480402.98000000004,0,0,1,0.4046242774566474,0.36416184971098264,2.047817608615717
+Other brokers,1476,2083235.96,1411.4064769647696,247,221,940526.6099999999,16,16,3,0.1673441734417344,0.1497289972899729,0.4514738743277069

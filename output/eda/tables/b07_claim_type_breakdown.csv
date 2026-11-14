@@ -1,0 +1,13 @@
+broker_comparison,claim_type,claims,known_amounts,median_amount,recorded_paid
+B07,Collision,4,4,3070.4,8308.73
+B07,Glass,2,2,691.05,60.82
+B07,Theft,60,59,8991.21,448553.25
+B07,Water Damage,2,2,6617.48,10147.56
+B07,Wind/Hail,2,2,8304.08,13332.62
+Other brokers,Collision,92,90,3471.795,223684.87
+Other brokers,Fire,3,3,46045.63,104814.86
+Other brokers,Glass,32,32,701.435,1925.05
+Other brokers,Liability,14,13,7345.42,87814.76
+Other brokers,Theft,29,29,4761.76,109328.33
+Other brokers,Water Damage,49,49,7335.74,330858.77
+Other brokers,Wind/Hail,28,28,4204.09,82099.97

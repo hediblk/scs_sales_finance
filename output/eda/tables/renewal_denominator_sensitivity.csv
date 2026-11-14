@@ -1,0 +1,4 @@
+,definition,denominator,renewed,rate
+0,Matured + observed Renewed/Not Renewed (primary),2250,1878,0.8346666666666667
+1,Matured + include Cancelled as nonrenewal,2308,1878,0.8136915077989602
+2,All policies (naive; includes immature policies),4684,1878,0.4009393680614859

@@ -1,0 +1,11 @@
+,raw_dtype,non_null,missing,distinct_non_null
+claim_id,object,862,0,847
+policy_id,object,862,0,757
+loss_date,object,862,0,460
+reported_date,object,862,0,466
+claim_type,object,862,0,7
+claim_amount,float64,853,9,827
+adjuster_team,object,862,0,3
+status,object,862,0,4
+paid_amount,float64,814,48,662
+closed_date,object,814,48,447
