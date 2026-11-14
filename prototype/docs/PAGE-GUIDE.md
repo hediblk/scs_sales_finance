@@ -30,8 +30,8 @@ Menu, in pitch order: **Dataset → Data cleaning → The gap → Action queue �
 
 ## 5. What if ("what the rule would earn")
 - Forecast chart by quarter, 2025Q1 to 2027Q1: today's policy vs the rules on; solid = actual, dashed = projection. Switch: revenue / gross profit / refunds / profit after refunds. Strip: next quarter, the 2026 replay, overdue exposure.
-- One row per rule (on/off + slider) with a live sentence. Opens at **cap 25%, credit 60 days**.
-- **Say**: "With a 25% cap, 2026 profit after refunds would be $109k higher; next quarter goes from $269k to $308k. It pays off as long as 45% of affected customers keep buying. The projection is a run-rate, not a model."
+- One row per rule (on/off + slider) with a live sentence. Opens with **only the Discount cap on, at 25%**. Damage and Credit open off as detection only: the Damage row names the groups the data flags (standing desks, BC and Prairies).
+- **Say**: "With a 25% cap, 2026 profit after refunds would be $86k higher; next quarter goes from $269k to $300k. It pays off as long as 45% of affected customers keep buying. The projection is a run-rate, not a model."
 
 ## 6. Accounts & Limits (the cards)
 - Customers: 310 business customers, $250k open, 1 over its limit, 3 past 60 days; one card per customer (balance vs limit, terms, days overdue); click for the detail.

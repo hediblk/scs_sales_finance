@@ -7,7 +7,7 @@ Numbers read from the running API on 2026-11-14; provisional until Hedi confirms
 ## Before you start (5 min before)
 - [ ] `run-demo.bat` (Windows) or `./run-demo.sh` (Mac/Linux); browser on The gap, zoom so the bridge fits.
 - [ ] Reset the user actions: `POST /api/admin/reset`.
-- [ ] What if opens at Pricing cap 25% and Credit 60 days. If it shows anything else, set those two sliders.
+- [ ] What if opens with only the Discount cap on, at 25%. Damage and Credit are off (detection only). If it shows anything else, set them back.
 - [ ] Backup screenshots ready in `docs/screens/`.
 
 ## Script
@@ -32,7 +32,8 @@ Numbers read from the running API on 2026-11-14; provisional until Hedi confirms
 6. Release one alert with a written reason.
 
 ### 4:15 to 4:45 · What it would earn (What if)
-- "If this rule had been on in 2026, with a 25% cap, profit after refunds would have been **$109k** higher; next quarter goes from **$269k** to **$308k**." Move the cap slider once, the forecast redraws.
+- "This is the approval rule we recommend: discounts above 25% need sign-off before the sale. Replayed on 2026, profit after refunds would have been **$86k** higher (gross margin about 26.8% to 28.4%); next quarter goes from **$269k** to **$300k**." Move the cap slider once, the forecast redraws.
+- "The hold fixes the incentive after the sale; the cap stops the loss before it." Damage and credit rows are off: they show what the data flags (standing desks in BC and the Prairies; unpaid invoices), detection only.
 - "The cap pays off as long as **45%** of affected customers keep buying."
 - "The projection is a run-rate: same quarter last year times this year's growth, not a model."
 
@@ -50,8 +51,9 @@ Numbers read from the running API on 2026-11-14; provisional until Hedi confirms
 | What if the automation is wrong? | The quota credit waits 45 days, a manager releases it with a reason, logged. |
 | Why 45 days? | Every overstock return came back between 20 and 44 days. |
 | Is the forecast a model? | No: a replay of 2026 with the rule on, plus same quarter last year x this year's growth. Labelled on screen. |
+| Isn't the cap the same as the C1 rule? | No. C1 holds quota credit after a quarter-end sale (207 orders). The cap is the approval step before any sale above 25% (253 orders). |
 | Would you never give discounts? | No. The cap is 25%, and it pays off as long as 45% of affected customers keep buying. |
 | How do you know dates are month first? | Day first would put orders after the extraction date. |
 | Where is the AI? | Email wording and Ask (read-only SELECT). Every flag, hold and dollar is our pandas code. |
-| What about damaged furniture? | Real (BC 16.9%, Prairies 15.4% of furniture revenue), but the fix is operational (packaging, carrier), so it stays out of this tool. |
+| What about damaged furniture? | Detected, not automated: standing desks to BC and the Prairies come back damaged 31 to 39% of the time (2026). The fix is packaging or carrier, an operations decision. Turn the Damage row on in What if to see an estimate, under assumptions you set. |
 | Quota and notifications aren't in the data. | Right: the hold is a status our tool sets, and notify writes to an in-app outbox. |
