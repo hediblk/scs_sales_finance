@@ -1,6 +1,8 @@
 # Y2K hackathon: plan (Option B, Chrome & Oak, LOCKED 2026-11-14)
 
-Source of truth for what we build. Numbers come from `explore/FINDINGS.md`, the EDA notebook (`ChromeAndOak_EDA.ipynb`) and checks run by the planning session. Numbers marked "(recompute)" move slightly after the cleaning decisions below and get re-checked by the check script.
+**Simulator extension:** [the policy simulator UI handoff](../../PLAN.md) defines the updated sliders, assumptions, scope, and default-selection rules. It supersedes earlier simulator settings in this document; the other prototype workflows remain as described below.
+
+Source of truth for the existing prototype workflows. Numbers come from `explore/FINDINGS.md`, the EDA notebook (`ChromeAndOak_EDA.ipynb`) and checks run by the planning session. Numbers marked "(recompute)" move slightly after the cleaning decisions below and get re-checked by the check script.
 
 ## The problem
 
