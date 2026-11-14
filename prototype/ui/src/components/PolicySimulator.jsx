@@ -1,8 +1,9 @@
 import { useEffect, useMemo, useRef, useState } from "react";
 import { api } from "../data/api.js";
-import { useApp, useResource } from "../state.jsx";
+import { useResource } from "../state.jsx";
 import { humanize, money, num } from "../lib/format.js";
 import { Chip, ErrorBox, Loading } from "./ui.jsx";
+import { Forecaster } from "./Forecaster.jsx";
 
 // Module order on the page (damage first, as built), the API path, and the tab label.
 export const SIM_MODULES = [
@@ -415,13 +416,9 @@ function ModulePanel({ initial, apiName, hidden, onParams, onEnv }) {
 
 // tab: one of the module ids, or "replay" (the quarter-end replay, rendered by the page).
 export function PolicySimulator({ tab, setTab, onHeader }) {
-  const { go } = useApp();
   const sim = useResource("simulator", api.simulator);
   const [params, setParams] = useState({});
   const [envs, setEnvs] = useState({});
-  const [applying, setApplying] = useState(false);
-  const [applied, setApplied] = useState(null);
-  const [applyError, setApplyError] = useState(null);
 
   const mods = sim.data?.modules ?? {};
   const present = SIM_MODULES.filter(([id]) => mods[id] && Object.keys(mods[id]).length);
@@ -435,15 +432,6 @@ export function PolicySimulator({ tab, setTab, onHeader }) {
       lead: `${active.scope}, ${active.period}. Every number below is recomputed by the back end each time a setting moves.`,
     });
   }, [tab, active?.label, active?.scope, active?.period]); // eslint-disable-line react-hooks/exhaustive-deps
-
-  const apply = async () => {
-    setApplying(true); setApplyError(null);
-    try {
-      const body = {};
-      for (const [id, name] of present) if (params[id]) body[name] = params[id];
-      setApplied(await api.simApply(body));
-    } catch (e) { setApplyError(e); } finally { setApplying(false); }
-  };
 
   const tabs = (
     <div className="tabs" role="tablist" aria-label="What if">
@@ -463,22 +451,11 @@ export function PolicySimulator({ tab, setTab, onHeader }) {
 
   return (
     <section className="block">
+      {tab !== "replay" && <Forecaster params={params} />}
       <div className="sim-top">
         {tabs}
-        {tab !== "replay" && (
-          <div className="sim-apply">
-            <button type="button" className="btn" onClick={apply} disabled={applying}>{applying ? "Applying..." : "Apply rules to simulation"}</button>
-            <span className="muted small">Creates tasks in the Action queue for the rules that are on, at these settings.</span>
-          </div>
-        )}
+        {tab !== "replay" && <span className="muted small">Each rule's settings below feed the projection above.</span>}
       </div>
-      {tab !== "replay" && applyError && <ErrorBox error={applyError} onRetry={apply} />}
-      {tab !== "replay" && applied && (
-        <div className="sim-applied">
-          <b>{num(applied.created)}</b> tasks created, <b>{num(applied.updated)}</b> updated, <b>{num(applied.unchanged)}</b> unchanged.
-          {" "}<button type="button" className="link-btn" onClick={() => go("queue", { view: "tasks" })}>Open them in the Action queue</button>
-        </div>
-      )}
       {present.map(([id, name]) => (
         <ModulePanel key={id} initial={mods[id]} apiName={name} hidden={tab !== id}
           onParams={(p) => setParams((s) => ({ ...s, [id]: p }))}

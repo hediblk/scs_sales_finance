@@ -4,7 +4,6 @@ import { dateLabel, money, num } from "../lib/format.js";
 import { ConditionControl } from "../components/ThresholdSlider.jsx";
 import { FindingDetail, impactLabel } from "../components/FindingDetail.jsx";
 import { Empty, Loading } from "../components/ui.jsx";
-import { TaskList } from "../components/TaskList.jsx";
 
 const SEV = { high: 3, medium: 2, low: 1 };
 const SEV_TONE = { high: "bad", medium: "warn", low: "neutral" };
@@ -58,7 +57,7 @@ function AlertQueue({ params }) {
     <>
       <section className="card queue-top">
         <div>
-          <span className="mini-label">Quota credit on hold now</span>
+          <span className="mini-label">Quota credit on hold now{[rep, region, segment].some(Boolean) ? ` · ${[rep, region, segment].filter(Boolean).join(", ")}` : ""}</span>
           <div className="counter">{money(heldQe.reduce((s, a) => s + a.amount, 0))}</div>
           <div className="counter-sub">
             <b>{num(openAll.length)}</b> open alerts on {num(new Set(openAll.map((a) => a.entity_id)).size)} {labels.entities}.
@@ -81,11 +80,12 @@ function AlertQueue({ params }) {
 
       <div className="filters">
         <div className="tabs" role="tablist" aria-label="Condition">
-          <button type="button" role="tab" aria-selected={cond === "all"} className={cond === "all" ? "is-on" : ""} onClick={() => setCond("all")}>
+          {/* While a search is typed, it covers every rule, so no rule tab shows as selected. */}
+          <button type="button" role="tab" aria-selected={!needle && cond === "all"} className={!needle && cond === "all" ? "is-on" : ""} onClick={() => setCond("all")}>
             All<span className="count">{countFor("all")}</span>
           </button>
           {conditions.map((c) => (
-            <button key={c.id} type="button" role="tab" aria-selected={cond === c.id} className={cond === c.id ? "is-on" : ""} onClick={() => setCond(c.id)}>
+            <button key={c.id} type="button" role="tab" aria-selected={!needle && cond === c.id} className={!needle && cond === c.id ? "is-on" : ""} onClick={() => setCond(c.id)}>
               {c.name}<span className="count">{countFor(c.id)}</span>
             </button>
           ))}
@@ -115,6 +115,7 @@ function AlertQueue({ params }) {
         </label>
         <input className="search" type="search" placeholder="Find an order, return or customer id" value={find}
           onChange={(e) => { setFind(e.target.value); setShown(PAGE); }} aria-label="Find an alert" style={{ minWidth: 230 }} />
+        {needle && <span className="muted small">Searching every rule and status</span>}
         {alertsLoading && <span className="muted small">Recounting...</span>}
       </div>
 
@@ -159,17 +160,7 @@ function AlertQueue({ params }) {
   );
 }
 
-// Two views: alerts our rules raised on the data, and tasks created by "Apply rules to simulation".
+// The queue shows only the alerts our rules raised on the data (the three rule-based conditions).
 export default function QueuePage({ params }) {
-  const [view, setView] = useState(params?.view === "tasks" ? "tasks" : "alerts");
-  useEffect(() => { if (params?.view) setView(params.view === "tasks" ? "tasks" : "alerts"); }, [params?.view]);
-  return (
-    <>
-      <div className="view-switch tabs big" role="tablist" aria-label="Queue view">
-        <button type="button" role="tab" aria-selected={view === "alerts"} className={view === "alerts" ? "is-on" : ""} onClick={() => setView("alerts")}>Rule alerts</button>
-        <button type="button" role="tab" aria-selected={view === "tasks"} className={view === "tasks" ? "is-on" : ""} onClick={() => setView("tasks")}>Simulator tasks</button>
-      </div>
-      {view === "tasks" ? <TaskList /> : <AlertQueue params={params} />}
-    </>
-  );
+  return <AlertQueue params={params} />;
 }

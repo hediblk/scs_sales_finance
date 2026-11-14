@@ -101,7 +101,7 @@ export function Legend({ series }) {
 
 // Renders any chart object from the contract: { type, x, series, rows, unit? }.
 // onPick(xValue, seriesKey?) makes bars and points clickable (drill-down).
-export function ChartRenderer({ chart, height = 260, onPick }) {
+export function ChartRenderer({ chart, height = 260, onPick, tooltip = true }) {
   const { type = "bar", x, series = [], rows = [], unit } = chart;
   const yFmt = axisFmt(unit);
   const pickable = typeof onPick === "function";
@@ -115,7 +115,7 @@ export function ChartRenderer({ chart, height = 260, onPick }) {
       tickFormatter={tickLabel} minTickGap={12} interval="preserveStartEnd" />
   );
   const yAxis = <YAxis tick={AXIS} tickLine={false} axisLine={false} tickFormatter={yFmt} width={60} />;
-  const tip = <Tooltip content={<ChartTooltip unit={unit} />} cursor={{ fill: "var(--surface-3)", stroke: "var(--border-strong)" }} />;
+  const tip = tooltip ? <Tooltip content={<ChartTooltip unit={unit} />} cursor={{ fill: "var(--surface-3)", stroke: "var(--border-strong)" }} /> : null;
 
   let body;
   if (type === "line") {
@@ -138,7 +138,7 @@ export function ChartRenderer({ chart, height = 260, onPick }) {
         <YAxis type="number" dataKey={ykey} name={series[0]?.label} tick={AXIS} tickLine={false} axisLine={false}
           tickFormatter={yFmt} width={60} />
         <ZAxis range={[70, 70]} />
-        <Tooltip content={<ScatterTip chart={chart} />} cursor={{ stroke: "var(--border-strong)" }} />
+        {tooltip && <Tooltip content={<ScatterTip chart={chart} />} cursor={{ stroke: "var(--border-strong)" }} />}
         {series.map((s, i) => (
           <Scatter key={s.key} name={s.label} data={rows} dataKey={s.key} fill={color(i)} stroke="var(--surface)" strokeWidth={2}
             isAnimationActive={false} />

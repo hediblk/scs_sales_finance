@@ -497,7 +497,8 @@ tr.has-fix td { background: var(--accent-soft); }
 .pt-hist p { margin: 4px 0 0; }
 
 /* ---------- Dynamic charts and filter bar ---------- */
-.filter-bar { padding: 10px 14px; margin-bottom: 16px; position: sticky; top: 92px; z-index: 4; }
+/* Not sticky: a sticky bar slid over the charts' own dropdowns and caught their clicks. */
+.filter-bar { padding: 10px 14px; margin-bottom: 16px; }
 .filter-row { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; }
 .filter-row .select select { padding: 5px 8px; font-size: 12.5px; }
 .filter-chips { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 8px; }
@@ -538,6 +539,23 @@ tr.has-fix td { background: var(--accent-soft); }
 .wi-assumptions h3 { font-size: 15px; margin-bottom: 8px; }
 .wi-assumptions ul { margin: 0; padding-left: 20px; display: grid; gap: 5px; color: var(--text-2); line-height: 1.5; }
 @media (max-width: 860px) { .wi-heads { grid-template-columns: 1fr; } }
+
+/* ---------- What if forecaster ---------- */
+.fc { margin-bottom: 18px; padding: 18px 20px; }
+.fc.is-loading .chart-box, .fc.is-loading .fc-kpis b { opacity: 0.6; }
+.fc-head { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 14px; }
+.fc-head h2 { font-size: 18px; }
+.fc-head p { margin: 3px 0 0; }
+.fc-kpis { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 10px; margin-bottom: 14px; }
+.fc-kpi { display: grid; gap: 3px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius); background: var(--surface-2); }
+.fc-kpi .mini-label { margin: 0; }
+.fc-kpi b { font-family: var(--font-display); font-size: 21px; letter-spacing: -0.01em; }
+.fc-kpi b.fc-rules { color: var(--accent); }
+.fc-legend { margin-bottom: 4px; }
+.fc-swatch-band { background: var(--accent); opacity: 0.25; }
+.fc-dash { display: inline-block; width: 22px; border-top: 2.5px dashed var(--text-2); vertical-align: middle; margin-right: 2px; }
+.fc-gap { margin: 6px 0 0; font-size: 14px; }
+.fc-method { margin: 4px 0 0; font-size: 12.5px; color: var(--text-3); }
 
 /* ---------- Policy simulator ---------- */
 .sim-top { display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px; margin-bottom: 12px; }

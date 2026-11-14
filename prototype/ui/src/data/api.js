@@ -53,8 +53,8 @@ export const api = {
   simulator: () => request("GET", "/api/simulator"),
   simModule: (name, params) => request("GET", `/api/simulator/${name}?${q(params ?? {})}`),
   simSweep: (name) => request("GET", `/api/simulator/sweep/${name}`),
-  simApply: (body) => request("POST", "/api/simulator/apply", body),
-  tasks: (params = {}) => request("GET", `/api/tasks?${q(params)}`),
+  // What if forecaster: today's policy vs the rules on, by quarter (run-rate for the next two quarters).
+  forecast: (params = {}) => request("GET", `/api/forecast?${q(params)}`),
 
   whatif: (threshold, window) => request("GET", `/api/whatif?${q({ threshold, window, rule: "cap" })}`),
 
@@ -65,6 +65,7 @@ export const api = {
   simulate: (condition, value, window) => request("GET", `/api/simulate?${q({ condition, value, window })}`),
   alerts: (condition, value, window) => request("GET", `/api/alerts?${q({ condition, value, window })}`),
   entity: (id) => request("GET", `/api/entity/${encodeURIComponent(id)}`),
+  alert: (alertId) => request("GET", `/api/alerts/${encodeURIComponent(alertId)}`),
   draft: (alertId) => request("POST", `/api/alerts/${encodeURIComponent(alertId)}/draft`),
   triage: (alertId) => request("POST", `/api/alerts/${encodeURIComponent(alertId)}/triage`),
   override: (alertId, reason) => request("POST", `/api/alerts/${encodeURIComponent(alertId)}/override`, { reason }),

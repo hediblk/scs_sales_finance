@@ -104,15 +104,34 @@ export default function AskPage() {
     if (q) send(q);
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
+  // Every context label is read from the back end's copy of the alert whose id is sent with the question
+  // (GET /api/alerts/{id}), the same record /api/ask hands to the AI, never from a copy held in the UI.
+  const ctxId = askContext?.id ?? null;
+  const [ctxInfo, setCtxInfo] = useState(null); // { id, name }
+  useEffect(() => {
+    if (!ctxId) { setCtxInfo(null); return undefined; }
+    let live = true;
+    setCtxInfo({ id: ctxId, name: null });
+    api.alert(ctxId).then((a) => live && setCtxInfo({ id: a.id, name: a.entity_name })).catch(() => {});
+    return () => { live = false; };
+  }, [ctxId]);
+  const labelFor = async (id) => {
+    if (!id) return null;
+    if (ctxInfo?.id === id && ctxInfo.name) return ctxInfo;
+    const a = await api.alert(id).catch(() => null);
+    return { id, name: a?.entity_name ?? null };
+  };
+
   const send = async (text) => {
     const q = (text ?? input).trim();
     if (!q || busy) return;
     setInput("");
-    const ctx = askContext;
-    setTurns((t) => [...t, { role: "user", content: q, alert: ctx ? { id: ctx.id, name: ctx.entity_name } : null }]);
     setBusy(true);
+    const alertId = ctxId;
+    const label = await labelFor(alertId);
+    setTurns((t) => [...t, { role: "user", content: q, alert: label }]);
     try {
-      const res = await api.ask(q, ctx?.id);
+      const res = await api.ask(q, alertId);
       setTurns((t) => [...t, { role: "assistant", res }]);
     } catch (e) {
       setTurns((t) => [...t, { role: "assistant", error: e.message }]);
@@ -128,7 +147,7 @@ export default function AskPage() {
       <div className="ask-thread">
         {turns.length === 0 && !busy ? (
           <div className="ask-empty">
-            <h3>{askContext ? `Ask about ${askContext.entity_name}` : "Ask a question about the clean data"}</h3>
+            <h3>{ctxId ? `Ask about ${ctxInfo?.name ?? `alert ${ctxId}`}` : "Ask a question about the clean data"}</h3>
             <p>
               The AI turns your question into one SELECT. A read-only connection runs it with a row limit, and you see the
               query, the rows and a chart. It cannot create, clear or change alerts.
@@ -140,8 +159,8 @@ export default function AskPage() {
             <div className="bubble">
               {t.role === "user" ? (
                 <>
-                  {t.alert && <div className="context-chip">About alert {t.alert.id}, {t.alert.name}</div>}
-                  {t.content}
+                  {t.alert && <div className="context-chip">About alert {t.alert.id}{t.alert.name ? `, ${t.alert.name}` : ""}:</div>}
+                  <div>{t.content}</div>
                 </>
               ) : <Answer t={t} />}
             </div>
@@ -154,7 +173,7 @@ export default function AskPage() {
       <div className="ask-input">
         {askContext && (
           <div className="row" style={{ alignItems: "center" }}>
-            <span className="chip chip-accent">Context: alert {askContext.id}, {askContext.entity_name}</span>
+            <span className="chip chip-accent">Context: alert {ctxId}{ctxInfo?.name ? `, ${ctxInfo.name}` : ""}</span>
             <button type="button" className="link-btn small" onClick={() => setAskContext(null)}>Clear</button>
             <span className="spacer" />
             {turns.length > 0 && <span className="chips">{ALERT_SUGGESTIONS.slice(0, 2).map((s) => <button key={s} type="button" className="chip-btn" onClick={() => send(s)}>{s}</button>)}</span>}
