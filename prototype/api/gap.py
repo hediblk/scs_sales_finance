@@ -73,8 +73,10 @@ def gap(ds: Dataset):
         _bar("list_growth", "Growth at list price", d["list"], kind="start"),
         _bar("discounts", "Extra discounts", d["discount"], driver_id="qe_push"),
         _bar("revenue", "Revenue growth", d["revenue"], kind="subtotal"),
-        _bar("unknown_cost", "Revenue on lines with no unit cost (left out of profit)", d["rev_unknown_cost"]),
-        _bar("cogs", "Extra cost of goods", d["cogs"]),
+        # Revenue on lines with no known unit cost is left out of gross profit; its small change is folded into this bar
+        # so the bridge still adds up without a separate column.
+        _bar("cogs", "Extra cost of goods", d["cogs"] + d["rev_unknown_cost"],
+             note=f"Includes {d['rev_unknown_cost']:+,.0f} of revenue on lines with no known unit cost, left out of gross profit"),
         _bar("gross_profit", "Gross profit growth", d["gp"], kind="subtotal"),
         _bar("refunds", "Extra refunds", d["refunds"], split=split),
         _bar("result", "Profit after refunds growth", par, kind="end"),
