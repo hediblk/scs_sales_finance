@@ -31,8 +31,8 @@ def _save_user_rows(rows):
 
 
 def log(alert_id, action, detail, actor="user", to=None, extra=None):
-    row = {"ts": datetime.now().isoformat(timespec="seconds"), "alert_id": alert_id, "actor": actor,
-           "action": action, "detail": detail}
+    row = {"ts": datetime.now().isoformat(timespec="seconds"), "ts_precision": "second", "alert_id": alert_id,
+           "actor": actor, "action": action, "detail": detail}
     if to:
         row["to"] = to
     if extra:
@@ -150,8 +150,9 @@ def draft(a):
 
 
 # ---------------------------------------------------------------- system chains
-def _ts(day, clock, n):
-    return f"{day}T{clock}:{n:02d}"
+def _ts(day, clock=None, n=None):
+    """System rows come from dates in the data, which have no time of day: the timestamp is the date only."""
+    return day
 
 
 def chain(a):
@@ -161,41 +162,44 @@ def chain(a):
     c = a["condition_id"]
     if c == "qe_discount":
         rows += [
-            {"ts": _ts(day, "18:00", 0), "alert_id": aid, "actor": "system", "action": "flag",
+            {"ts": _ts(day), "alert_id": aid, "actor": "system", "action": "flag",
              "detail": f"Rule matched: {a['order_id']} at {a['discount_pct']}% discount, {a['reasons'][1].split(', ', 1)[1]}"},
-            {"ts": _ts(day, "18:00", 1), "alert_id": aid, "actor": "system", "action": "quota_hold",
+            {"ts": _ts(day), "alert_id": aid, "actor": "system", "action": "quota_hold",
              "detail": f"Quota credit of {fmt_money(a['amount'])} for {a['owner']} held until {a['hold_until']} ({QUOTA_HOLD_DAYS} days)"},
-            {"ts": _ts(day, "18:00", 2), "alert_id": aid, "actor": "system", "action": "notify", "to": "Sales manager",
+            {"ts": _ts(day), "alert_id": aid, "actor": "system", "action": "notify", "to": "Sales manager",
              "detail": f"{a['owner']} order {a['order_id']} for {a['entity_name']}: {fmt_money(a['amount'])} at {a['discount_pct']}% off, quota credit on hold"},
-            {"ts": _ts(day, "18:00", 3), "alert_id": aid, "actor": "system", "action": "notify", "to": "CFO",
+            {"ts": _ts(day), "alert_id": aid, "actor": "system", "action": "notify", "to": "CFO",
              "detail": ("Sold below cost. " if a["below_cost"] else "") + f"{fmt_money(a['amount'])} under quota hold"},
         ]
         if a["resolution"] == "returned":
-            rows.append({"ts": _ts(a["resolved_on"], "18:00", 0), "alert_id": aid, "actor": "system", "action": "resolve",
+            rows.append({"ts": _ts(a["resolved_on"]), "alert_id": aid, "actor": "system", "action": "resolve",
                          "detail": f"Returned ({a['return_reason']}), {fmt_money(a['refund'])} refunded: quota credit cancelled"})
         elif a["resolution"] == "kept":
-            rows.append({"ts": _ts(a["resolved_on"], "18:00", 0), "alert_id": aid, "actor": "system", "action": "release",
+            rows.append({"ts": _ts(a["resolved_on"]), "alert_id": aid, "actor": "system", "action": "release",
                          "detail": f"{QUOTA_HOLD_DAYS} days with no return: quota credit of {fmt_money(a['amount'])} released"})
     elif c == "quiet_after_bad_return":
         rows += [
-            {"ts": _ts(day, "10:00", 0), "alert_id": aid, "actor": "system", "action": "flag",
+            {"ts": _ts(day), "alert_id": aid, "actor": "system", "action": "flag",
              "detail": f"Rule matched: {a['return_reason'].lower()} on {a['product']} for {a['entity_name']}"},
-            {"ts": _ts(day, "10:00", 1), "alert_id": aid, "actor": "system", "action": "notify", "to": "Customer Success",
+            {"ts": _ts(day), "alert_id": aid, "actor": "system", "action": "notify", "to": "Customer Success",
              "detail": f"Call task opened for {a['entity_name']} ({fmt_money(a['amount'])} ordered in the last 12 months)"},
-            {"ts": _ts(day, "10:00", 2), "alert_id": aid, "actor": "system", "action": "draft",
-             "detail": f"Apology email drafted for {a['entity_name']}"},
-            {"ts": _ts(day, "10:00", 3), "alert_id": aid, "actor": "system", "action": "notify", "to": a["owner"] or "Account rep",
+            {"ts": _ts(day), "alert_id": aid, "actor": "system", "action": "draft",
+             "detail": f"Apology email ready for {a['entity_name']}: built from the order facts, open the alert to see it"},
+            {"ts": _ts(day), "alert_id": aid, "actor": "system", "action": "notify", "to": a["owner"] or "Account rep",
              "detail": f"Your customer {a['entity_name']} had a bad return ({fmt_money(a['refund'])} refunded)"},
         ]
         if a["escalated"]:
-            rows.append({"ts": _ts(a["escalate_on"], "10:00", 0), "alert_id": aid, "actor": "system", "action": "winback_task",
+            rows.append({"ts": _ts(a["escalate_on"]), "alert_id": aid, "actor": "system", "action": "winback_task",
                          "detail": f"No reorder within {a['usual_gap_days']} days (usual gap): win-back task opened"})
         if a["resolution"] in ("reordered", "came_back_late"):
-            rows.append({"ts": _ts(a["resolved_on"], "10:00", 0), "alert_id": aid, "actor": "system", "action": "resolve",
+            rows.append({"ts": _ts(a["resolved_on"]), "alert_id": aid, "actor": "system", "action": "resolve",
                          "detail": f"Customer ordered again on {a['resolved_on']}: task closed"})
     else:
-        rows.append({"ts": _ts(day, "08:00", 0), "alert_id": aid, "actor": "system", "action": "flag",
+        rows.append({"ts": _ts(day), "alert_id": aid, "actor": "system", "action": "flag",
                      "detail": f"Detected: {a['reasons'][0]}; {a['reasons'][2]} (detection only, no automatic action)"})
+    for i, r in enumerate(rows):
+        r["ts_precision"] = "day"
+        r["seq"] = i  # order of the steps within the chain, since same-day rows share a date
     return rows
 
 
@@ -203,12 +207,13 @@ def all_rows(alerts, condition=None, alert_id=None):
     rows = [r for a in alerts for r in chain(a)]
     known = {a["id"] for a in alerts}
     for r in load_user_rows():
-        account_row = r["alert_id"].split("-")[0] in ("acct", "rep")
-        if r["alert_id"] in known or alert_id == r["alert_id"] or (account_row and not alert_id):
+        if r["alert_id"] in known or alert_id == r["alert_id"]:
             rows.append(r)
     if alert_id:
         rows = [r for r in rows if r["alert_id"] == alert_id]
-    return sorted(rows, key=lambda r: r["ts"], reverse=True)
+    for r in rows:
+        r.setdefault("ts_precision", "second")
+    return sorted(rows, key=lambda r: (r["ts"], r.get("seq", 0)), reverse=True)
 
 
 def override(a, reason):

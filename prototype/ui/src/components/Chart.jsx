@@ -100,10 +100,15 @@ export function Legend({ series }) {
 }
 
 // Renders any chart object from the contract: { type, x, series, rows, unit? }.
-export function ChartRenderer({ chart, height = 260 }) {
+// onPick(xValue, seriesKey?) makes bars and points clickable (drill-down).
+export function ChartRenderer({ chart, height = 260, onPick }) {
   const { type = "bar", x, series = [], rows = [], unit } = chart;
   const yFmt = axisFmt(unit);
-  const common = { data: rows, margin: { top: 8, right: 12, bottom: 0, left: 4 } };
+  const pickable = typeof onPick === "function";
+  const common = {
+    data: rows, margin: { top: 8, right: 12, bottom: 0, left: 4 },
+    style: pickable ? { cursor: "pointer" } : undefined,
+  };
   const grid = <CartesianGrid vertical={false} stroke="var(--border)" />;
   const xAxis = (
     <XAxis dataKey={x} tick={AXIS} tickLine={false} axisLine={{ stroke: "var(--border-strong)" }}
@@ -115,7 +120,7 @@ export function ChartRenderer({ chart, height = 260 }) {
   let body;
   if (type === "line") {
     body = (
-      <LineChart {...common}>
+      <LineChart {...common} onClick={pickable ? (e) => e?.activeLabel != null && onPick(e.activeLabel) : undefined}>
         {grid}{xAxis}{yAxis}{tip}
         {series.map((s, i) => (
           <Line key={s.key} type="monotone" dataKey={s.key} name={s.label} stroke={color(i)} strokeWidth={2}
@@ -150,6 +155,7 @@ export function ChartRenderer({ chart, height = 260 }) {
             stackId={stacked ? "stack" : undefined}
             radius={!stacked || i === series.length - 1 ? [4, 4, 0, 0] : 0}
             stroke={stacked ? "var(--surface)" : undefined} strokeWidth={stacked ? 1 : 0}
+            onClick={pickable ? (d) => onPick((d.payload ?? d)[x], series.length > 1 ? s.key : undefined) : undefined}
             isAnimationActive={false} />
         ))}
       </BarChart>

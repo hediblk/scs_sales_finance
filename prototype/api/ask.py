@@ -35,9 +35,21 @@ SQL_SYSTEM = ("You are the query writer inside Chrome & Oak Office Supply's inte
               "reads from those tables. If the question is not about this data, or the tables cannot answer it (general "
               "knowledge, other companies, advice, chit-chat, writing tasks, future predictions), reply with exactly "
               "OUT_OF_SCOPE and nothing else. Return shares and rates as percentages (0 to 100, rounded to 1 decimal) "
-              "and money rounded to whole dollars, with clear column names. Reply with the SQL only.")
+              "and money rounded to whole dollars. Column aliases in lower_snake_case with no currency word (all amounts "
+              "are Canadian dollars), e.g. total_refunds, revenue, refund_rate_pct. Write one compact SELECT: no comments, "
+              "no alignment padding or blank lines, at most 15 output columns. Reply with the SQL only.")
+SQL_MAX_TOKENS = 2000
+QUERY_FAILED_MSG = ("Ask could not turn this question into a working query. Try asking it more directly, for example "
+                    "naming the customer, rep, product or period.")
 ANSWER_SYSTEM = ("You answer questions about Chrome & Oak Office Supply's sales data using only the query result you are "
-                 "given. Never add outside knowledge. Copy numbers exactly as written. Plain text, no markdown.")
+                 "given. Never add outside knowledge. All money is in Canadian dollars: write amounts as $1,234,567 "
+                 "(thousands separators, no decimals), never USD or another currency. Write percentages with a % sign. "
+                 "Use the numbers from the result, only adding thousands separators. Write the final answer only: no "
+                 "working, no corrections, no second attempt. Plain text, no markdown.")
+LEAK = re.compile(r"\.\.\.\s*no\b|\bno:|\bwait\b|\bactually,|\bcorrection\b|\blet me\b|\bUSD\b|US\$", re.I)
+MONEY_WORDS = ("revenue", "refund", "amount", "cost", "price", "profit", "gp", "cogs", "limit", "balance", "owed", "sales", "spend")
+PCT_WORDS = ("pct", "percent", "rate", "share")
+COUNT_WORDS = ("orders", "count", "units", "quantity", "accounts", "customers", "invoices", "num_", "n_")
 
 SCHEMA = """Tables (DuckDB SQL):
 orders(order_id, order_date DATE, customer_id, region, product, category, quantity INT, unit_price DOUBLE,
@@ -209,12 +221,15 @@ def _chart(df):
             "rows": [{first: k, "rows": int(v)} for k, v in counts.head(TOP_N).items()], "note": note}
 
 
-def _gen_sql(question, context):
+def _gen_sql(question, context, failed_sql=None, failure=None):
     prompt = (f"{SCHEMA}\n\n{('Context, an alert the user is looking at:' + chr(10) + context + chr(10) + chr(10)) if context else ''}"
               f"Question: {question}\n\nReply with one DuckDB SELECT over these tables, or OUT_OF_SCOPE.")
+    if failed_sql is not None:
+        prompt += (f"\n\nYour previous query failed with: {failure}\nPrevious query:\n{failed_sql}\n"
+                   "Return a corrected, shorter single SELECT.")
     if not ai.enabled():
         return None, "no ANTHROPIC_API_KEY"
-    return ai._call(SQL_SYSTEM, prompt, max_tokens=600)
+    return ai._call(SQL_SYSTEM, prompt, max_tokens=SQL_MAX_TOKENS)
 
 
 def _round(df):
@@ -230,6 +245,38 @@ def _round(df):
     return out
 
 
+def _fmt(col, v):
+    """Code-side formatting for the template answer: $ with separators for money, % for rates."""
+    if v is None or isinstance(v, str) or not isinstance(v, (int, float)):
+        return str(v)
+    c = col.lower()
+    if any(w in c for w in PCT_WORDS):
+        return f"{v:,.1f}%"
+    if any(w in c for w in MONEY_WORDS) and not any(w in c for w in COUNT_WORDS):
+        return f"${v:,.0f}"
+    return f"{v:,.0f}" if float(v).is_integer() or abs(v) >= 100 else f"{v:,.3g}"
+
+
+def _template_answer(df):
+    """Answer written by code when the AI text cannot be used: reads the result's shape, like the chart does."""
+    if df.empty:
+        return "No rows match."
+    cols = list(df.columns)
+    nums = [c for c in cols if _is_num(df[c])]
+    if len(df) == 1:
+        r = df.iloc[0]
+        return "; ".join(f"{_label(c)}: {_fmt(c, _jsonable(r[c]))}" for c in cols) + "."
+    first = cols[0]
+    lead = [c for c in nums if c != first]
+    if lead:
+        k = lead[0]
+        top = df.loc[df[k].idxmax()]
+        low = df.loc[df[k].idxmin()]
+        return (f"Highest {_label(k)}: {top[first]} ({_fmt(k, _jsonable(top[k]))}). Lowest: {low[first]} "
+                f"({_fmt(k, _jsonable(low[k]))}). {int(df.attrs.get('total_rows', len(df)))} rows.")
+    return f"{int(df.attrs.get('total_rows', len(df)))} rows returned."
+
+
 def _empty(error, sql=None):
     return {"answer": None, "sql": sql, "columns": [], "rows": [], "chart": None, "error": error}
 
@@ -237,30 +284,50 @@ def _empty(error, sql=None):
 def ask(question, alert=None, sql=None):
     context = ""
     if alert:
-        context = "\n".join([f"{alert['id']} ({alert['condition_id']}), {alert['entity_name']}, rep {alert['owner']}, {alert['region']}"]
-                            + alert["reasons"])
+        ids = [f"{k}: {alert[k]}" for k in ("order_id", "return_id", "product", "segment") if alert.get(k)]
+        context = "\n".join([f"{alert['id']} ({alert['condition_id']}), customer_id {alert['entity_id']} ({alert['entity_name']}), "
+                             f"rep {alert['owner']}, region {alert['region']}"] + ids + alert["reasons"])
     source = "sql given"
     if not sql:
-        sql, source = _gen_sql(question, context)
-        if not sql:
-            return _empty(f"Ask needs the AI to write the query ({source}). You can also send a SELECT in the `sql` field.")
-        if sql.strip().upper().startswith("OUT_OF_SCOPE"):
-            return dict(_empty(OUT_OF_SCOPE_MSG), out_of_scope=True)
-    df, err = run_sql(sql)
+        # AI-written query: never run one the model did not finish; one corrected retry on a cut-off or failing query
+        failed, failure = None, None
+        for attempt in range(2):
+            gen, source = _gen_sql(question, context, failed, failure)
+            if not gen:
+                return _empty(f"Ask needs the AI to write the query ({source}). You can also send a SELECT in the `sql` field.")
+            if gen.strip().upper().startswith("OUT_OF_SCOPE"):
+                return dict(_empty(OUT_OF_SCOPE_MSG), out_of_scope=True)
+            if source == "ai_truncated":
+                failed, failure = gen, "the query was cut off before it ended (too long)"
+                continue
+            df, err = run_sql(gen)
+            if err and err.startswith("Query failed"):
+                failed, failure = gen, err.replace("Query failed: ", "")
+                continue
+            sql = gen
+            if attempt:
+                source = "ai (corrected once)"
+            break
+        else:
+            return dict(_empty(QUERY_FAILED_MSG), query_failed=True)
+    else:
+        df, err = run_sql(sql)
     clean_sql = check_sql(sql)[0]
     if err:
         return dict(_empty(err, clean_sql or sql), out_of_scope=err == OUT_OF_SCOPE_MSG)
     df = _round(df)
     rows = [[_jsonable(v) for v in r] for r in df.itertuples(index=False)]
     preview = df.head(20).to_string(index=False)
-    fallback = f"{len(df)} row{'s' if len(df) != 1 else ''} returned" + (f" (capped at {MAX_ROWS})" if len(df) == MAX_ROWS else "") + "."
+    fallback = _template_answer(df)
     answer, how = fallback, "template"
     if ai.enabled() and question:
         text, how = ai.write("answer", f"Question: {question}\nQuery that produced the result:\n{clean_sql}\n"
                                        f"Query result ({len(df)} rows):\n{preview}", fallback,
-                             max_tokens=400, system=ANSWER_SYSTEM)
+                             max_tokens=400, system=ANSWER_SYSTEM, effort="medium")
         answer = " ".join(line.strip() for line in text.splitlines() if line.strip()) if text else fallback
         answer = answer.replace("**", "").replace("__", "")
+        if how == "ai" and LEAK.search(answer):
+            answer, how = fallback, "template: AI text had a correction or a wrong currency"
     return {"answer": answer, "sql": clean_sql, "columns": list(df.columns), "rows": rows, "chart": _chart(df),
             "error": None, "sql_source": source, "answer_source": how, "row_cap": MAX_ROWS,
             "total_rows": int(df.attrs.get("total_rows", len(df)))}

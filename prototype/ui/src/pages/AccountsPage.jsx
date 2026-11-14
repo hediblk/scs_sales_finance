@@ -2,7 +2,6 @@ import { useEffect, useMemo, useState } from "react";
 import { api } from "../data/api.js";
 import { useApp, useResource } from "../state.jsx";
 import { money, num } from "../lib/format.js";
-import { MockNote } from "../components/Shell.jsx";
 import { Empty, ErrorBox, Loading, Tile } from "../components/ui.jsx";
 
 const PAGE = 48;
@@ -54,7 +53,7 @@ const SORTS = {
 
 function Customers() {
   const { openEntity, labels } = useApp();
-  const { data, error } = useResource("accounts", api.accounts);
+  const { data, error, reload } = useResource("accounts", api.accounts);
   const [seg, setSeg] = useState("All");
   const [sort, setSort] = useState("risk");
   const [query, setQuery] = useState("");
@@ -67,13 +66,12 @@ function Customers() {
       .filter((a) => !q || [a.id, a.name, a.rep, a.region].some((v) => String(v).toLowerCase().includes(q)))
       .sort(SORTS[sort][1]);
   }, [data, seg, sort, query]);
-  if (error) return <ErrorBox error={error} />;
+  if (error) return <ErrorBox error={error} onRetry={reload} />;
   if (!data) return <Loading what={`Loading ${labels.entities}`} />;
   const segs = ["All", ...new Set(data.map((a) => a.segment))];
   const over = data.filter((a) => a.utilization > 1).length;
   const near = data.filter((a) => a.utilization >= 0.8 && a.utilization <= 1).length;
   const overdue60 = data.filter((a) => a.days_overdue > 60).length;
-  const held = data.filter((a) => a.credit_hold).length;
   return (
     <>
       <div className="tiles">
@@ -81,7 +79,6 @@ function Customers() {
         <Tile label="Over credit limit" value={over} tone={over ? "bad" : "good"} hint="Open balance above the limit" />
         <Tile label="Near limit" value={near} tone={near ? "warn" : "good"} hint="80% of the limit or more" />
         <Tile label="Past 60 days" value={overdue60} tone={overdue60 ? "warn" : "good"} hint="Oldest unpaid invoice" />
-        <Tile label="On credit hold" value={held} hint="Advisory: set by a person, logged" />
       </div>
       <div className="acct-toolbar">
         <div className="chips">
@@ -120,32 +117,14 @@ function DiscountCompare({ value, team }) {
   );
 }
 
-function TargetCell({ rep, q, onSaved }) {
-  const [v, setV] = useState(q.target ?? "");
-  const [busy, setBusy] = useState(false);
-  useEffect(() => setV(q.target ?? ""), [q.target]);
-  const save = async () => {
-    const next = v === "" ? null : Number(v);
-    if (next === (q.target ?? null)) return;
-    setBusy(true);
-    try { onSaved(await api.setTarget(rep.id, q.quarter, next)); } catch { /* keep the typed value */ } finally { setBusy(false); }
-  };
-  return (
-    <input className="input target-input" type="number" min="0" step="1000" placeholder="Not set" value={v} disabled={busy}
-      onClick={(e) => e.stopPropagation()} onChange={(e) => setV(e.target.value)} onBlur={save}
-      onKeyDown={(e) => e.key === "Enter" && e.currentTarget.blur()} aria-label={`Target for ${rep.id} in ${q.quarter}`} />
-  );
-}
-
 function Reps() {
   const { openEntity } = useApp();
   const res = useResource("reps", api.reps);
   const quarters = useMemo(() => [...new Set((res.data ?? []).flatMap((r) => r.quarters.map((q) => q.quarter)))].sort(), [res.data]);
   const [quarter, setQuarter] = useState(null);
   useEffect(() => { if (!quarter && quarters.length) setQuarter(quarters[quarters.length - 1]); }, [quarters, quarter]);
-  if (res.error) return <ErrorBox error={res.error} />;
+  if (res.error) return <ErrorBox error={res.error} onRetry={res.reload} />;
   if (!res.data) return <Loading what="Loading reps" />;
-  const onSaved = (rep) => res.set(res.data.map((r) => (r.id === rep.id ? rep : r)));
   const rows = res.data.map((r) => ({ rep: r, q: r.quarters.find((x) => x.quarter === quarter) })).filter((x) => x.q)
     .sort((a, b) => b.q.revenue - a.q.revenue);
   return (
@@ -154,7 +133,7 @@ function Reps() {
         <div className="tabs" role="tablist" aria-label="Quarter">
           {quarters.map((q) => <button key={q} type="button" role="tab" aria-selected={quarter === q} className={quarter === q ? "is-on" : ""} onClick={() => setQuarter(q)}>{q}</button>)}
         </div>
-        <span className="muted small">Targets are not in the data. Type one to see attainment; it stays advisory.</span>
+        <span className="muted small">Quota-countable: revenue minus refunds, without quarter-end orders still on hold or returned. Click a rep for the details.</span>
       </div>
       <div className="card table-card">
         <div className="table-wrap">
@@ -162,13 +141,11 @@ function Reps() {
             <thead>
               <tr>
                 <th>Rep</th><th className="num">Revenue (gross)</th><th className="num">Net of returns</th><th className="num">Quota-countable</th>
-                <th>Avg discount vs team</th><th className="num">Last 14 days of quarter</th><th className="num">Target</th><th className="num">Attainment</th>
+                <th>Avg discount vs team</th><th className="num">Last 14 days of quarter</th>
               </tr>
             </thead>
             <tbody>
               {rows.map(({ rep, q }) => {
-                const gross = q.target ? q.revenue / q.target : null;
-                const counted = q.target ? q.quota_countable / q.target : null;
                 return (
                   <tr key={rep.id} className="is-click" onClick={() => openEntity(rep.id)}>
                     <td><span className="rep-id">{rep.id}</span><div className="muted small">{rep.region}</div></td>
@@ -177,12 +154,6 @@ function Reps() {
                     <td className="num"><b>{money(q.quota_countable)}</b></td>
                     <td><DiscountCompare value={q.avg_discount} team={q.team_avg_discount} /></td>
                     <td className="num">{num(q.quarter_end_share)}%</td>
-                    <td className="num"><TargetCell rep={rep} q={q} onSaved={onSaved} /></td>
-                    <td className="num att">
-                      {gross == null ? <span className="muted">n/a</span> : (
-                        <>{Math.round(counted * 100)}% counted<div className="muted">{Math.round(gross * 100)}% on gross</div></>
-                      )}
-                    </td>
                   </tr>
                 );
               })}
@@ -205,7 +176,6 @@ export default function AccountsPage({ params }) {
           <button type="button" role="tab" aria-selected={tab === "customers"} className={tab === "customers" ? "is-on" : ""} onClick={() => setTab("customers")}>{labels.Entities}</button>
           <button type="button" role="tab" aria-selected={tab === "reps"} className={tab === "reps" ? "is-on" : ""} onClick={() => setTab("reps")}>Reps</button>
         </div>
-        <MockNote route={tab === "reps" ? "/api/reps" : "/api/accounts"} />
       </div>
       {tab === "reps" ? <Reps /> : <Customers />}
     </>

@@ -134,7 +134,7 @@ export function FindingDetail({ alert, condition }) {
     <article className={`card finding sev-${alert.severity}`}>
       <header className="finding-head">
         <div>
-          <div className="finding-eyebrow">{condition?.name ?? alert.condition_id} · {alert.order_id ?? alert.return_id ?? alert.id}</div>
+          <div className="finding-eyebrow">{condition?.name ?? alert.condition_id} · {alert.return_id ?? alert.order_id ?? alert.id}</div>
           <h3>
             <button type="button" className="title-link" onClick={() => openEntity(alert.entity_id)}>{alert.entity_name}</button>
             {alert.product && <span className="muted" style={{ fontWeight: 500 }}> · {alert.quantity ? `${alert.quantity} x ` : ""}{alert.product}</span>}
@@ -164,7 +164,7 @@ export function FindingDetail({ alert, condition }) {
           <div className="trail">
             {rows.map((r, i) => (
               <span key={i} className={`trail-step${r.actor === "user" ? " is-user" : ""}`} title={r.detail}>
-                <b>{humanize(r.action)}</b>{r.to ? ` to ${r.to}` : ""} <span className="muted">{tsLabel(r.ts)}</span>
+                <b>{humanize(r.action)}</b>{r.to ? ` to ${r.to}` : ""} <span className="muted">{tsLabel(r.ts, r.ts_precision)}</span>
               </span>
             ))}
           </div>

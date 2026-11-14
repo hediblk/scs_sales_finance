@@ -41,6 +41,16 @@ export function plural(label = "") {
 
 export const lower = (s = "") => s.charAt(0).toLowerCase() + s.slice(1);
 
+// The API's text uses internal rule codes (C1, C2, C3); on screen, use the rule names from the queue.
+const RULE_NAMES = { C1: "the quarter-end discount rule", C2: "the bad-return rule", C3: "the overdue rule" };
+export function plainRules(text) {
+  if (typeof text !== "string") return text;
+  return text
+    .replace(/\s*\(condition (C[123])\)/gi, (m, c) => ` (${RULE_NAMES[c.toUpperCase()]})`)
+    .replace(/\bCondition (C[123])\b/g, (m, c) => RULE_NAMES[c].charAt(0).toUpperCase() + RULE_NAMES[c].slice(1))
+    .replace(/\b(C[123])\b/g, (m, c) => RULE_NAMES[c]);
+}
+
 export function humanize(code = "") {
   const s = code.replace(/[_-]+/g, " ").trim();
   return s.charAt(0).toUpperCase() + s.slice(1);
@@ -55,11 +65,14 @@ export function dateLabel(iso) {
   return d ? `${MONTHS[m - 1]} ${d}, ${y}` : `${MONTHS[m - 1]} ${y}`;
 }
 
-export function tsLabel(ts) {
+// Action-log time. Rows from the automatic chains are dated by events in the data, which have
+// no time of day (ts_precision "day"): show the date only. Rows a person wrote keep their real time.
+export function tsLabel(ts, precision) {
   if (!ts) return "";
-  const time = ts.length > 10 ? ts.slice(11, 16) : "";
-  const [, m, d] = ts.slice(0, 10).split("-").map(Number);
-  return `${MONTHS[m - 1]} ${d}${time ? `, ${time}` : ""}`;
+  const [y, m, d] = ts.slice(0, 10).split("-").map(Number);
+  const date = `${MONTHS[m - 1]} ${d}, ${y}`;
+  const time = precision !== "day" && ts.length > 10 ? ts.slice(11, 16) : "";
+  return time ? `${date} ${time}` : date;
 }
 
 // "2025-01" -> "Jan 25"; anything else unchanged.

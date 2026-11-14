@@ -1,40 +1,14 @@
 // The only data layer. Every screen calls these functions, never fetch() directly.
+// No placeholder data: a failed call throws, and the screen shows an inline error with Retry.
 //
 // One switch: VITE_API_BASE (in ui/.env.local).
 //   unset or "/"        -> same origin, through the Vite proxy to http://localhost:8000 (default)
 //   "http://host:8000"  -> that server directly (the API allows CORS)
-//   "mock"              -> mock JSON only (src/mock/, served by mockServer.js)
-//
-// In API mode, an endpoint the back end does not serve yet (404 "Not Found") or a back end
-// that is down falls back to the mock for that endpoint only. The UI shows which ones.
-import { handle as mockHandle } from "./mockServer.js";
 
 const RAW = import.meta.env.VITE_API_BASE;
-const MOCK_ONLY = RAW === "mock";
-const API_BASE = !RAW || RAW === "/" || MOCK_ONLY ? "" : RAW.replace(/\/+$/, "");
-export const SOURCE = MOCK_ONLY ? "mock" : "api";
-
-// Which endpoints are currently answered by the mock (shown in the topbar).
-const mocked = new Set();
-const listeners = new Set();
-const routeKey = (path) => path.split("?")[0].replace(/\/(C|R)\d+[^/]*$/, "/:id").replace(/\/alerts\/[^/]+\//, "/alerts/:id/");
-function markMocked(path, on) {
-  const k = routeKey(path);
-  if (on === mocked.has(k)) return;
-  on ? mocked.add(k) : mocked.delete(k);
-  listeners.forEach((fn) => fn([...mocked]));
-}
-export function onMockedChange(fn) {
-  listeners.add(fn);
-  fn([...mocked]);
-  return () => listeners.delete(fn);
-}
+const API_BASE = !RAW || RAW === "/" ? "" : RAW.replace(/\/+$/, "");
 
 async function request(method, path, body) {
-  if (MOCK_ONLY) {
-    markMocked(path, true);
-    return mockHandle(method, path, body);
-  }
   let res;
   try {
     res = await fetch(`${API_BASE}${path}`, {
@@ -43,23 +17,19 @@ async function request(method, path, body) {
       body: body ? JSON.stringify(body) : undefined,
     });
   } catch {
-    markMocked(path, true);
-    return mockHandle(method, path, body); // back end unreachable
+    throw new Error("The back end is not answering (is it running on port 8000?)");
   }
-  if (res.ok) {
-    markMocked(path, false);
-    return res.json();
-  }
+  if (res.ok) return res.json();
   const text = await res.text();
   let detail = text;
   try { detail = JSON.parse(text).detail ?? text; } catch { /* not JSON */ }
-  const routeMissing = res.status === 404 && detail === "Not Found";
-  const backendDown = res.status >= 502 || (res.status === 500 && !text.trim().startsWith("{"));
-  if (routeMissing || backendDown) {
-    markMocked(path, true);
-    return mockHandle(method, path, body);
+  if (res.status === 404 && detail === "Not Found") {
+    throw new Error(`${path.split("?")[0]} is not served by the back end yet`);
   }
-  throw new Error(typeof detail === "string" ? detail : `${method} ${path} failed: ${res.status}`);
+  if (res.status >= 502 || (res.status === 500 && !text.trim().startsWith("{"))) {
+    throw new Error("The back end is not answering (is it running on port 8000?)");
+  }
+  throw new Error(typeof detail === "string" && detail ? detail : `${method} ${path} failed (${res.status})`);
 }
 
 const q = (params) =>
@@ -69,15 +39,28 @@ export const api = {
   // Dataset page: source = "raw" (data/raw as received) or "clean" (data/clean).
   dsTables: (source) => request("GET", `/api/${source}/tables`),
   dsProfile: (source, table) => request("GET", `/api/${source}/${table}/profile`),
-  dsRows: (source, table, p = {}) => request("GET", `/api/${source}/${table}/rows?${q(p)}`),
+  // col + val filter; an empty val means "blank cells in that column", so it is always sent with col.
+  dsRows: (source, table, { val, ...p } = {}) =>
+    request("GET", `/api/${source}/${table}/rows?${q(p)}${p.col ? `&val=${encodeURIComponent(val ?? "")}` : ""}`),
   dsCharts: (source) => request("GET", `/api/${source}/charts`),
   setAside: () => request("GET", "/api/clean/set-aside"),
 
+  // Every chart in the app is a preset of this endpoint (docs/ui-contract.md, "Dynamic charts").
+  explore: (params) => request("GET", `/api/explore?${q(params)}`),
+  exploreOptions: () => request("GET", "/api/explore/options"),
+
+  // Policy simulator (docs/ui-contract.md, "Policy simulator"; spec docs/simulator-plan.md).
+  simulator: () => request("GET", "/api/simulator"),
+  simModule: (name, params) => request("GET", `/api/simulator/${name}?${q(params ?? {})}`),
+  simSweep: (name) => request("GET", `/api/simulator/sweep/${name}`),
+  simApply: (body) => request("POST", "/api/simulator/apply", body),
+  tasks: (params = {}) => request("GET", `/api/tasks?${q(params)}`),
+
+  whatif: (threshold, window) => request("GET", `/api/whatif?${q({ threshold, window, rule: "cap" })}`),
+
   meta: () => request("GET", "/api/meta"),
-  dataPrep: () => request("GET", "/api/data-prep"),
   overview: () => request("GET", "/api/overview"),
   gap: () => request("GET", "/api/gap"),
-  insights: () => request("GET", "/api/insights"),
   conditions: () => request("GET", "/api/conditions"),
   simulate: (condition, value, window) => request("GET", `/api/simulate?${q({ condition, value, window })}`),
   alerts: (condition, value, window) => request("GET", `/api/alerts?${q({ condition, value, window })}`),
@@ -87,9 +70,7 @@ export const api = {
   override: (alertId, reason) => request("POST", `/api/alerts/${encodeURIComponent(alertId)}/override`, { reason }),
   actions: () => request("GET", "/api/actions"),
   accounts: () => request("GET", "/api/accounts"),
-  creditHold: (id, on, reason) => request("POST", `/api/accounts/${encodeURIComponent(id)}/credit-hold`, { on, reason }),
   reps: () => request("GET", "/api/reps"),
-  setTarget: (id, quarter, target) => request("PUT", `/api/reps/${encodeURIComponent(id)}/target`, { quarter, target }),
   // A question starting with SELECT is sent as `sql` and runs as written (still read-only on the API side).
   ask: (question, alertId) => request("POST", "/api/ask", /^\s*select\b/i.test(question)
     ? { question, sql: question, alert_id: alertId ?? null }

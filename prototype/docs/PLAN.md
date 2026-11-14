@@ -1,6 +1,6 @@
 # Y2K hackathon: plan (Option B, Chrome & Oak, LOCKED 2026-11-14)
 
-**Simulator extension:** [the policy simulator UI handoff](../../PLAN.md) defines the updated sliders, assumptions, scope, and default-selection rules. It supersedes earlier simulator settings in this document; the other prototype workflows remain as described below.
+**Simulator extension (Hedi, 2026-11-14):** [`simulator-plan.md`](simulator-plan.md) defines the policy simulator: pricing cap, damage packaging and credit restriction modules, their sliders, assumptions and default-selection rules. It supersedes the earlier What if settings in this document; the other workflows remain as described below.
 
 Source of truth for the existing prototype workflows. Numbers come from `explore/FINDINGS.md`, the EDA notebook (`ChromeAndOak_EDA.ipynb`) and checks run by the planning session. Numbers marked "(recompute)" move slightly after the cleaning decisions below and get re-checked by the check script.
 
@@ -31,7 +31,7 @@ Values marked missing here are for the teammate to compute: [extra discount $], 
 | Quarter-end discount push (R07, Atlantic resellers) | Quarterly target + bonus on gross revenue: deep discounts in the last 14 days, resellers send overstock back about a month later | Quota on revenue net of returns after 45 days; approval for quarter-end discounts ≥ 25% | C1, action queue, reps tab |
 | Furniture damaged in transit (BC, Prairies) | Long-haul shipping of big items from Montreal; BC is also the fastest-growing region | Packaging or carrier change for long-haul furniture | Insight 3, C2 |
 | Business customers going quiet | A bad return (damaged, defective, wrong item) precedes the silence in 59% of cases | Contact the customer right after a bad return | C2 |
-| Late payments | Steady since 2025, not what changed | Monitor; credit hold only on clear cases | C3, customers tab |
+| Late payments | Steady since 2025, not what changed | Monitor only | C3, customers tab |
 
 **3. Which first, and why (stated on screen).** Ranked by four plain criteria: size in $, did it change in 2026, can the company control it, can a rule catch it early.
 - **#1 Quarter-end discount push:** largest controllable piece, new in 2026 (R07 discount 18-19% in 2025, 28% in 2026), one cause, a rule catches it with almost no false alarms. This is what the tool automates first.
@@ -91,7 +91,7 @@ Supporting facts for Q&A: Atlantic margin at the company's common product mix is
 - **Honesty line:** timing and correlation, not proof the return caused the churn.
 
 ### C3 · Overdue or over limit (detection only)
-3 customers past 60 days; C1173 owes $27.6k on a $25k limit, 221 days overdue. Shown in Accounts & Limits (customers tab: overdue days, balance vs limit) and as one line on the overview, to show we checked the CFO's claim. Action if time allows: advisory credit hold toggle, logged.
+3 customers past 60 days; C1173 owes $27.6k on a $25k limit, 221 days overdue. Shown in Accounts & Limits (customers tab: overdue days, balance vs limit) and as one line on the overview, to show we checked the CFO's claim. Detection only, no action.
 
 ## Be upfront in the pitch
 
@@ -119,17 +119,17 @@ Each feature exists because of something the data showed.
 | Threshold sliders | C1 sliders with live back-test numbers ("would have flagged N, $X") | Must |
 | Ask | **Read-only assessment tool.** Ask a question about the data, or "Ask about this alert" from a card (context pre-filled). AI writes a SELECT, DuckDB runs it on a read-only connection over the clean tables (SELECT only, row limit), answer + the query shown + a chart. Cannot create, clear or change alerts. Covers the interactive exploration bonus | Then |
 | Sales manager inbox | Sales manager inbox for held quarter-end orders. The hold is the rule's decision; an AI note labelled "advisory" sits beside it; the manager releases or keeps the hold | Then |
-| CFO brief | Weekly CFO brief: numbers by code, wording by AI, dropped in the outbox | Then |
 | Repeat offenders | Reps and resellers with the most C1 hits, a table on the overview | Then |
-| Accounts & Limits | Built on the brief's business mechanics. **Customers tab** (business accounts): credit limit vs open balance, utilization, terms (Net 30 / Net 60), days overdue, times over limit, advisory credit hold toggle. **Reps tab**: quarterly revenue gross, net of returns, and quota-countable after C1 holds; average discount vs team; quarter-end share. Quarterly targets are not in the data: show them as an input the manager sets (advisory), never as invented numbers. Drill-down per customer and per rep. Home of C3 | Then (first) |
+| Accounts & Limits | Built on the brief's business mechanics. **Customers tab** (business accounts): credit limit vs open balance, utilization, terms (Net 30 / Net 60), days overdue, times over limit. **Reps tab**: quarterly revenue gross, net of returns, and quota-countable after C1 holds; average discount vs team; quarter-end share. Quarterly targets are not in the data, so the page doesn't show them. Drill-down per customer and per rep. Home of C3 | Then (first) |
 | AI-written rules | Out. Rules must be our own logic | Skip |
 
 ## Scope cut line
 
 - **Must (first):** Dataset page, raw visualization.
 - **Must:** cleaning with its log (teammate), C1 full chain, C1 sliders, C2 creating a task, action log, 2 insight charts, overview.
-- **Then:** What if page (rule impact replay + Q4 run-rate), Accounts & Limits (customers + reps tabs, drill-downs), Ask (read-only), sales manager inbox with advisory AI note, AI email draft, CFO brief, repeat offenders table, C2 escalation, insights 3 and 4 charts.
-- **Skip:** C3 action, keyboard triage, login, anything not in this file.
+- **Then:** What if page (rule impact replay + Q4 run-rate), Accounts & Limits (customers + reps tabs, drill-downs), Ask (read-only), sales manager inbox with advisory AI note, AI email draft, repeat offenders table, C2 escalation, insights 3 and 4 charts.
+- **Skip:** C3 action, credit hold toggle, rep target input, CFO brief, keyboard triage, login, anything not in this file.
+- **Rule for every control (2026-11-14):** it stays only if it's on the demo path, covers a judging requirement or bonus, or lets a judge check a number. Otherwise it's removed, even if it works.
 
 ## Screens (proposed, confirm before the UI resumes)
 

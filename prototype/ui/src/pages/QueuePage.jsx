@@ -4,6 +4,7 @@ import { dateLabel, money, num } from "../lib/format.js";
 import { ConditionControl } from "../components/ThresholdSlider.jsx";
 import { FindingDetail, impactLabel } from "../components/FindingDetail.jsx";
 import { Empty, Loading } from "../components/ui.jsx";
+import { TaskList } from "../components/TaskList.jsx";
 
 const SEV = { high: 3, medium: 2, low: 1 };
 const SEV_TONE = { high: "bad", medium: "warn", low: "neutral" };
@@ -13,17 +14,21 @@ const MAIN = "qe_discount"; // C1 sits in the header; the others fold under "Oth
 
 const uniq = (xs) => [...new Set(xs.filter(Boolean))].sort();
 
-export default function QueuePage({ params }) {
+function AlertQueue({ params }) {
   const { alerts, alertsLoading, conditions, labels } = useApp();
   const [cond, setCond] = useState(params?.condition ?? MAIN);
   const [status, setStatus] = useState("open");
-  const [rep, setRep] = useState("");
-  const [region, setRegion] = useState("");
-  const [segment, setSegment] = useState("");
+  const [rep, setRep] = useState(params?.rep ?? "");
+  const [region, setRegion] = useState(params?.region ?? "");
+  const [segment, setSegment] = useState(params?.segment ?? "");
   const [shown, setShown] = useState(PAGE);
+  const [find, setFind] = useState("");
   const [focusId, setFocusId] = useState(null);
 
-  useEffect(() => { if (params?.condition) setCond(params.condition); }, [params?.condition]);
+  useEffect(() => {
+    if (params?.condition) setCond(params.condition);
+    setRep(params?.rep ?? ""); setRegion(params?.region ?? ""); setSegment(params?.segment ?? "");
+  }, [params?.condition, params?.rep, params?.region, params?.segment]);
 
   const condById = useMemo(() => Object.fromEntries(conditions.map((c) => [c.id, c])), [conditions]);
   const main = condById[MAIN] ?? conditions[0];
@@ -34,11 +39,14 @@ export default function QueuePage({ params }) {
     .filter((a) => !region || a.region === region)
     .filter((a) => !segment || a.segment === segment), [alerts, rep, region, segment]);
 
+  // A search looks across every rule and status (the demo opens alerts by order or return id).
+  const needle = find.trim().toLowerCase();
   const list = useMemo(() => base
-    .filter((a) => cond === "all" || a.condition_id === cond)
-    .filter((a) => status === "all" || (status === "open" ? isOpen(a) : !isOpen(a)))
+    .filter((a) => needle || cond === "all" || a.condition_id === cond)
+    .filter((a) => needle || status === "all" || (status === "open" ? isOpen(a) : !isOpen(a)))
+    .filter((a) => !needle || [a.id, a.order_id, a.return_id, a.entity_id, a.entity_name].some((v) => v && String(v).toLowerCase().includes(needle)))
     .sort((a, b) => (SEV[b.severity] ?? 0) - (SEV[a.severity] ?? 0) || b.created_at.localeCompare(a.created_at) || b.amount - a.amount),
-  [base, cond, status]);
+  [base, cond, status, needle]);
 
   const focused = list.find((a) => a.id === focusId) ?? list[0] ?? null;
   const openAll = base.filter(isOpen);
@@ -105,6 +113,8 @@ export default function QueuePage({ params }) {
             {uniq(alerts.map((a) => a.segment)).map((r) => <option key={r} value={r}>{r}</option>)}
           </select>
         </label>
+        <input className="search" type="search" placeholder="Find an order, return or customer id" value={find}
+          onChange={(e) => { setFind(e.target.value); setShown(PAGE); }} aria-label="Find an alert" style={{ minWidth: 230 }} />
         {alertsLoading && <span className="muted small">Recounting...</span>}
       </div>
 
@@ -145,6 +155,21 @@ export default function QueuePage({ params }) {
           </div>
         </div>
       )}
+    </>
+  );
+}
+
+// Two views: alerts our rules raised on the data, and tasks created by "Apply rules to simulation".
+export default function QueuePage({ params }) {
+  const [view, setView] = useState(params?.view === "tasks" ? "tasks" : "alerts");
+  useEffect(() => { if (params?.view) setView(params.view === "tasks" ? "tasks" : "alerts"); }, [params?.view]);
+  return (
+    <>
+      <div className="view-switch tabs big" role="tablist" aria-label="Queue view">
+        <button type="button" role="tab" aria-selected={view === "alerts"} className={view === "alerts" ? "is-on" : ""} onClick={() => setView("alerts")}>Rule alerts</button>
+        <button type="button" role="tab" aria-selected={view === "tasks"} className={view === "tasks" ? "is-on" : ""} onClick={() => setView("tasks")}>Simulator tasks</button>
+      </div>
+      {view === "tasks" ? <TaskList /> : <AlertQueue params={params} />}
     </>
   );
 }

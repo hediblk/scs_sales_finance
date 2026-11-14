@@ -1,6 +1,0 @@
-{
-  "summary": "[AI summary of the computed facts for {entity_name}. It reads the reasons list and never computes numbers.]",
-  "review_needed": true,
-  "why": "[One sentence on why a person should, or need not, look at this one]",
-  "recommendation": "hold"
-}

@@ -80,7 +80,7 @@ export default function LogPage() {
                 </div>
                 {r.detail && <div className="hist-detail">{r.detail}</div>}
               </div>
-              <time className="hist-time">{tsLabel(r.ts)}</time>
+              <time className="hist-time">{tsLabel(r.ts, r.ts_precision)}</time>
             </div>
           ))}
           {rows.length > limit && (

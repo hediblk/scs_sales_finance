@@ -1,11 +1,45 @@
 import { useEffect, useRef, useState } from "react";
 import { api } from "../data/api.js";
 import { useApp } from "../state.jsx";
-import { ChartRenderer } from "../components/Chart.jsx";
+import { ChartRenderer, Legend } from "../components/Chart.jsx";
+
 
 const cellFmt = new Intl.NumberFormat("en-CA", { maximumFractionDigits: 3 });
-const cell = (v) => (Math.abs(v) >= 100 ? Math.round(v).toLocaleString("en-CA") : cellFmt.format(v));
-import { MockNote } from "../components/Shell.jsx";
+const cell = (v) => (typeof v !== "number" ? String(v ?? "") : Math.abs(v) >= 100 ? Math.round(v).toLocaleString("en-CA") : cellFmt.format(v));
+const pretty = (s = "") => String(s).replace(/_/g, " ");
+
+// The visual the back end picked from the result's shape (docs/ui-contract.md, POST /api/ask).
+function Visual({ chart, rows }) {
+  if (!chart) return null;
+  if (chart.type === "kpi") {
+    return <div className="tiles ask-kpis"><div className="tile"><div className="tile-label">{pretty(chart.label)}</div><div className="tile-value">{cell(chart.value)}</div></div></div>;
+  }
+  if (chart.type === "kpis") {
+    return (
+      <div className="tiles ask-kpis">
+        {(chart.items ?? []).map((k) => <div key={k.label} className="tile"><div className="tile-label">{pretty(k.label)}</div><div className="tile-value">{cell(k.value)}</div></div>)}
+      </div>
+    );
+  }
+  if (!rows.length) return null;
+  let series = chart.series ?? [];
+  if (chart.type === "scatter" && !series.length && chart.y) series = [{ key: chart.y, label: chart.y }];
+  // Series on very different scales would flatten each other on one axis: keep the first, the table has the rest.
+  const span = (k) => Math.max(...rows.map((r) => Math.abs(Number(r[k]) || 0)));
+  const s0 = series[0] ? span(series[0].key) : 0;
+  const sameScale = series.filter((s) => { const v = span(s.key); return s0 && v / s0 < 10 && s0 / (v || 1) < 10; });
+  const plotted = sameScale.length ? sameScale : series.slice(0, 1);
+  return (
+    <div className="ask-chart">
+      {plotted.length === 1 && <div className="mini-label">{pretty(plotted[0].label)}</div>}
+      <Legend series={plotted.map((s) => ({ ...s, label: pretty(s.label) }))} />
+      <ChartRenderer chart={{ ...chart, series: plotted.map((s) => ({ ...s, label: pretty(s.label) })), rows }} height={230} />
+      {(chart.note || plotted.length < series.length) && (
+        <p className="ask-note">{[chart.note, plotted.length < series.length ? "Other columns are in the table below." : null].filter(Boolean).join(" ")}</p>
+      )}
+    </div>
+  );
+}
 
 const SUGGESTIONS = [
   "Revenue by region, Jan-Sep 2026 vs Jan-Sep 2025",
@@ -27,20 +61,16 @@ function Answer({ t }) {
   const rows = (r.rows ?? []).map((row) => Object.fromEntries((r.columns ?? []).map((c, i) => [c, row[i]])));
   return (
     <>
-      {r.answer && <div className="answer">{r.answer}</div>}
-      {r.error && <div className="error-box" style={{ marginTop: r.answer ? 10 : 0 }}>{r.error}</div>}
+      <Visual chart={r.chart} rows={rows} />
+      {r.answer && <div className="answer" style={{ marginTop: r.chart ? 12 : 0 }}>{r.answer}</div>}
+      {r.error && (
+        <div className={r.out_of_scope ? "ask-notice" : "error-box"} style={{ marginTop: r.answer ? 10 : 0 }}>{r.error}</div>
+      )}
       {r.sql && (
-        <details className="sql" open>
-          <summary>The query that ran (read-only)</summary>
+        <details className="sql">
+          <summary>Show the query that ran (read-only)</summary>
           <pre>{r.sql}</pre>
         </details>
-      )}
-      {r.chart && rows.length > 1 && r.chart.series?.length > 0 && (
-        // One measure per chart: mixed scales on one axis mislead. The table has every column.
-        <div className="ask-chart">
-          <div className="mini-label">{r.chart.series[0].label}</div>
-          <ChartRenderer chart={{ ...r.chart, series: [r.chart.series[0]], rows }} height={220} />
-        </div>
       )}
       {rows.length > 0 && (
         <div className="ask-table">
@@ -48,7 +78,7 @@ function Answer({ t }) {
             <thead><tr>{r.columns.map((c) => <th key={c}>{c}</th>)}</tr></thead>
             <tbody>
               {r.rows.slice(0, 50).map((row, i) => (
-                <tr key={i}>{row.map((v, j) => <td key={j} className={typeof v === "number" ? "num" : ""}>{typeof v === "number" ? cell(v) : String(v ?? "")}</td>)}</tr>
+                <tr key={i}>{row.map((v, j) => <td key={j} className={typeof v === "number" ? "num" : ""}>{cell(v)}</td>)}</tr>
               ))}
             </tbody>
           </table>
@@ -66,6 +96,13 @@ export default function AskPage() {
   const endRef = useRef(null);
 
   useEffect(() => { savedTurns = turns; endRef.current?.scrollIntoView({ behavior: "smooth", block: "end" }); }, [turns, busy]);
+
+  // A question handed over by a chart's "See these orders" link.
+  const { takePendingQuestion } = useApp();
+  useEffect(() => {
+    const q = takePendingQuestion();
+    if (q) send(q);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const send = async (text) => {
     const q = (text ?? input).trim();
@@ -94,7 +131,7 @@ export default function AskPage() {
             <h3>{askContext ? `Ask about ${askContext.entity_name}` : "Ask a question about the clean data"}</h3>
             <p>
               The AI turns your question into one SELECT. A read-only connection runs it with a row limit, and you see the
-              query, the rows and a chart. It cannot create, clear or change alerts. <MockNote route="/api/ask" />
+              query, the rows and a chart. It cannot create, clear or change alerts.
             </p>
             <div className="chips">{chips.map((s) => <button key={s} type="button" className="chip-btn" onClick={() => send(s)}>{s}</button>)}</div>
           </div>

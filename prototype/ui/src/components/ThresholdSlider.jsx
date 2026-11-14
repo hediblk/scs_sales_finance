@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { api } from "../data/api.js";
 import { useApp } from "../state.jsx";
 import { fmt, money, num } from "../lib/format.js";
-import { Chip } from "./ui.jsx";
+import { Chip, ErrorBox } from "./ui.jsx";
 
 // What one hit is called, per condition id (docs/ui-contract.md). Unknown ids use the entity label.
 const NOUN = { qe_discount: ["order", "orders"], quiet_after_bad_return: ["bad return", "bad returns"] };
@@ -14,15 +14,19 @@ export const nounFor = (cid, labels, n) => {
 // Live back-test for one condition at one threshold (and window). Debounced for slider drags.
 export function useSimulate(conditionId, value, window) {
   const [sim, setSim] = useState(null);
+  const [error, setError] = useState(null);
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
     if (value == null) return;
     let live = true;
     const t = setTimeout(() => {
-      api.simulate(conditionId, value, window ?? undefined).then((r) => live && setSim(r)).catch(() => live && setSim(null));
+      api.simulate(conditionId, value, window ?? undefined)
+        .then((r) => { if (live) { setSim(r); setError(null); } })
+        .catch((e) => { if (live) { setSim(null); setError(e); } });
     }, 120);
     return () => { live = false; clearTimeout(t); };
-  }, [conditionId, value, window]);
-  return sim;
+  }, [conditionId, value, window, attempt]);
+  return { sim, error, retry: () => setAttempt((n) => n + 1) };
 }
 
 function RuleText({ text, value, window }) {
@@ -53,7 +57,7 @@ export function ConditionControl({ condition, compact = false }) {
   const cur = thresholds[condition.id] ?? {};
   const value = cur.value ?? th.value;
   const window = win ? cur.window ?? win.value : null;
-  const sim = useSimulate(condition.id, value, window);
+  const { sim, error: simError, retry: simRetry } = useSimulate(condition.id, value, window);
   const changed = value !== th.value || (win && window !== win.value);
   const delta = sim ? sim.hits - condition.hits : 0;
 
@@ -76,8 +80,9 @@ export function ConditionControl({ condition, compact = false }) {
       <p className="sim-line" aria-live="polite">
         {sim ? (
           <>Would have flagged <b>{num(sim.hits)}</b> {nounFor(condition.id, labels, sim.hits)}, worth <b>{money(sim.amount)}</b>.</>
-        ) : "Counting..."}
+        ) : simError ? null : "Counting..."}
       </p>
+      {simError && <ErrorBox error={simError} onRetry={simRetry} />}
       {!compact && sim && (
         <div className="sim-stats">
           {sim.top_owner && <span>{sim.top_owner}: <b>{num(sim.top_owner_hits)}</b> of them ({num(sim.top_owner_share)}%)</span>}

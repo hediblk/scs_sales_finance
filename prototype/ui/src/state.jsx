@@ -1,5 +1,5 @@
 import { createContext, useCallback, useContext, useEffect, useMemo, useRef, useState } from "react";
-import { api, onMockedChange, SOURCE } from "./data/api.js";
+import { api } from "./data/api.js";
 import { lower, plural } from "./lib/format.js";
 
 const Ctx = createContext(null);
@@ -49,12 +49,10 @@ export function AppProvider({ pages, children }) {
   const [actions, setActions] = useState([]);
   const [entityId, setEntityId] = useState(null);
   const [error, setError] = useState(null);
-  const [mocked, setMocked] = useState([]);
   const [route, setRoute] = useState(() => readHash(pages));
   const [askContext, setAskContext] = useState(null); // alert object when "Ask about this alert"
+  const [header, setHeader] = useState(null); // { page, title, lead } set by a page that changes its own heading
   const loadedAt = useRef(new Date().toISOString().slice(0, 19));
-
-  useEffect(() => onMockedChange(setMocked), []);
 
   useEffect(() => {
     const onHash = () => setRoute(readHash(pages));
@@ -68,16 +66,20 @@ export function AppProvider({ pages, children }) {
     window.scrollTo({ top: 0 });
   }, []);
 
+  // First load. `retry` runs it again after a failure (no placeholder data, ever).
+  const [attempt, setAttempt] = useState(0);
   useEffect(() => {
+    setError(null);
     Promise.all([api.meta(), api.conditions(), api.actions()])
       .then(([m, c, a]) => {
         setMeta(m);
         setConditions(c);
-        setThresholds(Object.fromEntries(c.map((x) => [x.id, { value: x.threshold.value, window: x.window?.value ?? null }])));
+        setThresholds((t) => (Object.keys(t).length ? t : Object.fromEntries(c.map((x) => [x.id, { value: x.threshold.value, window: x.window?.value ?? null }]))));
         setActions(a);
       })
       .catch(setError);
-  }, []);
+  }, [attempt]);
+  const retry = useCallback(() => setAttempt((n) => n + 1), []);
 
   // Theme: the palette switches on meta.company (see theme/tokens.css).
   useEffect(() => {
@@ -100,7 +102,7 @@ export function AppProvider({ pages, children }) {
         .catch((e) => { if (live) { setError(e); setAlertsLoading(false); } });
     }, 180);
     return () => { live = false; clearTimeout(t); };
-  }, [conditions, thresholds]);
+  }, [conditions, thresholds, attempt]);
 
   const refreshActions = useCallback(() => api.actions().then(setActions).catch(() => {}), []);
 
@@ -128,6 +130,19 @@ export function AppProvider({ pages, children }) {
     go("ask");
   }, [go]);
 
+  // "See these orders" from a chart: Ask opens and sends this question once.
+  const pendingQuestion = useRef(null);
+  const askQuestion = useCallback((question) => {
+    setAskContext(null);
+    pendingQuestion.current = question;
+    go("ask");
+  }, [go]);
+  const takePendingQuestion = useCallback(() => {
+    const q = pendingQuestion.current;
+    pendingQuestion.current = null;
+    return q;
+  }, []);
+
   const labels = useMemo(() => {
     const entity = meta?.entity_label ?? "Customer";
     const owner = meta?.owner_label ?? "Account rep";
@@ -147,7 +162,8 @@ export function AppProvider({ pages, children }) {
   const rowsByAlert = useMemo(() => {
     const out = {};
     for (const a of actions) if (a.alert_id) (out[a.alert_id] ||= []).push(a);
-    for (const k in out) out[k].sort((x, y) => x.ts.localeCompare(y.ts));
+    // Chain order: date, then step number inside the chain (seq), then real time for human rows.
+    for (const k in out) out[k].sort((x, y) => x.ts.slice(0, 10).localeCompare(y.ts.slice(0, 10)) || (x.seq ?? 99) - (y.seq ?? 99) || x.ts.localeCompare(y.ts));
     return out;
   }, [actions]);
 
@@ -155,8 +171,8 @@ export function AppProvider({ pages, children }) {
     meta, labels, conditions, thresholds, setThreshold, resetThreshold,
     alerts, alertsLoading, actions, notifiedByAlert, rowsByAlert, refreshActions, override, runAndLog,
     entityId, openEntity: setEntityId, closeEntity: () => setEntityId(null),
-    route, go, askContext, setAskContext, askAbout,
-    error, source: SOURCE, mocked, loadedAt: loadedAt.current,
+    route, go, askContext, setAskContext, askAbout, askQuestion, takePendingQuestion, header, setHeader,
+    error, retry, loadedAt: loadedAt.current,
     openCount: alerts.filter(isOpen).length,
   };
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

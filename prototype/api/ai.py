@@ -59,7 +59,7 @@ def numbers_ok(text, facts_text):
     return True
 
 
-def _call(system, prompt, max_tokens=700):
+def _call(system, prompt, max_tokens=700, effort="low"):
     import anthropic
     client = _get_client()
     try:
@@ -68,7 +68,7 @@ def _call(system, prompt, max_tokens=700):
             max_tokens=max_tokens,
             betas=["server-side-fallback-2026-07-01"],
             fallbacks="default",
-            output_config={"effort": "low"},
+            output_config={"effort": effort},
             system=system,
             messages=[{"role": "user", "content": prompt}],
         )
@@ -78,6 +78,8 @@ def _call(system, prompt, max_tokens=700):
     if resp.stop_reason == "refusal":
         return None, "ai_refused"
     text = "".join(b.text for b in resp.content if getattr(b, "type", "") == "text").strip()
+    if resp.stop_reason == "max_tokens":
+        return (text or None), "ai_truncated"  # cut off: callers must not use it as finished text
     return (text or None), "ai"
 
 
@@ -86,7 +88,7 @@ SYSTEM = ("You write short, plain business text for Chrome & Oak Office Supply s
           "No greetings beyond one line, no sign-off slogans, no dashes as punctuation.")
 
 
-def write(kind, facts_text, fallback, max_tokens=700, system=None):
+def write(kind, facts_text, fallback, max_tokens=700, system=None, effort="low"):
     """kind: 'draft' (first line subject, blank line, body) or 'triage' (two lines: summary, why).
     Returns (text, source) where source is 'ai' or the reason the template was used."""
     if not enabled():
@@ -100,8 +102,8 @@ def write(kind, facts_text, fallback, max_tokens=700, system=None):
     else:
         task = ("Write two lines. Line 1: a one-sentence summary of the case. "
                 "Line 2: one sentence on why a person should or need not review it, consistent with the decision in the facts.")
-    text, source = _call(system or SYSTEM, f"Facts:\n{facts_text}\n\n{task}", max_tokens)
-    if not text:
+    text, source = _call(system or SYSTEM, f"Facts:\n{facts_text}\n\n{task}", max_tokens, effort)
+    if not text or source != "ai":
         return fallback, f"template: {source}"
     if not numbers_ok(text, facts_text):
         return fallback, "template: AI text had a number not in the facts"

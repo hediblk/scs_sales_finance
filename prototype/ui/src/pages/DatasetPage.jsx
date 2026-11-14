@@ -1,10 +1,20 @@
 import { Fragment, useEffect, useMemo, useRef, useState } from "react";
-import { Bar, BarChart, ResponsiveContainer, Tooltip } from "recharts";
 import { api } from "../data/api.js";
 import { useResource } from "../state.jsx";
 import { num } from "../lib/format.js";
 import { ChartCard } from "../components/Chart.jsx";
 import { Empty, ErrorBox, Loading, SectionHead } from "../components/ui.jsx";
+import { DynamicChart } from "../components/DynamicChart.jsx";
+import { FilterBar, FilterProvider } from "../components/Filters.jsx";
+import { ProfileTable } from "../components/ProfileTable.jsx";
+
+// Clean mode: the four dataset charts as live presets of /api/explore (Raw keeps the raw labels on purpose).
+const CLEAN_PRESETS = [
+  { metric: "orders", by: "month", title: "Orders per month", caption: "Clean orders by order month." },
+  { metric: "orders", by: "region", title: "Orders per region", caption: "After cleaning, every spelling maps to one of five regions." },
+  { metric: "orders", by: "discount_band", title: "Orders by discount band", caption: "After the percent fix, every discount is a fraction." },
+  { metric: "refunds", by: "month", title: "Refunds per month", caption: "Refunds in dollars, clean data." },
+];
 
 const SOURCES = [
   ["raw", "Raw", "data/raw exactly as received. Every value read as text, nothing coerced or fixed."],
@@ -83,80 +93,7 @@ function JoinDiagram({ tables, joins }) {
 
 /* ---------- Column profiles ---------- */
 
-function MiniHist({ hist }) {
-  return (
-    <div style={{ height: 64 }}>
-      <ResponsiveContainer width="100%" height="100%">
-        <BarChart data={hist} margin={{ top: 2, right: 0, bottom: 0, left: 0 }} barCategoryGap={1}>
-          <Tooltip cursor={{ fill: "var(--surface-3)" }} content={({ active, payload }) => active && payload?.length ? (
-            <div className="chart-tip">{num(payload[0].payload.from)} to {num(payload[0].payload.to)}: <b>{num(payload[0].payload.count)}</b></div>
-          ) : null} />
-          <Bar dataKey="count" fill="var(--series-2)" radius={[2, 2, 0, 0]} isAnimationActive={false} />
-        </BarChart>
-      </ResponsiveContainer>
-    </div>
-  );
-}
-
 const shown = (v) => (v === "" || v == null ? <i className="blank">blank</i> : v);
-
-function ProfileCard({ c, total, source, onFilter }) {
-  const top = c.top ?? [];
-  const max = Math.max(...top.map((t) => t.count), 1);
-  const allDistinct = top.length > 0 && top[0].count === 1;
-  return (
-    <article className={`card prof${c.changed_cells ? " is-changed" : ""}`}>
-      <header className="prof-head">
-        <span className="prof-name mono">{c.column}</span>
-        <span className="chip chip-info">{c.dtype}</span>
-      </header>
-      <div className="prof-stats">
-        <span>Missing <b>{num(c.missing)}</b> ({num(c.missing_pct)}%)</span>
-        <span>Distinct <b>{num(c.distinct)}</b></span>
-        {source === "clean" && c.changed_cells != null && (
-          <span className={c.changed_cells ? "prof-changed" : "muted"}>Changed vs raw <b>{num(c.changed_cells)}</b></span>
-        )}
-      </div>
-      {c.missing > 0 && <div className="prof-missing" title={`${c.missing_pct}% missing`}><i style={{ width: `${Math.max(2, c.missing_pct)}%` }} /></div>}
-
-      {c.numeric && (
-        <div className="prof-num">
-          <MiniHist hist={c.numeric.hist} />
-          <div className="prof-range">
-            <span>min <b>{num(c.numeric.min)}</b></span><span>median <b>{num(c.numeric.median)}</b></span><span>max <b>{num(c.numeric.max)}</b></span>
-          </div>
-          <div className="prof-flags">
-            {c.numeric.negatives > 0 && <span className="chip chip-bad">{c.numeric.negatives} negative</span>}
-            {c.numeric.zeros > 0 && <span className="chip chip-neutral">{num(c.numeric.zeros)} zero</span>}
-          </div>
-        </div>
-      )}
-      {c.date && (
-        <div className="prof-date">
-          <div><b>{c.date.min}</b> to <b>{c.date.max}</b>{c.date.range_from && <span className="muted small"> ({c.date.range_from})</span>}</div>
-          <div className="prof-flags">
-            {c.date.formats.map((f) => <span key={f.pattern} className={`chip ${c.date.formats.length > 1 ? "chip-warn" : "chip-neutral"}`}><span className="mono">{f.pattern}</span> {num(f.count)}</span>)}
-          </div>
-        </div>
-      )}
-      {!c.numeric && !c.date && top.length > 0 && (
-        allDistinct ? <p className="muted small" style={{ margin: "8px 0 0" }}>Every value is different (an identifier).</p> : (
-          <ul className="prof-top">
-            {top.slice(0, 7).map((t) => (
-              <li key={t.value}>
-                <button type="button" className="prof-val mono" onClick={() => onFilter(c.column, t.value)} title={`Show rows where ${c.column} is "${t.value}"`}>{shown(t.value)}</button>
-                <span className="prof-bar"><i style={{ width: `${(t.count / max) * 100}%` }} /></span>
-                <span className="prof-count">{num(t.count)}</span>
-              </li>
-            ))}
-            {c.distinct > 7 && <li className="muted small">{num(c.distinct - 7)} more values</li>}
-          </ul>
-        )
-      )}
-      {total > 0 && <span className="sr-only">{total} rows</span>}
-    </article>
-  );
-}
 
 /* ---------- Raw table ---------- */
 
@@ -166,8 +103,9 @@ function RowsTable({ source, table, filter, setFilter }) {
   const [qLive, setQLive] = useState("");
   const [sort, setSort] = useState(null); // { col, desc }
   const [state, setState] = useState({ data: null, error: null, loading: true });
+  const [attempt, setAttempt] = useState(0);
 
-  useEffect(() => { setOffset(0); }, [source, table, filter, q]);
+  useEffect(() => { setOffset(0); }, [source, table, filter, q, sort]);
   useEffect(() => { const t = setTimeout(() => setQ(qLive.trim()), 250); return () => clearTimeout(t); }, [qLive]);
   useEffect(() => {
     let live = true;
@@ -176,12 +114,12 @@ function RowsTable({ source, table, filter, setFilter }) {
       .then((data) => live && setState({ data, error: null, loading: false }))
       .catch((error) => live && setState({ data: null, error, loading: false }));
     return () => { live = false; };
-  }, [source, table, offset, q, filter, sort]);
+  }, [source, table, offset, q, filter, sort, attempt]);
 
   const d = state.data;
   const rows = useMemo(() => {
     if (!d) return [];
-    if (!sort) return d.rows;
+    if (!sort || d.sort === sort.col) return d.rows; // the API sorted the whole table
     const i = d.columns.indexOf(sort.col);
     const key = (v) => (v !== "" && !Number.isNaN(Number(v)) ? Number(v) : String(v).toLowerCase());
     return [...d.rows].sort((a, b) => {
@@ -204,12 +142,11 @@ function RowsTable({ source, table, filter, setFilter }) {
           </span>
         )}
         <span className="spacer" />
-        {d && <span className="muted small">{d.total ? `${num(offset + 1)} to ${num(Math.min(offset + PAGE, d.total))} of ${num(d.total)}` : "0 rows"}{d.snapshot ? " (offline snapshot)" : ""}</span>}
+        {d && <span className="muted small">{d.total ? `${num(offset + 1)} to ${num(Math.min(offset + PAGE, d.total))} of ${num(d.total)}` : "0 rows"}</span>}
         <button type="button" className="btn btn-quiet btn-sm" disabled={offset === 0} onClick={() => setOffset((o) => Math.max(0, o - PAGE))}>Previous</button>
         <button type="button" className="btn btn-quiet btn-sm" disabled={!d || offset + PAGE >= d.total} onClick={() => setOffset((o) => o + PAGE)}>Next</button>
       </div>
-      {sort && <p className="muted small" style={{ margin: "0 0 6px" }}>Sorted by {sort.col} within this page of {PAGE}.</p>}
-      {state.error && <ErrorBox error={state.error} />}
+      {state.error && <ErrorBox error={state.error} onRetry={() => setAttempt((n) => n + 1)} />}
       {!d && state.loading && <Loading what="Loading rows" />}
       {d && (
         <div className={`table-wrap ds-grid${state.loading ? " is-loading" : ""}`}>
@@ -243,9 +180,9 @@ function RowsTable({ source, table, filter, setFilter }) {
 /* ---------- Set aside (clean only) ---------- */
 
 function SetAside() {
-  const { data, error } = useResource("ds-set-aside", api.setAside);
+  const { data, error, reload } = useResource("ds-set-aside", api.setAside);
   const [open, setOpen] = useState(null);
-  if (error) return <ErrorBox error={error} />;
+  if (error) return <ErrorBox error={error} onRetry={reload} />;
   if (!data) return <Loading what="Loading set-aside rows" />;
   const groups = data.reduce((m, r) => ((m[`${r.outcome}: ${r.reason}`] = (m[`${r.outcome}: ${r.reason}`] ?? 0) + 1), m), {});
   return (
@@ -293,6 +230,9 @@ export default function DatasetPage({ params }) {
   const tables = useResource(`ds-tables-${source}`, () => api.dsTables(source), [source]);
   const profile = useResource(`ds-profile-${source}-${table}`, () => api.dsProfile(source, table), [source, table]);
   const charts = useResource(`ds-charts-${source}`, () => api.dsCharts(source), [source]);
+  // Raw mode compares distinct counts with the clean profile to flag values written several ways.
+  const cleanProfile = useResource(`ds-profile-clean-${table}`, () => api.dsProfile("clean", table), [table]);
+  const cleanDistinct = Object.fromEntries((cleanProfile.data ?? []).map((c) => [c.column, c.distinct]));
   const rowsRef = useRef(null);
 
   useEffect(() => { setFilter(null); }, [table]);
@@ -303,6 +243,9 @@ export default function DatasetPage({ params }) {
   const tdata = tables.data;
   const tmeta = tdata?.tables.find((t) => t.name === table);
   const chartList = Array.isArray(charts.data) ? charts.data : charts.data?.charts ?? [];
+  // "N above 1" for the discount column comes from the raw discount histogram the API already computes.
+  const discountHist = chartList.find((c) => /discount_hist/.test(c.id));
+  const aboveOne = discountHist?.rows?.filter((r) => /1 or more/i.test(String(r[discountHist.x] ?? ""))).reduce((t, r) => t + (r.rows ?? r[discountHist.series?.[0]?.key] ?? 0), 0) ?? 0;
 
   return (
     <>
@@ -315,7 +258,7 @@ export default function DatasetPage({ params }) {
         <p>{SOURCES.find(([k]) => k === source)[2]}</p>
       </div>
 
-      {tables.error && <ErrorBox error={tables.error} />}
+      {tables.error && <ErrorBox error={tables.error} onRetry={tables.reload} />}
       {!tdata ? <Loading what="Loading the files" /> : (
         <>
           <TableCards tables={tdata.tables} active={table} onPick={setTable} />
@@ -323,15 +266,22 @@ export default function DatasetPage({ params }) {
         </>
       )}
 
+      <FilterProvider id="dataset">
+      <section className="block">
+        <SectionHead title="Explore (clean data)">
+          Live chart on the cleaned orders, whichever mode is selected above. Change the measure, the grouping or the split; click a bar to filter.
+        </SectionHead>
+        <FilterBar note={source === "clean" ? "Filters apply to this chart and to the clean charts further down." : "Filters apply to this chart. The raw charts further down show the file as received."} />
+        <DynamicChart height={280} />
+      </section>
+
       <section className="block">
         <SectionHead title={`Columns in ${table}`}>
-          {tmeta ? `${tmeta.columns} columns, ${num(tmeta.rows)} rows. Click a top value to see those rows below.` : ""}
+          {tmeta ? `${tmeta.columns} columns, ${num(tmeta.rows)} rows. Click a row for the full values and a link to those rows.` : ""}
         </SectionHead>
-        {profile.error && <ErrorBox error={profile.error} />}
+        {profile.error && <ErrorBox error={profile.error} onRetry={profile.reload} />}
         {!profile.data ? <Loading what="Profiling columns" /> : (
-          <div className="prof-grid">
-            {profile.data.map((c) => <ProfileCard key={c.column} c={c} total={tmeta?.rows ?? 0} source={source} onFilter={filterTo} />)}
-          </div>
+          <ProfileTable rows={profile.data} tmeta={tmeta} source={source} aboveOne={table === "orders" ? aboveOne : 0} cleanDistinct={cleanProfile.data ? cleanDistinct : null} onFilter={filterTo} />
         )}
       </section>
 
@@ -343,12 +293,21 @@ export default function DatasetPage({ params }) {
       </section>
 
       <section className="block">
-        <SectionHead title={`${source === "raw" ? "Raw" : "Clean"} charts`}>Switch Raw and Clean to see what cleaning changed.</SectionHead>
-        {charts.error && <ErrorBox error={charts.error} />}
-        {!charts.data ? <Loading what="Loading charts" /> : (
-          <div className="grid-2">{chartList.map((c) => <ChartCard key={c.id} chart={c} height={220} />)}</div>
+        <SectionHead title={`${source === "raw" ? "Raw" : "Clean"} charts`}>
+          {source === "raw" ? "The file as received, raw labels included. Switch to Clean for the same charts, live." : "Live charts on the clean data: change the view or click to filter."}
+        </SectionHead>
+        {source === "raw" ? (
+          <>
+            {charts.error && <ErrorBox error={charts.error} onRetry={charts.reload} />}
+            {!charts.data ? <Loading what="Loading charts" /> : (
+              <div className="grid-2">{chartList.map((c) => <ChartCard key={c.id} chart={c} height={220} />)}</div>
+            )}
+          </>
+        ) : (
+          <div className="grid-2">{CLEAN_PRESETS.map((p) => <DynamicChart key={p.title} preset={p} height={220} />)}</div>
         )}
       </section>
+      </FilterProvider>
 
       {source === "clean" && <SetAside />}
     </>

@@ -9,11 +9,12 @@ import AccountsPage from "./pages/AccountsPage.jsx";
 import LogPage from "./pages/LogPage.jsx";
 import AskPage from "./pages/AskPage.jsx";
 import DatasetPage from "./pages/DatasetPage.jsx";
+import WhatIfPage from "./pages/WhatIfPage.jsx";
 
-const PAGE_COMPONENTS = { dataset: DatasetPage, gap: GapPage, queue: QueuePage, accounts: AccountsPage, log: LogPage, ask: AskPage };
+const PAGE_COMPONENTS = { dataset: DatasetPage, whatif: WhatIfPage, gap: GapPage, queue: QueuePage, accounts: AccountsPage, log: LogPage, ask: AskPage };
 
 function Shell() {
-  const { meta, labels, error, route, go } = useApp();
+  const { meta, labels, error, retry, route, go } = useApp();
   const page = PAGES.find((p) => p.key === route.key) ?? PAGES[0];
   const Page = PAGE_COMPONENTS[page.page];
 
@@ -23,7 +24,7 @@ function Shell() {
       <main className="main">
         <Topbar page={page} labels={labels} />
         <div className="content">
-          {error && <ErrorBox error={error} />}
+          {error && <ErrorBox error={error} onRetry={retry} />}
           {!meta && !error ? <Loading what="Loading the data" /> : Page ? <Page key={page.key} params={route.params} /> : null}
         </div>
       </main>

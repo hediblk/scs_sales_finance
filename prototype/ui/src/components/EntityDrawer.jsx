@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { api } from "../data/api.js";
-import { useApp, useResource } from "../state.jsx";
-import { dateLabel, fmt, money } from "../lib/format.js";
+import { useApp } from "../state.jsx";
+import { dateLabel, fmt, money, plainRules } from "../lib/format.js";
 import { ChartRenderer, Legend } from "./Chart.jsx";
 import { ErrorBox, Loading, SeverityChip, StatusChip } from "./ui.jsx";
 
@@ -22,43 +22,11 @@ function CompareRow({ c }) {
   );
 }
 
-// Advisory credit hold: set by a person, with a reason, logged.
-function CreditHold({ id }) {
-  const { refreshActions } = useApp();
-  const accounts = useResource("accounts", api.accounts);
-  const acct = accounts.data?.find((a) => a.id === id);
-  const [reason, setReason] = useState("");
-  const [busy, setBusy] = useState(false);
-  const [err, setErr] = useState(null);
-  if (!acct) return null;
-  const on = acct.credit_hold;
-  const toggle = async () => {
-    setBusy(true); setErr(null);
-    try {
-      const updated = await api.creditHold(id, !on, reason.trim());
-      accounts.set(accounts.data.map((a) => (a.id === id ? { ...a, ...updated } : a)));
-      setReason("");
-      refreshActions();
-    } catch (e) { setErr(e.message); } finally { setBusy(false); }
-  };
-  return (
-    <div className={`hold-box${on ? " is-on" : ""}`}>
-      <div><b>{on ? "Credit hold is on." : "No credit hold."}</b> <span className="muted small">Advisory: new orders get flagged for review, nothing is blocked.</span></div>
-      <div className="row">
-        <input className="input" value={reason} onChange={(e) => setReason(e.target.value)} placeholder="Reason (goes into the activity log)" aria-label="Reason" />
-        <button type="button" className={on ? "btn btn-quiet btn-sm" : "btn btn-sm"} disabled={busy || !reason.trim()} onClick={toggle}>
-          {busy ? "Saving..." : on ? "Lift the hold" : "Put on credit hold"}
-        </button>
-      </div>
-      {err && <div className="error-box">{err}</div>}
-    </div>
-  );
-}
-
 // Drill-down panel for one customer or rep. Opens from an alert, an account card, a rep row or a log row.
 export function EntityDrawer() {
   const { entityId, closeEntity, labels, alerts, conditions } = useApp();
   const [state, setState] = useState({ data: null, error: null });
+  const [attempt, setAttempt] = useState(0);
 
   useEffect(() => {
     if (!entityId) return;
@@ -66,7 +34,7 @@ export function EntityDrawer() {
     setState({ data: null, error: null });
     api.entity(entityId).then((data) => live && setState({ data, error: null })).catch((error) => live && setState({ data: null, error }));
     return () => { live = false; };
-  }, [entityId]);
+  }, [entityId, attempt]);
 
   useEffect(() => {
     if (!entityId) return;
@@ -92,20 +60,18 @@ export function EntityDrawer() {
           <button type="button" className="btn btn-quiet btn-sm" onClick={closeEntity}>Close</button>
         </header>
 
-        {state.error && <ErrorBox error={state.error} />}
+        {state.error && <ErrorBox error={state.error} onRetry={() => setAttempt((n) => n + 1)} />}
         {!d && !state.error && <Loading />}
         {d && (
           <div className="drawer-body">
             <div className="facts">
               {d.facts.map((f) => (
                 <div key={f.label} className="fact">
-                  <div className="fact-label">{f.label}</div>
+                  <div className="fact-label">{plainRules(f.label)}</div>
                   <div className="fact-value">{fmt(f.value, f.unit)}</div>
                 </div>
               ))}
             </div>
-
-            <CreditHold id={entityId} />
 
             {d.compare?.length > 0 && (
               <section className="drawer-section">

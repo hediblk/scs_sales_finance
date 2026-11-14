@@ -41,7 +41,7 @@ export function Wordmark({ meta }) {
 }
 
 export function Sidebar({ pages, active, onSelect }) {
-  const { meta, openCount, source } = useApp();
+  const { meta, openCount } = useApp();
   return (
     <aside className="sidebar">
       <Wordmark meta={meta} />
@@ -60,7 +60,6 @@ export function Sidebar({ pages, active, onSelect }) {
       </nav>
       <div className="side-foot">
         <div><span className="side-foot-label">Data extracted</span>{meta ? dateLabel(meta.extracted_on) : ""}</div>
-        <div><span className="side-foot-label">Source</span>{source === "mock" ? "Mock JSON (src/mock)" : "FastAPI on :8000"}</div>
         {meta?.ai_enabled === false && <div><span className="side-foot-label">AI text</span>Template fallback (no key)</div>}
       </div>
     </aside>
@@ -68,27 +67,16 @@ export function Sidebar({ pages, active, onSelect }) {
 }
 
 export function Topbar({ page, labels }) {
-  const { source, mocked } = useApp();
-  const lead = typeof page.lead === "function" ? page.lead(labels) : page.lead;
-  const cls = source === "mock" ? "is-mock" : mocked.length ? "is-mixed" : "is-live";
-  const text = source === "mock" ? "Mock data" : mocked.length ? `Live API, ${mocked.length} on mock` : "Live API";
-  const title = source === "mock"
-    ? "Every number on screen is placeholder mock data"
-    : mocked.length ? `Not served by the API yet, shown from src/mock: ${mocked.join(", ")}` : "Every number comes from the FastAPI back end";
+  const { header } = useApp();
+  const own = header?.page === page.key ? header : null;
+  const lead = own?.lead ?? (typeof page.lead === "function" ? page.lead(labels) : page.lead);
   return (
     <header className="topbar">
       <div className="topbar-text">
         <div className="eyebrow">{page.step ? `${page.step} ` : ""}{page.label}</div>
-        <h1>{page.title}</h1>
+        <h1>{own?.title ?? page.title}</h1>
         {lead && <p className="lead">{lead}</p>}
       </div>
-      <span className={`source-pill ${cls}`} title={title}>{text}</span>
     </header>
   );
-}
-
-// Inline marker for a section whose endpoint is answered by the mock.
-export function MockNote({ route }) {
-  const { mocked } = useApp();
-  return mocked.includes(route) ? <span className="mock-note" title={`${route} is not served by the API yet`}>Mock data</span> : null;
 }

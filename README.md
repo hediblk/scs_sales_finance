@@ -58,11 +58,21 @@ The notebook keeps summaries and review tables in memory; optional CSV exports a
 
 `prototype/` is the app: a FastAPI + pandas back end (`prototype/api`) and a React + Vite UI (`prototype/ui`), self-contained with its own copy of the raw and clean data. The plan, demo script and API contract are in `prototype/docs` (`PLAN.md`, `DEMO.md`, `ui-contract.md`).
 
+Needs Python 3.12+ and Node 18+. One command starts everything (the first run installs the dependencies):
+
+```bash
+cd prototype && ./run-demo.sh
+```
+
+On Windows, double-click `prototype/run-demo.bat`. Then open http://localhost:5173 (API on http://localhost:8000).
+
+By hand, Mac / Linux (on Windows use `.venv/Scripts/python`):
+
 ```bash
 cd prototype
-python -m venv .venv
-.venv/Scripts/python -m pip install -r api/requirements.txt
-.venv/Scripts/python -m uvicorn api.main:app --port 8000
+python3 -m venv .venv
+.venv/bin/python -m pip install -r api/requirements.txt
+.venv/bin/python -m uvicorn api.main:app --port 8000
 ```
 
 In a second terminal:
@@ -73,4 +83,6 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:5173. AI wording (email drafts, Ask) needs `ANTHROPIC_API_KEY=...` in `prototype/.env`, which is gitignored; without it the app uses template text. Every flag and number comes from the rules in `prototype/api`, never from the model.
+AI wording (email drafts, advisory notes, Ask) is optional: copy `prototype/.env.example` to `prototype/.env` and paste an Anthropic API key (`.env` is gitignored). Without a key the app runs fully and the text uses templates. Every flag, number and chart comes from the rules in `prototype/api`, never from the model.
+
+Pages: Dataset, The gap, Action queue, What if (policy simulator: damage, pricing, credit), Accounts & Limits, Ask, Activity log. `POST /api/admin/reset` clears the user actions before a demo run. `python -m api.check` (from `prototype/`) recomputes the headline numbers.

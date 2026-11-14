@@ -1,0 +1,225 @@
+{
+  "model_version": "sim-2",
+  "generated_at": "2026-11-14T14:05:17",
+  "data_hashes": {
+    "customers.csv": "f8661d83bd41532814673623d32fe1d3dcc3e41773aeea8d27abbcad325abcdd",
+    "orders.csv": "ccd590988f6fb07506984303d967bbf9d9f022615b1ec80e9e33905ed0eaf03d",
+    "returns.csv": "fa27874ed5755ec45a10f17ef5e9c8b800b968d49e0f794654cadcfc28cdc47b"
+  },
+  "scope": "Pricing and damage: orders Jan-Sep 2026. Credit: replay from Jan 2025, sales effects Jan-Sep 2026, exposure at 2026-10-31.",
+  "assumptions": [
+    "Clean data as of 2026-11-14 12:40: orders to 2026-09-30, returns and payments observed to 2026-10-31. All money in CAD.",
+    "Gross profit and contribution use only order lines with a known unit cost; unknown costs stay unknown (coverage shown).",
+    "Refunds are attributed to the order they belong to (one return at most per order).",
+    "Retrospective experiment on orders that already happened, not a demand forecast."
+  ],
+  "evaluation": {
+    "orders_from": "2026-01-01",
+    "orders_to": "2026-09-30",
+    "observed_to": "2026-10-31"
+  },
+  "modules": {
+    "pricing_policy": {
+      "status": "ok",
+      "controls": {
+        "cap": [
+          0,
+          100,
+          1
+        ],
+        "retention": [
+          0,
+          100,
+          1
+        ]
+      },
+      "selected_parameters": {
+        "cap": 0,
+        "retention": 100
+      },
+      "baseline_metrics": {
+        "revenue": 3898558.44,
+        "gross_profit": 1044578.43,
+        "weighted_margin_pct": 27.16,
+        "refunds": 293370.77,
+        "net_revenue_after_refunds": 3605187.67,
+        "affected_orders": 0,
+        "expected_retained_orders": 0.0,
+        "expected_retained_units": 19585.0,
+        "affected_unknown_cost_orders": 0
+      },
+      "selected_metrics": {
+        "cap": 0,
+        "revenue": 4674793.13,
+        "gross_profit": 1814572.73,
+        "weighted_margin_pct": 39.3,
+        "refunds": 293370.77,
+        "net_revenue_after_refunds": 4381422.36,
+        "affected_orders": 2436,
+        "expected_retained_orders": 2436.0,
+        "expected_retained_units": 19585.0,
+        "affected_unknown_cost_orders": 34
+      },
+      "deltas": {
+        "revenue": 776234.69,
+        "gross_profit": 769994.3,
+        "weighted_margin_pct": 12.15,
+        "refunds": 0.0,
+        "net_revenue_after_refunds": 776234.69,
+        "affected_orders": 2436,
+        "expected_retained_orders": 2436.0,
+        "expected_retained_units": 0.0,
+        "affected_unknown_cost_orders": 34
+      },
+      "selection_reason": "Cap 0% at 100% retention: highest gross profit ($1,814,573 vs $1,044,578 baseline) among caps that do not reduce revenue, gross profit or weighted margin. At 100% retention with fixed quantities and costs, a lower cap mechanically raises revenue and gross profit: a boundary result of that assumption, not a demand forecast.",
+      "objective": "Keep revenue, gross profit and weighted margin >= baseline; max gross profit, then revenue, then margin; ties: higher cap."
+    },
+    "damage_policy": {
+      "status": "ok",
+      "controls": {
+        "trigger": [
+          0,
+          100,
+          1
+        ],
+        "effectiveness": [
+          0,
+          100,
+          1
+        ],
+        "cost": [
+          0,
+          20,
+          1
+        ]
+      },
+      "selected_parameters": {
+        "trigger": 10,
+        "effectiveness": 25,
+        "cost": 5
+      },
+      "baseline_metrics": {
+        "revenue": 3898558.44,
+        "gross_profit": 1044578.43,
+        "weighted_margin_pct": 27.16,
+        "refunds": 293370.77,
+        "net_revenue_after_refunds": 3605187.67,
+        "intervention_cost": 0.0,
+        "avoided_damage_refunds": 0.0,
+        "net_benefit": 0.0,
+        "contribution": 756655.21,
+        "contribution_margin_pct": 21.26,
+        "targeted_groups": 0,
+        "targeted_orders": 0,
+        "targeted_units": 0,
+        "targeted_unknown_cost_orders": 0,
+        "targeted_unknown_cost_damaged": 0
+      },
+      "selected_metrics": {
+        "trigger": 10,
+        "revenue": 3898558.44,
+        "gross_profit": 1044578.43,
+        "weighted_margin_pct": 27.16,
+        "refunds": 265261.92,
+        "net_revenue_after_refunds": 3633296.52,
+        "intervention_cost": 5460.0,
+        "avoided_damage_refunds": 28108.85,
+        "net_benefit": 22648.85,
+        "contribution": 778007.17,
+        "contribution_margin_pct": 21.7,
+        "targeted_groups": 3,
+        "targeted_orders": 160,
+        "targeted_units": 1092,
+        "targeted_unknown_cost_orders": 2,
+        "targeted_unknown_cost_damaged": 1
+      },
+      "deltas": {
+        "revenue": 0.0,
+        "gross_profit": 0.0,
+        "weighted_margin_pct": 0.0,
+        "refunds": -28108.85,
+        "net_revenue_after_refunds": 28108.85,
+        "intervention_cost": 5460.0,
+        "avoided_damage_refunds": 28108.85,
+        "net_benefit": 22648.85,
+        "contribution": 21351.96,
+        "contribution_margin_pct": 0.44,
+        "targeted_groups": 3,
+        "targeted_orders": 160,
+        "targeted_units": 1092,
+        "targeted_unknown_cost_orders": 2,
+        "targeted_unknown_cost_damaged": 1
+      },
+      "selection_reason": "Trigger 10% (strictly above, at least 30 orders) targets 3 group(s), 1092 units: highest known-cost contribution ($778,007 vs $756,655) at the starting assumptions of 25% damage-refund reduction and CAD 5 per shipped unit; ties go to fewer targeted shipments, then the higher trigger.",
+      "objective": "Keep net revenue after refunds, contribution and contribution margin >= baseline; max contribution, then net revenue, then margin; ties: fewer targeted units, then higher trigger."
+    },
+    "credit_policy": {
+      "status": "ok",
+      "controls": {
+        "allowance": [
+          1,
+          180,
+          1
+        ],
+        "action": [
+          "prepayment",
+          "full_ban"
+        ],
+        "acceptance": [
+          0,
+          100,
+          1
+        ]
+      },
+      "selected_parameters": {
+        "allowance": 1,
+        "action": "prepayment",
+        "acceptance": 100
+      },
+      "baseline_metrics": {
+        "revenue": 3898558.44,
+        "gross_profit": 1044578.43,
+        "weighted_margin_pct": 27.16,
+        "refunds": 293370.77,
+        "net_revenue_after_refunds": 3605187.67,
+        "overdue_exposure": 135366.89,
+        "open_exposure": 250003.52,
+        "restricted_accounts": 0,
+        "restricted_orders": 0,
+        "prepaid_revenue": 0.0,
+        "forgone_revenue": 0.0
+      },
+      "selected_metrics": {
+        "allowance": 1,
+        "action": "prepayment",
+        "probation_accounts": 295,
+        "revenue": 3898558.44,
+        "gross_profit": 1044578.43,
+        "weighted_margin_pct": 27.16,
+        "refunds": 293370.77,
+        "net_revenue_after_refunds": 3605187.67,
+        "overdue_exposure": 4961.06,
+        "open_exposure": 7231.97,
+        "restricted_accounts": 266,
+        "restricted_orders": 1633,
+        "prepaid_revenue": 3000573.39,
+        "forgone_revenue": 0.0
+      },
+      "deltas": {
+        "revenue": 0.0,
+        "gross_profit": 0.0,
+        "weighted_margin_pct": 0.0,
+        "refunds": 0.0,
+        "net_revenue_after_refunds": 0.0,
+        "overdue_exposure": -130405.83,
+        "open_exposure": -242771.55,
+        "restricted_accounts": 266,
+        "restricted_orders": 1633,
+        "prepaid_revenue": 3000573.39,
+        "forgone_revenue": 0.0
+      },
+      "selection_reason": "G = 1 days with prepayment at 100% prepayment acceptance: lowest overdue exposure at 2026-10-31 ($4,961 vs $135,367) among settings that keep Jan-Sep 2026 revenue, gross profit and margin at baseline; 266 accounts restricted. With 100% prepayment acceptance, restriction costs no sales, so the shortest allowance wins: a boundary result of that optimistic assumption. A full ban loses revenue and is never eligible.",
+      "objective": "Keep Jan-Sep 2026 revenue, gross profit and weighted margin >= baseline; min overdue exposure at 2026-10-31; ties: lower open exposure, fewer restricted accounts, longer allowance, prepayment over ban; policy off preferred when identical."
+    }
+  }
+}

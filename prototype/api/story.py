@@ -92,6 +92,9 @@ def overview(ds: Dataset):
     reps = rep_stats(ds)
     r07 = reps.loc["R07"]
     others = reps.drop("R07")
+    paid = ds.orders[(ds.orders.terms_days > 0) & ds.orders.payment_date.notna()]
+    late = (100 * (paid.payment_date > paid.due_date)).groupby(paid.year).mean()
+    coverage = 100 * ds.orders.cost_known.mean()
     kpis = [
         {"id": "revenue", "label": "Revenue, Jan-Sep 2026", "value": round(h[2026]["revenue"], 2), "unit": "$",
          "hint": f"{g['revenue']:+.1f}% vs Jan-Sep 2025", "tone": "good"},
@@ -104,7 +107,8 @@ def overview(ds: Dataset):
         {"id": "qe_flagged", "label": "Quarter-end discount orders", "value": sim["hits"], "unit": "orders",
          "hint": f"{fmt_money(sim['amount'])} revenue, {sim['top_owner_hits']} by {sim['top_owner']}, {fmt_money(sim['refunds_caught'])} refunded later", "tone": "warn"},
         {"id": "overdue", "label": "Overdue at extraction", "value": round(float(ar.overdue_amt.sum()), 2), "unit": "$",
-         "hint": f"{len(od60)} customers past 60 days. Late-payment rate flat since 2025", "tone": "neutral"},
+         "hint": f"{len(od60)} customers past 60 days. Invoices paid late: {late.get(2025, 0):.0f}% in 2025, {late.get(2026, 0):.0f}% in 2026",
+         "tone": "neutral"},
     ]
     gv = [{"metric": "Revenue", "y2025": round(h[2025]["revenue"]), "y2026": round(h[2026]["revenue"]), "growth_pct": round(g["revenue"], 1)},
           {"metric": "Gross profit", "y2025": round(h[2025]["gross_profit"]), "y2026": round(h[2026]["gross_profit"]), "growth_pct": round(g["gross_profit"], 1)},
@@ -118,7 +122,7 @@ def overview(ds: Dataset):
     charts = [
         {"id": "growth_vs_profit", "type": "bar", "unit": "$", "x": "metric",
          "title": "Revenue grew a third, profit did not follow",
-         "caption": f"Jan-Sep 2025 vs Jan-Sep 2026. Revenue {g['revenue']:+.1f}%, gross profit {g['gross_profit']:+.1f}%, gross profit minus refunds {g['gp_minus_refunds']:+.1f}%. Gross profit uses the 98.5% of lines with a known cost.",
+         "caption": f"Jan-Sep 2025 vs Jan-Sep 2026. Revenue {g['revenue']:+.1f}%, gross profit {g['gross_profit']:+.1f}%, gross profit minus refunds {g['gp_minus_refunds']:+.1f}%. Gross profit uses the {coverage:.1f}% of lines with a known cost.",
          "series": [{"key": "y2025", "label": "Jan-Sep 2025"}, {"key": "y2026", "label": "Jan-Sep 2026"}], "rows": gv},
         {"id": "discount_band_returns", "type": "bar", "unit": "%", "x": "band",
          "title": "Deep discounts come back as returns",

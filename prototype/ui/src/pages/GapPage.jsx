@@ -1,10 +1,31 @@
 import { useState } from "react";
 import { api } from "../data/api.js";
 import { useApp, useResource } from "../state.jsx";
-import { money, num } from "../lib/format.js";
+import { money, num, plainRules } from "../lib/format.js";
 import { BridgeChart, ChartRenderer, Legend } from "../components/Chart.jsx";
-import { MockNote } from "../components/Shell.jsx";
 import { Chip, ErrorBox, Loading, SectionHead, Tile } from "../components/ui.jsx";
+import { DynamicChart } from "../components/DynamicChart.jsx";
+import { FilterBar, FilterProvider } from "../components/Filters.jsx";
+
+const BUSINESS = ["Reseller", "SMB", "Enterprise"];
+// Each driver chart is a preset of /api/explore that opens on the view the story needs.
+const PRESETS = {
+  discount_band_returns: {
+    metric: "return_rate", by: "discount_band", filters: { segment: BUSINESS },
+    title: "Deep discounts come back as returns",
+    caption: "Business orders by discount band: share returned. Switch the metric to gross margin % for the other half of the story.",
+  },
+  qe_week_share: {
+    metric: "revenue", by: "days_to_quarter_end", split: "rep", highlight: "R07", normalize: "share",
+    title: "R07 books half the quarter in its last two weeks",
+    caption: "Share of each side's revenue by days before quarter end: R07 against every other rep.",
+  },
+  furniture_damage_region: {
+    metric: "return_rate", by: "region", filters: { category: ["Furniture"] },
+    title: "Furniture comes back most on the long routes",
+    caption: "Furniture orders returned, by region (all return reasons).",
+  },
+};
 
 const CRITERIA = [
   ["changed_in_2026", "Changed in 2026"],
@@ -38,7 +59,12 @@ function HandledBy({ ids }) {
   );
 }
 
+// Driver 1 gets both halves of its story: when R07 books, and what deep discounts do.
+const DRIVER_PRESETS = { qe_push: ["qe_week_share", "discount_band_returns"] };
+
 function DriverCard({ d, chart, highlight }) {
+  const presets = (DRIVER_PRESETS[d.id] ?? [d.chart_id]).map((id) => PRESETS[id]).filter(Boolean);
+  const preset = presets[0];
   return (
     <article id={`driver-${d.id}`} className={`card driver rank-${d.rank}${highlight ? " is-highlight" : ""}`}>
       <div className="driver-rank"><b>{d.rank}</b><span>rank</span></div>
@@ -47,17 +73,23 @@ function DriverCard({ d, chart, highlight }) {
           <h3>{d.title}</h3>
           <div className="driver-impact">
             <b>{d.impact != null ? money(d.impact) : "n/a"}</b>
-            {(d.impact_label ?? d.impact_note) && <span title={d.impact_note}>{d.impact_label ?? "impact"}</span>}
+            {/* The basis and period of each amount, on screen: the four drivers measure different things. */}
+            {(d.impact_note ?? d.impact_label) && <span className="impact-basis">{d.impact_note ?? d.impact_label}</span>}
           </div>
         </header>
         <div className="criteria">{CRITERIA.map(([k, l]) => <Criterion key={k} value={d[k]} label={l} />)}</div>
-        <div className={chart ? "driver-grid" : ""}>
+        <div className={preset || chart ? "driver-grid" : ""}>
           <dl className="wwt">
-            <div><dt>What happened</dt><dd>{d.what}</dd></div>
-            <div><dt>Why it happened</dt><dd>{d.why}</dd></div>
-            <div className="is-todo"><dt>What to do</dt><dd>{d.todo}</dd></div>
+            <div><dt>What happened</dt><dd>{plainRules(d.what)}</dd></div>
+            <div><dt>Why it happened</dt><dd>{plainRules(d.why)}</dd></div>
+            <div className="is-todo"><dt>What to do</dt><dd>{plainRules(d.todo)}</dd></div>
           </dl>
-          {chart && (
+          {preset ? (
+            <div className="mini-chart dyn-wrap dyn-stack">
+              {presets.map((p) => <DynamicChart key={p.title} preset={p} height={190} />)}
+            </div>
+          ) : chart && (
+            // Customer-level comparison: not expressible with /api/explore yet, so it stays as computed.
             <div className="mini-chart">
               <h4>{chart.title}</h4>
               <Legend series={chart.series} />
@@ -85,9 +117,9 @@ function WhoIsRight({ rows }) {
             return (
               <tr key={r.exec}>
                 <td><b>{r.exec}</b></td>
-                <td>{r.claim}</td>
+                <td>{plainRules(r.claim)}</td>
                 <td>
-                  {v ? <><Chip tone={v[0]}>{v[1]}</Chip><div className="small" style={{ marginTop: 6 }}>{r.evidence}</div></> : r.verdict}
+                  {v ? <><Chip tone={v[0]}>{v[1]}</Chip><div className="small" style={{ marginTop: 6 }}>{plainRules(r.evidence)}</div></> : plainRules(r.verdict)}
                 </td>
               </tr>
             );
@@ -103,7 +135,7 @@ export default function GapPage() {
   const ov = useResource("overview", api.overview);
   const [sel, setSel] = useState(null);
 
-  if (gap.error && ov.error) return <ErrorBox error={gap.error} />;
+  if (gap.error || ov.error) return <ErrorBox error={gap.error ?? ov.error} onRetry={() => { gap.reload(); ov.reload(); }} />;
   if (!gap.data || !ov.data) return <Loading what="Loading the overview" />;
   const g = gap.data;
   const o = ov.data;
@@ -130,7 +162,6 @@ export default function GapPage() {
               <h3>From revenue growth to profit-after-refunds growth</h3>
               <p>{g.period}. Each bar is money in dollars; click one to open the driver behind it.</p>
             </div>
-            <MockNote route="/api/gap" />
           </div>
           <BridgeChart bridge={g.bridge} selected={sel} onSelect={selectBar} />
           {selBar?.split && (
@@ -141,7 +172,6 @@ export default function GapPage() {
               ))}</tbody>
             </table>
           )}
-          {g.provisional_note && <p className="bridge-hint">{g.provisional_note}</p>}
         </section>
         <section className="card gap-headline">
           <div className="gap-big">How it looks<b>+{num(g.headline.revenue_growth_pct)}% revenue</b>{money(g.headline.revenue_growth)} more than last year</div>
@@ -152,26 +182,29 @@ export default function GapPage() {
               <div className="gap-arrow" />
               <div className="reco">
                 <span className="mini-label">What we recommend</span>
-                <ol>{reco.map((r, i) => <li key={i}>{r}</li>)}</ol>
+                <ol>{reco.map((r, i) => <li key={i}>{plainRules(r)}</li>)}</ol>
               </div>
             </>
           )}
         </section>
       </div>
 
-      <section className="block">
-        <SectionHead title="What drives the gap, ranked" aside={<MockNote route="/api/gap" />}>
-          Same four answers for every driver: what happened, why it happened, what to do, and where the tool handles it.
-        </SectionHead>
-        <div className="drivers">
-          {drivers.map((d) => <DriverCard key={d.id} d={d} chart={charts[d.chart_id]} highlight={selDriver === d.id} />)}
-        </div>
-      </section>
+      <FilterProvider id="gap">
+        <section className="block">
+          <SectionHead title="What drives the gap, ranked">
+            Same four answers for every driver: what happened, why it happened, what to do, and where the tool handles it.
+          </SectionHead>
+          <FilterBar note="Filters apply to the driver charts. The bridge and the headline numbers stay on Jan-Sep 2026 vs Jan-Sep 2025." />
+          <div className="drivers">
+            {drivers.map((d) => <DriverCard key={d.id} d={d} chart={charts[d.chart_id]} highlight={selDriver === d.id} />)}
+          </div>
+        </section>
+      </FilterProvider>
 
       {g.why_first && (
         <section className="block card why-first">
           <h2>Which first, and why</h2>
-          <p>{g.why_first}</p>
+          <p>{plainRules(g.why_first)}</p>
         </section>
       )}
 

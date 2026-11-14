@@ -54,8 +54,13 @@ export function Loading({ what = "Loading" }) {
   return <div className="loading" role="status"><span className="spinner" aria-hidden="true" />{what}</div>;
 }
 
-export function ErrorBox({ error }) {
-  return <div className="error-box" role="alert">Could not load: {String(error?.message ?? error)}</div>;
+export function ErrorBox({ error, onRetry }) {
+  return (
+    <div className="error-box" role="alert">
+      <span>Could not load: {String(error?.message ?? error)}</span>
+      {onRetry && <button type="button" className="btn btn-quiet btn-xs" onClick={onRetry}>Retry</button>}
+    </div>
+  );
 }
 
 export function Empty({ children }) {

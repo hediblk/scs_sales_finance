@@ -130,8 +130,21 @@ def profile(source, name):
     return out
 
 
-def rows(source, name, offset=0, limit=50, q="", col="", val=""):
+def _sort_key(s):
+    """Numbers sort as numbers when every non-blank value is a number; otherwise as text. Blanks go last."""
+    vals = s[s.str.strip() != ""]
+    if len(vals) and vals.str.match(NUM).all():
+        return pd.to_numeric(s, errors="coerce")
+    return s.where(s.str.strip() != "", None).str.lower()
+
+
+def rows(source, name, offset=0, limit=50, q="", col="", val="", sort="", desc=False):
     df = table(source, name)
+    if sort:
+        if sort not in df.columns:
+            raise KeyError(sort)
+        key = _sort_key(df[sort])
+        df = df.iloc[key.sort_values(ascending=not desc, na_position="last", kind="stable").index.map(df.index.get_loc)]
     m = pd.Series(True, index=df.index)
     if col:
         if col not in df.columns:
@@ -147,6 +160,7 @@ def rows(source, name, offset=0, limit=50, q="", col="", val=""):
     limit = max(1, min(int(limit), 500))
     page = sub.iloc[int(offset): int(offset) + limit]
     return {"source": source, "table": name, "total": int(len(sub)), "offset": int(offset), "limit": limit,
+            "sort": sort or None, "desc": bool(desc),
             "columns": list(df.columns), "rows": page.values.tolist()}
 
 

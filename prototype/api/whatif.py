@@ -119,7 +119,7 @@ def whatif(ds: Dataset, threshold=25.0, window=14):
         "which is conservative: deep-discount overstock might not have been ordered at all.",
         "Lose order: the customer walks away. The order's revenue, cost of goods and refunds all disappear.",
         "The real outcome sits between the two scenarios.",
-        "Gross profit counts only order lines with a known unit cost (98.5% of lines), as everywhere else in the tool.",
+        f"Gross profit counts only order lines with a known unit cost ({100 * o.cost_known.mean():.1f}% of lines), as everywhere else in the tool.",
         "Refunds are counted against the year the order was placed.",
         "Q4 2026 is a rough run-rate: Q4 2025 actual x (1 + Jan-Sep revenue growth), then each scenario's Jan-Sep effect. "
         "Not a forecast model; seasonality, new customers and price changes are ignored.",
@@ -136,6 +136,8 @@ def whatif(ds: Dataset, threshold=25.0, window=14):
         "baseline_2025": base25,
         "actual": actual,
         "scenarios": scenarios,
+        "range": {k: [min(s[k] for s in scenarios), max(s[k] for s in scenarios)]
+                  for k in ("revenue", "profit_after_refunds", "profit_after_refunds_growth", "revenue_growth")},
         "bridge_by_scenario": bridges,
         "projection": {"quarter": "2026Q4", "kind": "run-rate",
                        "method": "Q4 2025 actual x (1 + Jan-Sep YoY growth), then the scenario's Jan-Sep relative effect",

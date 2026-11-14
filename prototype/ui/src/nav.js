@@ -1,4 +1,4 @@
-// The whole navigation lives here. Each page names one page component (see pages/index.js),
+// The whole navigation lives here. Each page names one page component (see App.jsx),
 // so merging, renaming or reordering pages is an edit to this file only.
 // `lead` may be a string or a function of the labels from /api/meta.
 
@@ -22,21 +22,27 @@ export const PAGES = [
     page: "queue",
   },
   {
-    key: "accounts", step: "04", label: "Accounts & Limits", hint: "Customers and reps",
+    key: "whatif", step: "04", label: "What if", hint: "Replay 2026 with a cap",
+    title: "What if quarter-end discounts had been capped?",
+    lead: "Replays the 2026 orders with an approval rule: quarter-end discounts above the threshold are capped at it. Two outcomes bound the truth: the customer keeps the order at the cap, or walks away.",
+    page: "whatif",
+  },
+  {
+    key: "accounts", step: "05", label: "Accounts & Limits", hint: "Customers and reps",
     title: "Accounts and limits",
     lead: (L) => `Business ${L.entities}: credit limit against open balance, terms and days overdue. Reps: revenue gross, net of returns and quota-countable.`,
     page: "accounts",
-  },
-  {
-    key: "log", step: "05", label: "Activity log", hint: "System and user steps",
-    title: "Activity log",
-    lead: "Every automatic step and every human decision, newest first, plus the outbox of who got notified. Nothing leaves the app: notify writes to this outbox.",
-    page: "log",
   },
   {
     key: "ask", step: "06", label: "Ask", hint: "Read-only questions",
     title: "Ask the data",
     lead: "Plain-English questions over the clean tables. The AI writes one SELECT, a read-only connection runs it, and you see the query. It cannot create, clear or change an alert.",
     page: "ask",
+  },
+  {
+    key: "log", step: "07", label: "Activity log", hint: "System and user steps",
+    title: "Activity log",
+    lead: "Every automatic step and every human decision, newest first, plus the outbox of who got notified. Nothing leaves the app: notify writes to this outbox.",
+    page: "log",
   },
 ];

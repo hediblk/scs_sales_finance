@@ -5,13 +5,16 @@ Run from the project root:
 """
 from functools import lru_cache
 
-from fastapi import Body, FastAPI, HTTPException
+from fastapi import Body, FastAPI, HTTPException, Query
 from fastapi.middleware.cors import CORSMiddleware
 
 from . import accounts, actions, ai, dataset, detect, story
 from . import ask as ask_mod
 from . import gap as gap_mod
 from . import whatif as whatif_mod
+from . import explore as explore_mod
+from . import simulator as sim
+from . import tasks as tasks_mod
 from .pipeline import EXTRACTED_ON, load
 
 app = FastAPI(title="Chrome & Oak decision desk")
@@ -19,6 +22,83 @@ app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], all
 
 DS = load()  # reads data/clean as it is; never rewritten by the API
 ask_mod.build_db(DS)  # DuckDB copy for Ask, opened read-only per question
+SIM_DEFAULTS = sim.load_defaults(DS)  # saved batch when the data hashes match, else the batch runs once here
+
+
+# ---------------------------------------------------------------- policy simulator (docs/simulator-plan.md)
+def _rng(name, v, lo, hi):
+    if v is not None and not (lo <= v <= hi):
+        raise HTTPException(400, f"{name} must be between {lo} and {hi}")
+    return v
+
+
+@lru_cache(maxsize=2048)
+def _sim_pricing(enabled, cap, retention):
+    return sim.pricing_scenario(DS, enabled, cap, retention, sim.recommended_block(SIM_DEFAULTS, "pricing_policy"))
+
+
+@lru_cache(maxsize=2048)
+def _sim_damage(enabled, trigger, effectiveness, cost, period):
+    return sim.damage_scenario(DS, enabled, trigger, effectiveness, cost, period, sim.recommended_block(SIM_DEFAULTS, "damage_policy"))
+
+
+@lru_cache(maxsize=2048)
+def _sim_credit(enabled, allowance, action=None, acceptance=100):
+    return sim.credit_replay_scenario(DS, enabled, allowance, action, acceptance, sim.recommended_block(SIM_DEFAULTS, "credit_policy"))
+
+
+@app.get("/api/simulator")
+def simulator_all():
+    p = SIM_DEFAULTS["modules"]
+    return {"model_version": SIM_DEFAULTS["model_version"], "data_hashes": SIM_DEFAULTS["data_hashes"],
+            "generated_at": SIM_DEFAULTS["generated_at"], "scope": SIM_DEFAULTS["scope"], "assumptions": SIM_DEFAULTS["assumptions"],
+            "modules": {"pricing_policy": _sim_pricing(True, *(p["pricing_policy"]["selected_parameters"][k] for k in ("cap", "retention"))),
+                        "damage_policy": _sim_damage(True, *(p["damage_policy"]["selected_parameters"][k] for k in ("trigger", "effectiveness", "cost")), "2026"),
+                        "credit_policy": _sim_credit(True, *(p["credit_policy"]["selected_parameters"][k] for k in ("allowance", "action", "acceptance")))}}
+
+
+@app.get("/api/simulator/pricing")
+def simulator_pricing(enabled: bool = True, cap: int | None = None, retention: int = 100):
+    _rng("cap", cap, 0, 100), _rng("retention", retention, 0, 100)
+    return _sim_pricing(enabled, cap, retention)
+
+
+@app.get("/api/simulator/damage")
+def simulator_damage(enabled: bool = True, trigger: int | None = None, effectiveness: int = 25, cost: int = 5, period: str = "2026"):
+    _rng("trigger", trigger, 0, 100), _rng("effectiveness", effectiveness, 0, 100), _rng("cost", cost, 0, 20)
+    if period not in ("2026", "full"):
+        raise HTTPException(400, "period must be 2026 or full")
+    return _sim_damage(enabled, trigger, effectiveness, cost, period)
+
+
+@app.get("/api/simulator/credit")
+def simulator_credit(enabled: bool = True, allowance: int | None = None, action: str | None = None, acceptance: int = 100):
+    _rng("allowance", allowance, 1, 180), _rng("acceptance", acceptance, 0, 100)
+    if action is not None and action not in ("prepayment", "full_ban"):
+        raise HTTPException(400, "action must be prepayment or full_ban")
+    return _sim_credit(enabled, allowance, action, acceptance)
+
+
+@app.get("/api/simulator/sweep/{module}")
+def simulator_sweep(module: str):
+    mod = {"pricing": "pricing_policy", "damage": "damage_policy", "credit": "credit_policy"}.get(module)
+    if not mod:
+        raise HTTPException(404, "Sweeps exist for pricing, damage and credit")
+    fixed = {"pricing_policy": {"retention": 100}, "damage_policy": sim.DAMAGE_START, "credit_policy": {"acceptance": 100}}[mod]
+    return {"module": mod, "fixed_assumptions": fixed, "rows": sim.sweep_rows(mod)}
+
+
+@app.post("/api/simulator/apply")
+def simulator_apply(body: dict = Body(default={})):
+    """"Apply rules to simulation": run the condition checks at these settings and create deduplicated in-app tasks."""
+    if not any((body or {}).get(k) for k in ("pricing", "damage", "credit")):
+        raise HTTPException(400, "Send at least one of pricing, damage, credit")
+    return tasks_mod.apply(DS, body or {})
+
+
+@app.get("/api/tasks")
+def tasks_list(module: str | None = None, status: str | None = None, owner: str | None = None, limit: int | None = None):
+    return tasks_mod.listing(module, status, owner, limit)
 
 
 def _defaults(condition, value, window):
@@ -83,8 +163,9 @@ def ds_profile(source: str, name: str):
 
 
 @app.get("/api/{source}/{name}/rows")
-def ds_rows(source: str, name: str, offset: int = 0, limit: int = 50, q: str = "", col: str = "", val: str = ""):
-    return _ds_call(dataset.rows, source, name, offset, limit, q, col, val)
+def ds_rows(source: str, name: str, offset: int = 0, limit: int = 50, q: str = "", col: str = "", val: str = "",
+            sort: str = "", desc: bool = False):
+    return _ds_call(dataset.rows, source, name, offset, limit, q, col, val, sort, desc)
 
 
 @app.get("/api/data-prep")
@@ -116,6 +197,34 @@ def gap():
 @lru_cache(maxsize=1)
 def _insights():
     return story.insights(DS)
+
+
+@lru_cache(maxsize=1024)
+def _explore(metric, by, split, filters, date_from, date_to, highlight, normalize):
+    return explore_mod.explore(DS, metric, by, split or None, dict(filters), date_from or None, date_to or None,
+                               list(highlight) or None, normalize)
+
+
+def _csv(v):
+    return tuple(sorted(x.strip() for x in v.split(",") if x.strip())) if v else ()
+
+
+@app.get("/api/explore/options")
+def explore_options():
+    return explore_mod.options(DS)
+
+
+@app.get("/api/explore")
+def explore(metric: str = "revenue", by: str = "quarter", split: str = "", region: str = "", rep: str = "",
+            segment: str = "", product: str = "", category: str = "", date_from: str = Query("", alias="from"),
+            date_to: str = Query("", alias="to"), highlight: str = "", normalize: str = "none"):
+    """Every chart in the app is a preset of this query. Plain pandas, cached per query."""
+    filters = tuple((k, _csv(v)) for k, v in (("region", region), ("rep", rep), ("segment", segment),
+                                               ("product", product), ("category", category)) if v)
+    try:
+        return _explore(metric, by, split, filters, date_from, date_to, _csv(highlight), normalize)
+    except ValueError as e:
+        raise HTTPException(400, str(e))
 
 
 @lru_cache(maxsize=512)
@@ -233,32 +342,9 @@ def accounts_list(segment: str | None = None, region: str | None = None, rep: st
     return out
 
 
-@app.post("/api/accounts/{cid}/credit-hold")
-def credit_hold(cid: str, body: dict = Body(default={})):
-    on = bool((body or {}).get("on", True))
-    reason = (body or {}).get("reason", "").strip()
-    if on and not reason:
-        raise HTTPException(400, "A credit hold needs a reason")
-    acc = accounts.set_credit_hold(DS, cid, on, reason)
-    if acc is None:
-        raise HTTPException(404, f"No business account {cid}")
-    return acc
-
-
 @app.get("/api/reps")
 def reps_list():
     return accounts.reps(DS)
-
-
-@app.put("/api/reps/{rep_id}/target")
-def rep_target(rep_id: str, body: dict = Body(default={})):
-    quarter = (body or {}).get("quarter")
-    if not quarter:
-        raise HTTPException(400, "Body needs a quarter, e.g. {\"quarter\": \"2026Q3\", \"target\": 300000}")
-    if accounts.rep(DS, rep_id) is None:
-        raise HTTPException(404, f"No rep {rep_id}")
-    accounts.set_target(rep_id, quarter, (body or {}).get("target"))
-    return accounts.rep(DS, rep_id)
 
 
 # ---------------------------------------------------------------- Ask (read-only)
@@ -274,7 +360,7 @@ def ask(body: dict = Body(default={})):
 
 @app.post("/api/admin/reset")
 def reset():
-    """Clear user overrides, drafts, advisory notes, credit holds and targets (before a demo run)."""
+    """Clear user overrides, drafts, advisory notes and simulator tasks (before a demo run)."""
     actions.reset_user_rows()
-    accounts.reset_targets()
+    tasks_mod.reset()
     return {"ok": True}

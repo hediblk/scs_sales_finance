@@ -1,7 +1,7 @@
 # UI ↔ data contract (draft, generic until the track is locked)
 
 Stack: **React + Vite + Recharts** in `ui/` (UI session owns it), **FastAPI + pandas** in `api/` (data session owns it). Analysis scripts stay in `explore/`.
-Until the API exists, the UI reads mock JSON with these exact shapes from `ui/src/mock/`. Switching to the real API = changing one base URL.
+**Rule (team decision 2026-11-14): nothing cosmetic.** Every control in the UI calls one of these endpoints or does a real client-side job (navigate, filter, copy). No mock data, no fallback to placeholders: a failed call shows an error with Retry. No invented values, including times of day the data doesn't have.
 All money in CAD, plain numbers (no formatted strings). Dates ISO `YYYY-MM-DD`.
 
 ## Endpoints
@@ -22,7 +22,7 @@ All money in CAD, plain numbers (no formatted strings). Dates ISO `YYYY-MM-DD`.
 ```
 `numeric`: `{ "min": 0, "p25": 0, "median": 0, "p75": 0, "max": 0, "hist": [{ "from": 0, "to": 0, "count": 0 }] }`. `date`: `{ "min": "...", "max": "...", "formats": [{ "pattern": "YYYY-MM-DD", "count": 0 }] }`. `changed_cells` (clean only): cells in this column changed vs raw, from `changes.csv`.
 
-`GET /api/{raw|clean}/{table}/rows?offset=0&limit=50&q=&col=&val=` → `{ "total": 0, "columns": [...], "rows": [[...]] }`. Clean rows include the `fixes` column.
+`GET /api/{raw|clean}/{table}/rows?offset=0&limit=50&q=&col=&val=&sort=&desc=1` → `{ "total": 0, "columns": [...], "rows": [[...]] }`. Clean rows include the `fixes` column. `sort` orders the whole table before paging (numbers as numbers when every value in the column is a number, otherwise text; blanks last); `desc=1` reverses it. Unknown sort column → 404.
 
 `GET /api/{raw|clean}/charts` → charts in the overview chart shape: orders per month, rows per region label, discount histogram, refunds per month. Side by side, raw vs clean shows what cleaning changed (15 region labels become 5, discounts like 22.5 disappear).
 
@@ -101,10 +101,9 @@ All money in CAD, plain numbers (no formatted strings). Dates ISO `YYYY-MM-DD`.
 - Update 13:40: the C1 automatic chain is rules only: `flag`, `quota_hold`, `notify` (Sales manager, CFO), then `release` (45 days, no return) or `resolve` (returned, credit cancelled). No triage row in the chain. `POST /api/alerts/{id}/triage` is the advisory note: it returns `advisory: true` and a `label`, and never changes the alert's status, severity or hold.
 - `/api/alerts` filters: `rep` (or `owner`), `region`, `segment`, `severity`, `status`. Every alert carries `segment`.
 - `/api/gap`: bridge kinds are `start | minus | plus | subtotal | end`. `minus` / `plus` carry the size (positive); `start`, `subtotal`, `end` carry the signed value. Bars: growth at list price, extra discounts, revenue growth (subtotal), revenue on lines with no unit cost, extra cost of goods, gross profit growth (subtotal), extra refunds (with a `split` by reason), profit after refunds growth. `bridge_residual` is 0 when the bars add up. Response has `provisional: true` and a `provisional_note` until the teammate's data is in. Drivers add `impact_note`.
-- Accounts: `/api/accounts` adds `credit_hold_reason` and accepts `segment`, `region`, `rep` filters. A credit hold needs a reason (400 without); it writes `credit_hold` (user) and `notify` (to the rep) rows with `alert_id` `acct-<id>`. `/api/reps` quarters add `held_or_cancelled`; `quota_countable` = revenue minus refunds, excluding C1 orders still on hold or returned. `PUT /api/reps/{id}/target` writes an action row with action `target`.
+- Accounts (read only): `/api/accounts` accepts `segment`, `region`, `rep` filters. `/api/reps` quarters add `held_or_cancelled`; `quota_countable` = revenue minus refunds, excluding C1 orders still on hold or returned.
 - `POST /api/ask`: also accepts `sql` (a SELECT you write, skips the AI). Response adds `sql_source`, `answer_source`, `row_cap` (500), `total_rows` (true count, even when `rows` is capped). Without an ANTHROPIC_API_KEY, a question with no `sql` returns an `error` saying so.
 - Ask is limited to the dataset: a question that is not about Chrome & Oak's orders, customers or returns (general knowledge, forecasts, writing tasks, chit-chat) returns `error` with a fixed message and `out_of_scope: true`. Every query must read from `orders`, `customers` or `returns`. Show `error` as a gentle notice, not a failure. The AI key is set now (`/api/meta` → `ai_enabled: true`), so drafts, the advisory note and Ask answers are AI-worded (`source: "ai"`).
-- `POST /api/admin/reset` also clears credit holds and targets.
 
 `POST /api/ask` body `{ "question": "...", "alert_id": "a1 or null" }` (Then tier, read-only)
 ```json
@@ -131,17 +130,16 @@ Live (back end): every `line`, `bar` and `scatter` chart carries its own `rows` 
 `GET /api/accounts` (Accounts & Limits, customers tab; business customers only)
 ```json
 [{ "id": "C1173", "name": "...", "segment": "Enterprise", "region": "Ontario", "rep": "R04", "terms": "Net 60",
-   "credit_limit": 25000, "open_balance": 27600, "utilization": 1.10, "days_overdue": 221, "times_over_limit": 0,
-   "credit_hold": false }]
+   "credit_limit": 25000, "open_balance": 27600, "utilization": 1.10, "days_overdue": 221, "times_over_limit": 0 }]
 ```
-`POST /api/accounts/{id}/credit-hold` body `{ "on": true, "reason": "..." }` → updated account, writes an action log row (advisory).
+Read only. C3 (overdue or over limit) stays detection only: there is no credit-hold action.
 
 `GET /api/reps` (Accounts & Limits, reps tab)
 ```json
 [{ "id": "R07", "region": "Atlantic", "quarters": [{ "quarter": "2026Q3", "revenue": 0, "net_of_returns": 0,
-   "quota_countable": 0, "avg_discount": 0, "team_avg_discount": 0, "quarter_end_share": 0, "target": null }] }]
+   "quota_countable": 0, "avg_discount": 0, "team_avg_discount": 0, "quarter_end_share": 0 }] }]
 ```
-`target` is null: targets are not in the data. `PUT /api/reps/{id}/target` body `{ "quarter": "2026Q3", "target": 0 }` lets the manager set one (advisory input).
+Read only. Quarterly targets are not in the data, so the API does not return or store any.
 
 `GET /api/entity/{entity_id}` (drill-down for a customer or a rep; restored 2026-11-14 with Accounts & Limits)
 ```json
@@ -156,9 +154,10 @@ Live (back end): every `line`, `bar` and `scatter` chart carries its own `rows` 
 
 `GET /api/actions`
 ```json
-[{ "ts": "2026-10-31T09:00:00", "alert_id": "a1", "actor": "system", "action": "credit_hold", "detail": "..." }]
+[{ "ts": "2026-09-29", "ts_precision": "day", "seq": 0, "alert_id": "qe-SO-006704", "actor": "system", "action": "flag", "detail": "..." }]
 ```
-`actor`: `system | user`. `action`: `flag | quota_hold | winback_task | credit_hold | notify | draft | triage | override | release | resolve`. Condition ids: `qe_discount` (C1), `quiet_after_bad_return` (C2), `overdue_or_over_limit` (C3), see `docs/PLAN.md`. A `notify` row also carries `"to": "rep name or role"` (the "notify the right person" step; shown in the UI as an outbox).
+`actor`: `system | user`. `action`: `flag | quota_hold | winback_task | notify | draft | triage | override | release | resolve`. Condition ids: `qe_discount` (C1), `quiet_after_bad_return` (C2), `overdue_or_over_limit` (C3), see `docs/PLAN.md`. A `notify` row also carries `"to": "rep name or role"` (the "notify the right person" step; shown in the UI as an outbox).
+Timestamps (back end, 2026-11-14): every row has `ts_precision`. System rows from the automatic chains are dated by events in the data, which have no time of day: `ts` is `YYYY-MM-DD` and `ts_precision` is `"day"`; show the date only, never a time. These rows also carry `seq` (step order inside the chain, 0 = flag); rows are sorted newest first by `(ts, seq)`. Rows written when someone acts now (override, release, draft, advisory note) keep the real time: `ts` is `YYYY-MM-DDTHH:MM:SS`, `ts_precision` is `"second"`.
 
 ### What if (rule impact simulator, its own page)
 
@@ -184,4 +183,78 @@ Rules, all plain code:
 - The truth sits between the two scenarios; the page shows them as a range.
 - **projection** is a rough run-rate, labelled as such, never presented as a forecast model.
 
+### Dynamic charts (team decision 2026-11-14: no static charts)
+
+`GET /api/explore?metric=revenue&by=quarter&split=&region=&rep=&segment=&product=&category=&from=2025-01-01&to=2026-09-30`
+- `metric`: `revenue | gross_profit | margin_pct | avg_discount | refunds | return_rate | orders | units`
+- `by`: `month | quarter | region | rep | segment | product | category | channel | days_to_quarter_end | discount_band`
+- `split` (optional): a second dimension drawn as series, top 6 values plus "Other"
+- filters: any of region, rep, segment, product, category (comma-separated values), from / to dates
+```json
+{ "chart": { "type": "line", "x": "quarter", "series": [{ "key": "revenue", "label": "Revenue" }], "note": "..." },
+  "columns": ["quarter", "revenue"], "rows": [["2025Q1", 0]],
+  "filters_applied": { "region": ["Atlantic"] }, "n_orders": 0 }
+```
+Chart type picked by code (time `by` → line, otherwise bar; with `split` → grouped or stacked bar). Clean data only, margins on known-cost rows, cached per query. Every chart in the app is a preset of this endpoint, so the story opens on the right view and can be changed live.
+
+Live (back end): `/api/explore` answers in about 20-110 ms, about 4 ms cached. Two extra optional params:
+- `highlight=R07` (with `split`): the highlighted value(s) against everything else combined (`"Other account reps"`), so one rep can be compared with the team.
+- `normalize=share`: each series as % of its own total (additive metrics only; rate metrics ignore it and say so in `note`). Use it with `highlight` to compare shapes, e.g. share of revenue by days before quarter end.
+`days_to_quarter_end` comes in 7-day buckets ordered from far ("84-90 days") to the quarter end ("0-6 days"), drawn as a line; `discount_band` in 5-point bands up to "40%+". `rep` includes "Online (no rep)". Line charts are also used for `by=days_to_quarter_end`. `chart` adds `title`, `unit` (`$ | % | orders | units`) and `split`; with `split`, `columns` = `[by, series...]` and each row is `[x, v1, v2, ...]` (null where a group is empty). Additive metrics with a split → `stacked-bar`, rates with a split → `bar` (grouped). Bad `metric` / `by` / `split` → 400; filters that match nothing → empty `rows` with a `note`.
+`GET /api/explore/options` → `{ metrics: [{id, label, unit, additive}], by: [{id, label}], split: [...], filters: {region: [...], rep: [...], segment, product, category}, date_range: {min, max}, normalize: ["none","share"] }` for the dropdowns.
+
 Live (back end): `/api/whatif` answers in about 50 ms, then about 5 ms from cache for a threshold/window pair already seen. `rule` other than `cap` → 400. Extra fields: `threshold`, `window`, `flagged.owners`, `flagged.list_revenue`, `flagged.avg_discount`, `baseline_2025` (Jan-Sep 2025 actuals), `actual.revenue_growth` and each scenario's `revenue_growth` (%), `range` (`[low, high]` across the two scenarios for `revenue`, `profit_after_refunds`, `profit_after_refunds_growth`, `revenue_growth`), `projection.q4_profit_after_refunds` (same run-rate for profit after refunds), `projection.jan_sep_revenue_growth_pct`. Only 2026 orders are replayed (Jan-Sep 2025 is the comparison base), so `flagged.orders` is lower than the C1 count over both years (121 vs 207 at 25%).
+
+### Policy simulator (spec: `docs/simulator-plan.md`)
+
+Three modules, ids `pricing_policy`, `damage_policy`, `credit_policy` (distinct from the alert conditions `qe_discount` / `quiet_after_bad_return` / `overdue_or_over_limit`). The quarter-end What if (`/api/whatif`) stays as it is and is labelled separately: it covers quarter-end business orders only, while `pricing_policy` covers all valid orders. Never compare the two as if only the cap changed.
+
+Scenario period: orders Jan-Sep 2026 (clean data), returns and payments observed to 2026-10-31. All money CAD. Rates are whole-number percentages; their deltas are percentage points. Unknown unit costs stay unknown; every module reports `coverage`.
+
+`GET /api/simulator` → everything the page needs on load:
+```json
+{ "model_version": "sim-1", "data_hashes": { "customers.csv": "sha256...", "orders.csv": "...", "returns.csv": "..." },
+  "generated_at": "2026-11-14T15:02:11", "scope": "...", "assumptions": ["..."],
+  "modules": { "pricing_policy": { "...module envelope at the recommended settings..." }, "damage_policy": {}, "credit_policy": {} } }
+```
+
+`GET /api/simulator/pricing?enabled=1&cap=0&retention=100`
+`GET /api/simulator/damage?enabled=1&trigger=15&effectiveness=25&cost=5&period=2026`  (`period=full` = the full-window evidence view, Jan 2025 to Sep 2026)
+`GET /api/simulator/credit?enabled=1&allowance=60&action=prepayment&acceptance=100`  (`action`: `prepayment` | `full_ban`)
+Missing params take the recommended values. `enabled=0` returns `selected` equal to `baseline` and zero deltas. Out-of-range values → 400.
+
+Module envelope (same shape for the three):
+```json
+{ "module": "pricing_policy", "label": "Discount cap", "status": "ok",
+  "enabled": true, "period": "Jan-Sep 2026", "scope": "All valid orders",
+  "controls": [ { "id": "cap", "label": "Discount cap", "kind": "policy", "min": 0, "max": 100, "step": 1, "unit": "%",
+                  "value": 0, "recommended": 0, "read_only": false } ],
+  "recommended": { "parameters": { "cap": 0, "retention": 100 }, "label": "Best modeled setting at the starting assumptions",
+                   "selection_reason": "..." },
+  "baseline": { "revenue": 0, "gross_profit": 0, "weighted_margin_pct": 0, "refunds": 0, "net_revenue_after_refunds": 0 },
+  "selected": { "...same metric keys, at the current controls...": 0 },
+  "delta":    { "...same metric keys: selected minus baseline (CAD or pp)...": 0 },
+  "coverage": { "orders": 0, "known_cost_orders": 0, "unknown_cost_orders": 0, "known_cost_pct": 0 },
+  "details": { "...module specific, below...": [] },
+  "assumptions": ["..."], "notes": ["..."] }
+```
+`status`: `ok` for all three modules. `controls[].kind`: `policy` (what the business sets) | `assumption` (sensitivity input, never optimized) | `derived` (read only). Show the negative deltas as they are; "Reset to recommended" = request again without params (or with `recommended.parameters`).
+
+Module specifics:
+- **pricing_policy** (controls `cap` 0-100 %, `retention` 0-100 %): orders with discount strictly above the cap get the cap; their revenue, product cost and refunds are weighted by retention; other orders keep weight 1. Metrics: `revenue`, `gross_profit` (known-cost rows), `weighted_margin_pct`, `refunds`, `net_revenue_after_refunds`, `affected_orders`, `expected_retained_orders`, `expected_retained_units`. `details.break_even_retention`: `{ "gross_profit": 71.3, "gross_profit_whole": 72, "revenue": 64.0, "revenue_whole": 64 }` = the lowest retention at which the selected cap keeps gross profit (or revenue) at or above baseline; `null` when no retention reaches it. `details.by_rep`: affected orders and revenue change per rep (drill-down).
+- **damage_policy** (controls `trigger` 0-100 % strict >, `effectiveness` 0-100 %, `cost` CAD 0-20 per shipped unit; `min_orders` = 30, derived): product x region groups whose damaged-in-transit return rate is above the trigger with at least 30 orders get reinforced packaging plus inspection. Metrics: `revenue` and `gross_profit` (unchanged by packaging), `refunds`, `net_revenue_after_refunds`, `intervention_cost`, `contribution` (known-cost rows: gross profit minus refunds minus intervention cost; a contribution proxy, not audited profit), `contribution_margin_pct`, `targeted_groups`, `targeted_orders`, `targeted_units`, `avoided_damage_refunds`. `details.groups`: every product x region with `orders`, `damage_orders`, `damage_rate_pct`, `damage_refunds`, `units`, `eligible` (>= 30 orders), `targeted`.
+- **credit_policy** (`status: "ok"`, chronological replay from Jan 2025; controls `allowance` G 1-180 days, `probation_allowance` derived = max(1, ceil(G/2)) read only, `action` `prepayment` | `full_ban`, `acceptance` 0-100 % with `"read_only": true` when the action is `full_ban`): first offense = an invoice still unpaid at due date + G; probation shortens the allowance for invoices placed afterwards; second offense = such an invoice unpaid at due date + probation allowance, and the account is restricted from that date. Prepayment keeps later orders (weighted by acceptance, paid at order date); full ban removes them. Metrics: `revenue`, `gross_profit`, `weighted_margin_pct`, `refunds`, `net_revenue_after_refunds` (Jan-Sep 2026), `overdue_exposure` and `open_exposure` (at 2026-10-31), `restricted_accounts`, `restricted_orders`, `prepaid_revenue`, `forgone_revenue`. `details.replay_accounts`: per account `probation_since`, `restricted_since`, `state`; `details.restricted_before_2026`; `details.snapshot_detection`: the current-state view (accounts unpaid more than G days at the snapshot, used for the Finance cases). `coverage` shows paid lateness and unpaid aging separately. Recommended setting from the sweep: G = 1 day, prepayment, at 100% acceptance (a boundary result of that optimistic assumption; the reason says so).
+
+`GET /api/simulator/sweep/{pricing|damage|credit}` → `{ "module": "...", "fixed_assumptions": {...}, "rows": [ { "parameter": 0, "...metrics...": 0, "eligible": true, "selected": false } ] }` from `output/simulations/sweep_results.csv` (computed once in a batch, not per request).
+
+`POST /api/simulator/apply` body `{ "pricing": { "enabled": true, "cap": 0, "retention": 100 }, "damage": { "enabled": true, "trigger": 15, "effectiveness": 25, "cost": 5 }, "credit": { "enabled": true, "allowance": 60 } }` (any module may be left out) → `{ "created": 0, "updated": 0, "unchanged": 0, "by_module": { "pricing_policy": { "created": 0 } }, "tasks": ["...first 50 created or updated..."] }`. This is the "Apply rules to simulation" button: it runs the condition checks at those settings and creates in-app tasks. Deduplicated by module + entity (order / product-region group / account): an identical rerun changes nothing; a rerun with other settings adds an event to the existing task instead of a new task.
+
+`GET /api/tasks?module=&status=&owner=&limit=` → tasks, newest first:
+```json
+[{ "id": "damage_policy:ErgoLift Standing Desk|BC", "module": "damage_policy", "entity_type": "group", "entity_id": "ErgoLift Standing Desk|BC",
+   "owner_role": "Operations", "title": "...", "explanation": "...", "proposed_mitigation": "...",
+   "source_records": ["SO-00...", "RT-00..."], "parameters": { "trigger": 15, "effectiveness": 25, "cost": 5 },
+   "status": "open", "created_at": "2026-11-14T15:10:02",
+   "events": [{ "ts": "2026-11-14T15:10:02", "ts_precision": "second", "action": "created", "detail": "..." }] }]
+```
+Owner roles: `Sales manager` (pricing review), `Operations` (packaging / inspection), `Finance` (credit case, with a recommended communication). `POST /api/admin/reset` also clears the tasks.
