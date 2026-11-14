@@ -11,19 +11,25 @@ export const PAGES = [
     page: "dataset",
   },
   {
-    key: "gap", step: "02", label: "The gap", hint: "Revenue on paper vs cash",
+    key: "cleaning", step: "02", label: "Data cleaning", hint: "Assumptions, raw vs clean",
+    title: "How we cleaned the data",
+    lead: "Every row we deleted, set aside, fixed or left blank, the assumption behind it, and what it changes between the raw and the clean numbers.",
+    page: "cleaning",
+  },
+  {
+    key: "gap", step: "03", label: "The gap", hint: "Revenue on paper vs cash",
     title: "Revenue on paper is not cash in the bank",
     lead: "Revenue grew a third, profit after refunds barely moved. Booked revenue fails to become cash in two ways: it comes back, or it is never paid.",
     page: "gap",
   },
   {
-    key: "queue", step: "03", label: "Action queue", hint: "Rules that act on their own", badge: "openAlerts",
+    key: "queue", step: "04", label: "Action queue", hint: "Rules that act on their own", badge: "openAlerts",
     title: "Action queue",
     lead: "Our rules check every order. A deep quarter-end discount puts the rep's quota credit on hold for 45 days and notifies the sales manager and CFO, with no click. A manager can release it with a written reason.",
     page: "queue",
   },
   {
-    key: "ask", step: "04", label: "Ask", hint: "Read-only questions",
+    key: "ask", step: "05", label: "Ask", hint: "Read-only questions",
     title: "Ask the data",
     lead: "Plain-English questions over the clean tables, or open it from an alert to dig into why it fired. The AI writes one SELECT, a read-only connection runs it, and you see the query. It cannot change an alert.",
     page: "ask",

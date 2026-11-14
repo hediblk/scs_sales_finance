@@ -258,3 +258,30 @@ Module specifics:
    "events": [{ "ts": "2026-11-14T15:10:02", "ts_precision": "second", "action": "created", "detail": "..." }] }]
 ```
 Owner roles: `Sales manager` (pricing review), `Operations` (packaging / inspection), `Finance` (credit case, with a recommended communication). `POST /api/admin/reset` also clears the tasks.
+
+### Forecast (What if page: current policy vs rules on)
+
+`GET /api/forecast?pricing=1&cap=0&retention=100&damage=1&trigger=10&effectiveness=25&cost=5&credit=1&allowance=1&action=prepayment&acceptance=100`
+Every param is optional; a missing one takes the recommended setting from `/api/simulator`. `pricing`, `damage`, `credit` = 1 / 0 switch a module on or off. Same ranges as the simulator controls (400 outside them). Cached per parameter set.
+```json
+{ "kind": "run-rate", "provisional": true,
+  "params": { "pricing": { "enabled": true, "cap": 0, "retention": 100 }, "damage": { "enabled": true, "trigger": 10, "effectiveness": 25, "cost": 5 },
+              "credit": { "enabled": true, "allowance": 1, "action": "prepayment", "acceptance": 100 } },
+  "quarters": ["2025Q1", "...", "2026Q3", "2026Q4", "2027Q1"],
+  "series": {
+    "revenue": [ { "quarter": "2025Q1", "kind": "actual", "current": 0, "with_rules": 0 },
+                 { "quarter": "2026Q4", "kind": "forecast", "current": 0, "with_rules": 0 } ],
+    "gross_profit": [], "refunds": [], "profit_after_refunds": [] },
+  "kpis": {
+    "next_quarter": { "quarter": "2026Q4", "metrics": { "revenue": { "current": 0, "with_rules": 0, "delta": 0 }, "...": {} } },
+    "replay_jan_sep_2026": { "revenue": { "current": 0, "with_rules": 0, "delta": 0 }, "...": {} },
+    "credit": { "enabled": true, "overdue_exposure_current": 0, "overdue_exposure_with_rules": 0, "overdue_exposure_delta": 0,
+                "open_exposure_delta": 0, "restricted_accounts": 0, "revenue_effect_jan_sep_2026": 0 } },
+  "growth_used_pct": { "revenue": 33.0, "gross_profit": 21.7, "refunds": 67.4, "profit_after_refunds": 10.0 },
+  "method": "...", "assumptions": ["..."] }
+```
+- Metrics (CAD): `revenue`; `gross_profit` (known-cost rows); `refunds`; `profit_after_refunds` = gross profit minus refunds minus intervention (packaging) cost.
+- `actual` quarters (2025Q1 to 2026Q3): `current` = what happened; `with_rules` = the same orders replayed with the rules on. Pricing and damage apply together on the same orders: pricing first (capped discount, retention weight), then the damage reduction on the retained orders' damaged-in-transit refunds, plus the packaging cost on retained targeted units. Each refund is counted once. Damage targets are the product x region groups picked by the trigger on Jan-Sep 2026.
+- `forecast` quarters (2026Q4, 2027Q1): run-rate, not a model. `current` = same quarter a year earlier x (1 + that metric's Jan-Sep 2026 vs Jan-Sep 2025 growth, in `growth_used_pct`). `with_rules` = `current` x (rules-on / current over Jan-Sep 2026).
+- Credit is not in the four lines. Its effect is the `kpis.credit` block: overdue and open exposure at 2026-10-31, restricted accounts, and its own Jan-Sep 2026 revenue effect (0 with prepayment at 100% acceptance, negative with a ban or lower acceptance).
+- Draw two lines per metric (current, with rules) with the forecast quarters dashed or shaded, and label the page "run-rate projection".

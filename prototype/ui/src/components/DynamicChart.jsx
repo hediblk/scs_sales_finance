@@ -47,6 +47,8 @@ export function DynamicChart({ preset = {}, height = 250 }) {
   const [metric, setMetric] = useState(preset.metric ?? "revenue");
   const [by, setBy] = useState(preset.by ?? "quarter");
   const [split, setSplit] = useState(preset.split ?? "");
+  const [ctlFocus, setCtlFocus] = useState(false); // hide the hover tooltip while a dropdown is in use
+  const chooseBy = (v) => { setBy(v); if (v === split) setSplit(""); };
   const [msg, setMsg] = useState(null);
   const [state, setState] = useState({ data: null, error: null, loading: true });
   const [attempt, setAttempt] = useState(0);
@@ -54,9 +56,9 @@ export function DynamicChart({ preset = {}, height = 250 }) {
   const asPreset = metric === (preset.metric ?? "revenue") && by === (preset.by ?? "quarter") && split === (preset.split ?? "");
   const params = useMemo(() => ({
     metric, by,
-    split: split || undefined,
-    highlight: split && split === preset.split ? preset.highlight : undefined,
-    normalize: split && split === preset.split ? preset.normalize : undefined,
+    split: split && split !== by ? split : undefined,
+    highlight: split && split !== by && split === preset.split ? preset.highlight : undefined,
+    normalize: split && split !== by && split === preset.split ? preset.normalize : undefined,
     ...filterParams(filters, preset.filters),
   }), [metric, by, split, filters, preset.split, preset.highlight, preset.normalize, preset.filters]);
   const key = JSON.stringify(params);
@@ -67,7 +69,7 @@ export function DynamicChart({ preset = {}, height = 250 }) {
     const t = setTimeout(() => {
       api.explore(params)
         .then((data) => live && setState({ data, error: null, loading: false }))
-        .catch((error) => live && setState((s) => ({ data: s.data, error, loading: false })));
+        .catch((error) => live && setState({ data: null, error, loading: false }));
     }, 120);
     return () => { live = false; clearTimeout(t); };
   }, [key, attempt]); // eslint-disable-line react-hooks/exhaustive-deps
@@ -121,10 +123,10 @@ export function DynamicChart({ preset = {}, height = 250 }) {
       {/* Folded by default: the story view is what the demo shows; exploring is one click away. */}
       <details className="dyn-explore" open={!asPreset}>
         <summary>Change the view</summary>
-        <div className="dyn-controls">
+        <div className="dyn-controls" onFocus={() => setCtlFocus(true)} onBlur={() => setCtlFocus(false)}>
           <Select label="Metric" value={metric} onChange={setMetric} options={opts.data?.metrics ?? [{ id: metric, label: metric }]} />
-          <Select label="Group by" value={by} onChange={setBy} options={opts.data?.by ?? [{ id: by, label: by }]} />
-          <Select label="Split" value={split} onChange={setSplit} allowNone options={(opts.data?.split ?? []).filter((o) => o.id !== by)} />
+          <Select label="Group by" value={by} onChange={chooseBy} options={opts.data?.by ?? [{ id: by, label: by }]} />
+          <Select label="Split" value={split === by ? "" : split} onChange={setSplit} allowNone options={(opts.data?.split ?? []).filter((o) => o.id !== by)} />
           {fixed.length > 0 && <span className="dyn-fixed">{fixed.map(([k, v]) => `${k}: ${v.join(", ")}`).join(" · ")}</span>}
         </div>
       </details>
@@ -135,7 +137,7 @@ export function DynamicChart({ preset = {}, height = 250 }) {
       {d && rows.length > 0 && (
         <>
           <Legend series={chart.series} />
-          <ChartRenderer key={key} chart={{ ...chart, rows }} height={height} onPick={pick} />
+          <ChartRenderer key={key} chart={{ ...chart, rows }} height={height} onPick={pick} tooltip={!ctlFocus} />
         </>
       )}
 

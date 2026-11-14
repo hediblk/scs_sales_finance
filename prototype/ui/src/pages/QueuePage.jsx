@@ -57,7 +57,7 @@ function AlertQueue({ params }) {
     <>
       <section className="card queue-top">
         <div>
-          <span className="mini-label">Quota credit on hold now</span>
+          <span className="mini-label">Quota credit on hold now{[rep, region, segment].some(Boolean) ? ` · ${[rep, region, segment].filter(Boolean).join(", ")}` : ""}</span>
           <div className="counter">{money(heldQe.reduce((s, a) => s + a.amount, 0))}</div>
           <div className="counter-sub">
             <b>{num(openAll.length)}</b> open alerts on {num(new Set(openAll.map((a) => a.entity_id)).size)} {labels.entities}.
@@ -81,7 +81,7 @@ function AlertQueue({ params }) {
       <div className="filters">
         <div className="tabs" role="tablist" aria-label="Condition">
           {conditions.map((c) => (
-            <button key={c.id} type="button" role="tab" aria-selected={cond === c.id} className={cond === c.id ? "is-on" : ""} onClick={() => setCond(c.id)}>
+            <button key={c.id} type="button" role="tab" aria-selected={!needle && cond === c.id} className={!needle && cond === c.id ? "is-on" : ""} onClick={() => setCond(c.id)}>
               {c.name}<span className="count">{countFor(c.id)}</span>
             </button>
           ))}
@@ -99,6 +99,7 @@ function AlertQueue({ params }) {
         </label>
         <input className="search" type="search" placeholder="Find an order or customer id" value={find}
           onChange={(e) => { setFind(e.target.value); setShown(PAGE); }} aria-label="Find an alert" style={{ minWidth: 230 }} />
+        {needle && <span className="muted small">Searching every rule and status</span>}
         {alertsLoading && <span className="muted small">Recounting...</span>}
       </div>
 

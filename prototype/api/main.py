@@ -15,6 +15,7 @@ from . import whatif as whatif_mod
 from . import explore as explore_mod
 from . import simulator as sim
 from . import tasks as tasks_mod
+from . import forecast as forecast_mod
 from .pipeline import EXTRACTED_ON, load
 
 app = FastAPI(title="Chrome & Oak decision desk")
@@ -77,6 +78,33 @@ def simulator_credit(enabled: bool = True, allowance: int | None = None, action:
     if action is not None and action not in ("prepayment", "full_ban"):
         raise HTTPException(400, "action must be prepayment or full_ban")
     return _sim_credit(enabled, allowance, action, acceptance)
+
+
+@lru_cache(maxsize=4096)
+def _forecast(pricing, damage, credit):
+    return forecast_mod.forecast(DS, dict(pricing) if pricing else None, dict(damage) if damage else None,
+                                 dict(credit) if credit else None)
+
+
+@app.get("/api/forecast")
+def forecast(pricing: bool = True, cap: int | None = None, retention: int | None = None,
+             damage: bool = True, trigger: int | None = None, effectiveness: int | None = None, cost: int | None = None,
+             credit: bool = True, allowance: int | None = None, action: str | None = None, acceptance: int | None = None):
+    """What if page: current policy vs rules on, per quarter, plus a run-rate for 2026Q4 and 2027Q1."""
+    rec = {k: v["selected_parameters"] for k, v in SIM_DEFAULTS["modules"].items()}
+    for name, v, lo, hi in (("cap", cap, 0, 100), ("retention", retention, 0, 100), ("trigger", trigger, 0, 100),
+                            ("effectiveness", effectiveness, 0, 100), ("cost", cost, 0, 20), ("allowance", allowance, 1, 180),
+                            ("acceptance", acceptance, 0, 100)):
+        _rng(name, v, lo, hi)
+    if action is not None and action not in ("prepayment", "full_ban"):
+        raise HTTPException(400, "action must be prepayment or full_ban")
+    pick = lambda v, mod, k: v if v is not None else rec[mod][k]
+    p = (("cap", pick(cap, "pricing_policy", "cap")), ("retention", pick(retention, "pricing_policy", "retention"))) if pricing else None
+    d = (("trigger", pick(trigger, "damage_policy", "trigger")), ("effectiveness", pick(effectiveness, "damage_policy", "effectiveness")),
+         ("cost", pick(cost, "damage_policy", "cost"))) if damage else None
+    c = (("allowance", pick(allowance, "credit_policy", "allowance")), ("action", pick(action, "credit_policy", "action")),
+         ("acceptance", pick(acceptance, "credit_policy", "acceptance"))) if credit else None
+    return _forecast(p, d, c)
 
 
 @app.get("/api/simulator/sweep/{module}")

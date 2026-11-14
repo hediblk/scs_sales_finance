@@ -7,9 +7,10 @@ import GapPage from "./pages/GapPage.jsx";
 import QueuePage from "./pages/QueuePage.jsx";
 import AskPage from "./pages/AskPage.jsx";
 import DatasetPage from "./pages/DatasetPage.jsx";
+import CleaningPage from "./pages/CleaningPage.jsx";
 
 // What if, Accounts & Limits and Activity log are left out of the demo (files kept, not routed).
-const PAGE_COMPONENTS = { dataset: DatasetPage, gap: GapPage, queue: QueuePage, ask: AskPage };
+const PAGE_COMPONENTS = { dataset: DatasetPage, cleaning: CleaningPage, gap: GapPage, queue: QueuePage, ask: AskPage };
 
 function Shell() {
   const { meta, labels, error, retry, route, go } = useApp();
